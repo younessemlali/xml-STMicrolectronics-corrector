@@ -1,0 +1,96 @@
+# Streamlit Configuration File for PIXID Automation
+
+[theme]
+# Couleurs personnalisées pour PIXID
+primaryColor = "#2196F3"  # Bleu Material Design
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F0F2F6"
+textColor = "#262730"
+
+# Police
+font = "sans serif"
+
+[server]
+# Port par défaut
+port = 8501
+
+# Adresse d'écoute
+address = "0.0.0.0"
+
+# Limite de taille pour les uploads (200MB)
+maxUploadSize = 200
+
+# Limite de taille des messages (200MB)
+maxMessageSize = 200
+
+# Activer CORS si nécessaire
+enableCORS = false
+
+# Activer XSRF protection
+enableXsrfProtection = true
+
+# Headers
+headless = true
+
+# File watching
+fileWatcherType = "auto"
+
+[browser]
+# Titre de l'onglet
+serverAddress = "localhost"
+gatherUsageStats = false
+
+# Port du serveur
+serverPort = 8501
+
+[runner]
+# Magic commands
+magicEnabled = true
+
+# Installation des requirements automatique
+installTracer = false
+
+# Fast reruns
+fastReruns = true
+
+# Afficher les erreurs dans le navigateur
+postScriptGC = true
+
+[client]
+# Afficher les erreurs détaillées
+showErrorDetails = true
+
+# Barre d'outils
+toolbarMode = "minimal"
+
+# Cache
+caching = true
+
+# Afficher les traceback Python
+displayRawCode = false
+
+[logger]
+# Niveau de log
+level = "info"
+
+# Format des messages
+messageFormat = "%(asctime)s %(message)s"
+
+[deprecation]
+# Afficher les warnings de dépréciation
+showfileUploaderEncoding = false
+showImageFormat = false
+showPyplotGlobalUse = false
+
+[mapbox]
+# Token Mapbox (si utilisation de cartes)
+# token = ""
+
+# Configuration spécifique PIXID
+[pixid]
+# Ces valeurs peuvent être overridées par les secrets en production
+default_folder_id = "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F"
+default_sheet_id = "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4"
+sync_interval_minutes = 15
+max_files_per_sync = 100
+retention_days = 30
