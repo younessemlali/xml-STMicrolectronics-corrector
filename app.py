@@ -1,6 +1,6 @@
 """
 STMicroelectronics XML Corrector - Streamlit App
-Version autonome sans dépendances externes
+Version sans lxml pour éviter les problèmes d'installation
 """
 
 import streamlit as st
@@ -92,7 +92,7 @@ def extract_order_id_from_xml(xml_content):
 def enrich_xml(xml_content, commande_data):
     """Enrichit le XML avec les données de la commande"""
     try:
-        # Parser le XML
+        # Parser le XML avec ElementTree standard
         root = ET.fromstring(xml_content)
         
         # Créer ou trouver la section STMicroelectronics
