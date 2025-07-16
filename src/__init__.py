@@ -1,67 +1,27 @@
-#!/bin/bash
+"""pixid_sync package initializer
 
-# Script pour créer la structure complète du projet PIXID Automation
+Expose les constantes communes pour l'ensemble des modules, afin que les
+imports relatifs de xml_processor.py (et autres) fonctionnent sans erreur.
+"""
 
-echo "📁 Création de la structure du projet PIXID Automation..."
+# --- Constantes -----------------------------------------------------------
 
-# Créer les dossiers principaux
-mkdir -p src
-mkdir -p tests/test_fixtures
-mkdir -p .github/workflows
-mkdir -p .streamlit
-mkdir -p logs
+XML_FIELD_MAPPING = {
+    # "Nom de colonne Google Sheet" : "Balise XML à créer / mettre à jour"
+    "Numéro de commande": "OrderId",
+    "Code agence": "AgencyCode",
+    "Code unité": "UnitCode",
+    "Statut": "TempStatus",
+    "Niveau convention collective": "CollectiveLevel",
+    "Classification de l’intérimaire": "TempClassification",
+    "Personne absente": "AbsenteeName",
+}
 
-# Créer les fichiers vides qui seront complétés plus tard
-touch src/email_parser.py
-touch src/google_client.py
-touch src/xml_processor.py
-touch src/monitoring.py
+# Liste simple utilisée par d'autres modules pour boucler sur les champs
+FIELDS_TO_EXTRACT = list(XML_FIELD_MAPPING.keys())
 
-touch tests/test_email_parser.py
-touch tests/test_xml_processor.py
-touch tests/__init__.py
-
-touch .streamlit/config.toml
-touch .gitignore
-
-# Créer des fichiers de test exemple
-echo "📧 Création d'un fichier .eml exemple pour les tests..."
-cat > tests/test_fixtures/sample.eml << 'EOF'
-From: noreply@pixid.fr
-To: rh@entreprise.com
-Subject: Confirmation commande PIXID #12345
-Date: Mon, 15 Jan 2024 10:30:00 +0100
-Content-Type: text/plain; charset=UTF-8
-
-Bonjour,
-
-Votre commande a été confirmée avec les détails suivants :
-
-Numéro de commande : 12345
-Code agence : AG-75-001
-Statut : Confirmée
-Niveau convention collective : Niveau IV - Technicien
-Classification de l'intérimaire : Technicien spécialisé maintenance
-Personne absente : Marie DUPONT
-
-Cordialement,
-L'équipe PIXID
-EOF
-
-echo "📄 Création d'un fichier XML exemple pour les tests..."
-cat > tests/test_fixtures/sample.xml << 'EOF'
-<?xml version="1.0" encoding="UTF-8"?>
-<PixidOrder>
-    <OrderId>12345</OrderId>
-    <CreationDate>2024-01-15</CreationDate>
-    <Customer>
-        <Name>Entreprise Test</Name>
-        <Contact>contact@entreprise.com</Contact>
-    </Customer>
-</PixidOrder>
-EOF
-
-echo "✅ Structure créée avec succès!"
-echo ""
-echo "📂 Arborescence créée :"
-tree -a -I '__pycache__|.git'
+# Rendre les symboles importables via `from pixid_sync import ...`
+__all__ = [
+    "XML_FIELD_MAPPING",
+    "FIELDS_TO_EXTRACT",
+]
