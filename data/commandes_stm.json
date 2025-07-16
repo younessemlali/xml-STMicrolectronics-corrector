@@ -1,10 +1,33 @@
 {
-  "commandes": [],
-  "lastUpdate": null,
-  "metadata": {
-    "totalCommandes": 0,
-    "source": "Google Apps Script",
-    "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
-    "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F"
-  }
+  "commandes": [
+    {
+      "numero_commande": "CR000727",
+      "code_agence": "STC",
+      "code_unite": "CR8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "THOMAS JEAN MOREL",
+      "date_extraction": "2025-07-16T20:37:03.853Z"
+    },
+    {
+      "numero_commande": "CR000719",
+      "code_agence": "STC",
+      "code_unite": "CR8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ANIS BOUSSANDEL",
+      "date_extraction": "2025-07-16T20:37:03.861Z"
+    },
+    {
+      "numero_commande": "CR000722",
+      "code_agence": "STC",
+      "code_unite": "CR8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LYDIE BOVAERE",
+      "date_extraction": "2025-07-16T20:37:03.870Z"
+    }
+  ],
+  "lastUpdate": "2025-07-16T20:37:04.738Z",
+  "source": "Google Apps Script - Traitement imm?diat"
 }
