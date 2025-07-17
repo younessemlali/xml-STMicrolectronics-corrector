@@ -65,37 +65,81 @@ def load_commandes_data():
         return {"commandes": [], "lastUpdate": None, "metadata": {}}
 
 def extract_order_id_from_xml(xml_content):
-    """Extrait l'OrderId du fichier XML"""
+    """Extrait l'OrderId du fichier XML avec débogage"""
     try:
         # Parser le XML
         root = ET.fromstring(xml_content)
         
-        # Recherche spécifique dans la structure ReferenceInformation > OrderId > IdValue
-        # Méthode 1: Recherche directe avec XPath-like
-        for ref_info in root.iter('ReferenceInformation'):
-            for order_id in ref_info.iter('OrderId'):
-                id_value = order_id.find('IdValue')
-                if id_value is not None and id_value.text and id_value.text.strip():
-                    return id_value.text.strip()
+        # Debug: Afficher la structure XML
+        print("=== DÉBUT DU DÉBOGAGE ===")
+        print(f"Root tag: {root.tag}")
         
-        # Méthode 2: Si la structure n'est pas trouvée, chercher OrderId/IdValue n'importe où
-        for order_id in root.iter('OrderId'):
+        # Méthode 1: Chercher tous les éléments OrderId
+        print("\n--- Recherche de tous les éléments OrderId ---")
+        order_ids = list(root.iter('OrderId'))
+        print(f"Nombre d'éléments OrderId trouvés: {len(order_ids)}")
+        
+        for i, order_id in enumerate(order_ids):
+            print(f"\nOrderId #{i+1}:")
+            print(f"  Attributs: {order_id.attrib}")
+            
+            # Chercher IdValue comme enfant direct
             id_value = order_id.find('IdValue')
-            if id_value is not None and id_value.text and id_value.text.strip():
-                return id_value.text.strip()
+            if id_value is not None:
+                print(f"  IdValue trouvé: '{id_value.text}'")
+                if id_value.text and id_value.text.strip():
+                    print(f"  --> TROUVÉ: {id_value.text.strip()}")
+                    return id_value.text.strip()
+            else:
+                print("  Pas d'IdValue trouvé comme enfant direct")
+                
+                # Afficher tous les enfants
+                print("  Enfants de OrderId:")
+                for child in order_id:
+                    print(f"    - {child.tag}: {child.text}")
         
-        # Méthode 3: Recherche alternative si les balises ont des majuscules différentes
+        # Méthode 2: Si aucun OrderId n'est trouvé, chercher dans toute la structure
+        print("\n--- Recherche alternative ---")
+        
+        # Afficher les 10 premiers éléments pour comprendre la structure
+        print("Premiers éléments du XML:")
+        count = 0
+        for elem in root.iter():
+            if count < 20:
+                indent = "  " * len(list(elem.iterancestors())) if hasattr(elem, 'iterancestors') else ""
+                text_preview = elem.text[:50] + "..." if elem.text and len(elem.text) > 50 else elem.text
+                print(f"{indent}{elem.tag}: {text_preview if elem.text else 'Pas de texte'}")
+                
+                # Si c'est un OrderId, afficher ses enfants
+                if elem.tag.lower() == 'orderid':
+                    print(f"{indent}  Enfants de {elem.tag}:")
+                    for child in elem:
+                        print(f"{indent}    - {child.tag}: {child.text}")
+                
+                count += 1
+        
+        # Recherche insensible à la casse
+        print("\n--- Recherche insensible à la casse ---")
         for elem in root.iter():
             if elem.tag.lower() == 'orderid':
-                # Chercher IdValue comme enfant direct
+                print(f"Trouvé élément avec tag (casse différente): {elem.tag}")
                 for child in elem:
-                    if child.tag.lower() == 'idvalue' and child.text and child.text.strip():
-                        return child.text.strip()
+                    if child.tag.lower() == 'idvalue':
+                        print(f"  IdValue trouvé (casse différente): {child.tag} = '{child.text}'")
+                        if child.text and child.text.strip():
+                            return child.text.strip()
         
+        print("\n=== FIN DU DÉBOGAGE - AUCUN ORDERID TROUVÉ ===")
         return None
         
+    except ET.ParseError as e:
+        print(f"ERREUR DE PARSING XML: {str(e)}")
+        print("Vérifiez que le fichier est un XML valide")
+        return None
     except Exception as e:
-        st.error(f"Erreur lors de l'extraction de l'OrderId: {str(e)}")
+        print(f"ERREUR INATTENDUE: {type(e).__name__}: {str(e)}")
+        import traceback
+        traceback.print_exc()
         return None
 
 def enrich_xml(xml_content, commande_data):
