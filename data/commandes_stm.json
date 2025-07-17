@@ -26,8 +26,24 @@
       "classification_interimaire": "A2",
       "personne_absente": "LYDIE BOVAERE",
       "date_extraction": "2025-07-16T20:37:03.870Z"
+    },
+    {
+      "numero_commande": "CD000085",
+      "code_agence": "STC",
+      "code_unite": "CD8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MORGANE HOUILLON",
+      "date_extraction": "2025-07-17T01:47:05Z"
     }
   ],
-  "lastUpdate": "2025-07-16T20:37:04.738Z",
-  "source": "Google Apps Script - Traitement imm?diat"
+  "lastUpdate": "2025-07-17T01:47:13.918Z",
+  "source": "Google Apps Script - Traitement imm?diat",
+  "metadata": {
+    "totalCommandes": 4,
+    "source": "Google Apps Script - PIXID STMicroelectronics",
+    "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
+    "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
+    "version": "2.0"
+  }
 }
