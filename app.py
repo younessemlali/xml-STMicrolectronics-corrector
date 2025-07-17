@@ -70,21 +70,30 @@ def extract_order_id_from_xml(xml_content):
         # Parser le XML
         root = ET.fromstring(xml_content)
         
-        # Recherche de l'OrderId (différentes variantes possibles)
-        # Recherche directe
-        for elem in root.iter():
-            if elem.tag.lower() in ['orderid', 'order_id', 'numero_commande', 'commande', 'order']:
-                if elem.text and elem.text.strip():
-                    return elem.text.strip()
+        # Recherche spécifique dans la structure ReferenceInformation > OrderId > IdValue
+        # Méthode 1: Recherche directe avec XPath-like
+        for ref_info in root.iter('ReferenceInformation'):
+            for order_id in ref_info.iter('OrderId'):
+                id_value = order_id.find('IdValue')
+                if id_value is not None and id_value.text and id_value.text.strip():
+                    return id_value.text.strip()
         
-        # Recherche dans les attributs
+        # Méthode 2: Si la structure n'est pas trouvée, chercher OrderId/IdValue n'importe où
+        for order_id in root.iter('OrderId'):
+            id_value = order_id.find('IdValue')
+            if id_value is not None and id_value.text and id_value.text.strip():
+                return id_value.text.strip()
+        
+        # Méthode 3: Recherche alternative si les balises ont des majuscules différentes
         for elem in root.iter():
-            for attr, value in elem.attrib.items():
-                if attr.lower() in ['orderid', 'order_id', 'numero_commande', 'id']:
-                    if value and value.strip():
-                        return value.strip()
+            if elem.tag.lower() == 'orderid':
+                # Chercher IdValue comme enfant direct
+                for child in elem:
+                    if child.tag.lower() == 'idvalue' and child.text and child.text.strip():
+                        return child.text.strip()
         
         return None
+        
     except Exception as e:
         st.error(f"Erreur lors de l'extraction de l'OrderId: {str(e)}")
         return None
