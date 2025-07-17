@@ -11,6 +11,7 @@ from datetime import datetime
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 import io
+import re
 
 # Configuration
 GITHUB_RAW_URL = "https://raw.githubusercontent.com/younessemlali/xml-STMicrolectronics-corrector/main/data/commandes_stm.json"
@@ -65,24 +66,115 @@ def load_commandes_data():
         return {"commandes": [], "lastUpdate": None, "metadata": {}}
 
 def extract_order_id_from_xml(xml_content):
-    """Extrait l'OrderId du fichier XML"""
+    """Extrait l'OrderId du fichier XML de manière robuste"""
     try:
-        import re
+        # Liste pour stocker tous les OrderIds trouvés
+        order_ids_found = []
         
-        # Méthode 1: Regex pour chercher la balise OrderId avec IdValue
-        # Cette méthode est plus flexible et fonctionne même si le XML a des namespaces
-        pattern = r'<OrderId[^>]*>\s*<IdValue>([^<]+)</IdValue>'
-        match = re.search(pattern, xml_content, re.IGNORECASE | re.DOTALL)
+        # ==== MÉTHODE 1: REGEX (la plus robuste) ====
+        # Pattern 1: OrderId avec IdValue directement dedans
+        patterns = [
+            # Pattern standard
+            r'<OrderId[^>]*>\s*<IdValue>([^<]+)</IdValue>',
+            # Pattern avec espaces/retours à la ligne
+            r'<OrderId[^>]*>\s*\n?\s*<IdValue>([^<]+)</IdValue>',
+            # Pattern avec namespace ou attributs
+            r'<[^:>]*:?OrderId[^>]*>\s*<[^:>]*:?IdValue[^>]*>([^<]+)</[^:>]*:?IdValue>',
+            # Pattern très flexible
+            r'<OrderId[^>]*>[\s\S]*?<IdValue[^>]*>([^<]+)</IdValue>[\s\S]*?</OrderId>',
+            # Pattern pour structure mal formée
+            r'OrderId[^>]*>[\s\S]*?<IdValue>([^<]+)</IdValue>'
+        ]
         
-        if match:
-            return match.group(1).strip()
+        for pattern in patterns:
+            matches = re.findall(pattern, xml_content, re.IGNORECASE | re.DOTALL)
+            for match in matches:
+                cleaned = match.strip()
+                if cleaned and cleaned not in order_ids_found:
+                    order_ids_found.append(cleaned)
         
-        # Méthode 2: Pattern alternatif avec plus d'espace entre les balises
-        pattern2 = r'<OrderId[^>]*>[\s\S]*?<IdValue[^>]*>([^<]+)</IdValue>[\s\S]*?</OrderId>'
-        match2 = re.search(pattern2, xml_content, re.IGNORECASE)
+        # Si on a trouvé quelque chose avec regex, on retourne
+        if order_ids_found:
+            return order_ids_found[0]  # Retourner le premier trouvé
         
-        if match2:
-            return match2.group(
+        # ==== MÉTHODE 2: XML PARSING ====
+        try:
+            # Essayer de parser le XML
+            # Nettoyer le XML des potentiels problèmes d'encoding
+            xml_clean = xml_content.encode('utf-8', 'ignore').decode('utf-8', 'ignore')
+            
+            # Parser
+            root = ET.fromstring(xml_clean)
+            
+            # Recherche dans toutes les variantes possibles
+            search_tags = ['OrderId', 'orderid', 'ORDERID', 'order_id', 'Order_Id']
+            value_tags = ['IdValue', 'idvalue', 'IDVALUE', 'id_value', 'Id_Value']
+            
+            # Chercher toutes les combinaisons possibles
+            for order_tag in search_tags:
+                for elem in root.iter():
+                    if order_tag.lower() in elem.tag.lower():
+                        # Chercher IdValue dans les enfants
+                        for value_tag in value_tags:
+                            for child in elem.iter():
+                                if value_tag.lower() in child.tag.lower() and child.text:
+                                    cleaned = child.text.strip()
+                                    if cleaned:
+                                        return cleaned
+            
+            # Méthode alternative : chercher tous les IdValue et vérifier le parent
+            for elem in root.iter():
+                elem_tag_lower = elem.tag.lower()
+                if 'idvalue' in elem_tag_lower or 'id_value' in elem_tag_lower:
+                    if elem.text and elem.text.strip():
+                        # Vérifier si un parent contient OrderId
+                        parent_elem = root
+                        for parent in root.iter():
+                            if elem in list(parent):
+                                parent_tag_lower = parent.tag.lower()
+                                if 'orderid' in parent_tag_lower or 'order_id' in parent_tag_lower:
+                                    return elem.text.strip()
+        
+        except ET.ParseError:
+            # Si le XML est mal formé, continuer avec d'autres méthodes
+            pass
+        except Exception:
+            # Ignorer autres erreurs de parsing
+            pass
+        
+        # ==== MÉTHODE 3: RECHERCHE TEXTUELLE BRUTE ====
+        # Recherche de patterns qui ressemblent à des numéros de commande
+        # Pattern pour trouver des valeurs qui ressemblent à des IDs de commande
+        id_patterns = [
+            r'<IdValue>([A-Z0-9]+)</IdValue>',  # Alphanumeric IDs
+            r'<IdValue>(RT\d+)</IdValue>',      # RT followed by numbers
+            r'<IdValue>(\d{6,})</IdValue>',     # At least 6 digits
+            r'<IdValue>([A-Z]{2,}\d+)</IdValue>' # Letters followed by numbers
+        ]
+        
+        for pattern in id_patterns:
+            matches = re.findall(pattern, xml_content, re.IGNORECASE)
+            for match in matches:
+                # Vérifier si c'est dans un contexte OrderId
+                context_check = xml_content.lower()
+                match_pos = context_check.find(match.lower())
+                if match_pos > 0:
+                    # Chercher OrderId dans les 200 caractères avant
+                    context_before = context_check[max(0, match_pos-200):match_pos]
+                    if 'orderid' in context_before:
+                        return match.strip()
+        
+        # ==== MÉTHODE 4: DERNIER RECOURS ====
+        # Si vraiment rien n'est trouvé, chercher n'importe quel IdValue
+        last_resort = re.search(r'<IdValue>([^<]+)</IdValue>', xml_content, re.IGNORECASE)
+        if last_resort:
+            return last_resort.group(1).strip()
+        
+        return None
+        
+    except Exception as e:
+        st.error(f"Erreur lors de l'extraction de l'OrderId: {str(e)}")
+        return None
 
 def enrich_xml(xml_content, commande_data):
     """Enrichit le XML avec les données de la commande"""
@@ -306,6 +398,15 @@ def main():
                 else:
                     st.error("❌ **Impossible de détecter l'OrderId dans le fichier XML**")
                     st.info("Assurez-vous que votre fichier contient une balise OrderId, order_id, numero_commande ou similaire.")
+                    
+                    # Option de debug
+                    with st.expander("🔍 Voir un aperçu du fichier XML pour debug"):
+                        # Afficher les 100 premières lignes
+                        lines = xml_content.split('\n')[:100]
+                        preview = '\n'.join(lines)
+                        if len(xml_content.split('\n')) > 100:
+                            preview += "\n\n... (fichier tronqué) ..."
+                        st.code(preview, language='xml')
     
     with tab2:
         st.subheader("📊 Commandes disponibles")
