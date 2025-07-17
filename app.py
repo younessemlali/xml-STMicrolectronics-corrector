@@ -65,84 +65,24 @@ def load_commandes_data():
         return {"commandes": [], "lastUpdate": None, "metadata": {}}
 
 def extract_order_id_from_xml(xml_content):
-    """Extrait l'OrderId du fichier XML de manière flexible"""
+    """Extrait l'OrderId du fichier XML"""
     try:
-        # Parser le XML
-        root = ET.fromstring(xml_content)
+        import re
         
-        # Liste des chemins possibles pour trouver l'OrderId
-        # On va chercher dans plusieurs endroits possibles
+        # Méthode 1: Regex pour chercher la balise OrderId avec IdValue
+        # Cette méthode est plus flexible et fonctionne même si le XML a des namespaces
+        pattern = r'<OrderId[^>]*>\s*<IdValue>([^<]+)</IdValue>'
+        match = re.search(pattern, xml_content, re.IGNORECASE | re.DOTALL)
         
-        # 1. Chercher OrderId > IdValue dans ReferenceInformation
-        for ref_info in root.iter('ReferenceInformation'):
-            for order_elem in ref_info.iter('OrderId'):
-                # Chercher IdValue comme enfant
-                id_value = order_elem.find('IdValue')
-                if id_value is not None and id_value.text and id_value.text.strip():
-                    return id_value.text.strip()
-                
-                # Si pas trouvé, chercher dans tous les descendants
-                for id_val in order_elem.iter('IdValue'):
-                    if id_val.text and id_val.text.strip():
-                        return id_val.text.strip()
+        if match:
+            return match.group(1).strip()
         
-        # 2. Chercher n'importe quel OrderId > IdValue dans tout le document
-        for order_elem in root.iter('OrderId'):
-            # Chercher IdValue comme enfant direct
-            id_value = order_elem.find('IdValue')
-            if id_value is not None and id_value.text and id_value.text.strip():
-                return id_value.text.strip()
-            
-            # Chercher dans tous les descendants
-            for id_val in order_elem.iter('IdValue'):
-                if id_val.text and id_val.text.strip():
-                    return id_val.text.strip()
+        # Méthode 2: Pattern alternatif avec plus d'espace entre les balises
+        pattern2 = r'<OrderId[^>]*>[\s\S]*?<IdValue[^>]*>([^<]+)</IdValue>[\s\S]*?</OrderId>'
+        match2 = re.search(pattern2, xml_content, re.IGNORECASE)
         
-        # 3. Chercher avec différentes casses (orderid, ORDERID, etc.)
-        for elem in root.iter():
-            if elem.tag.lower() == 'orderid':
-                # Chercher IdValue avec différentes casses
-                for child in elem:
-                    if child.tag.lower() == 'idvalue' and child.text and child.text.strip():
-                        return child.text.strip()
-                
-                # Chercher dans les descendants
-                for descendant in elem.iter():
-                    if descendant.tag.lower() == 'idvalue' and descendant.text and descendant.text.strip():
-                        return descendant.text.strip()
-        
-        # 4. Méthode alternative : chercher directement IdValue avec un parent OrderId
-        for id_value in root.iter('IdValue'):
-            parent = id_value.find('..')
-            if parent is not None and parent.tag == 'OrderId':
-                if id_value.text and id_value.text.strip():
-                    return id_value.text.strip()
-        
-        # 5. Dernière tentative : chercher n'importe quel IdValue dans ReferenceInformation
-        for ref_info in root.iter('ReferenceInformation'):
-            # Chercher spécifiquement dans la section OrderId
-            order_section = ref_info.find('.//OrderId')
-            if order_section is not None:
-                id_val = order_section.find('.//IdValue')
-                if id_val is not None and id_val.text and id_val.text.strip():
-                    return id_val.text.strip()
-        
-        # 6. Si toujours rien, chercher avec XPath-like pattern
-        # Chercher tous les IdValue et vérifier si leur parent est OrderId
-        for elem in root.iter():
-            if elem.tag == 'IdValue':
-                # Obtenir le parent de manière sûre
-                for parent in root.iter():
-                    if elem in parent:
-                        if parent.tag == 'OrderId' and elem.text and elem.text.strip():
-                            return elem.text.strip()
-                        break
-        
-        return None
-        
-    except Exception as e:
-        st.error(f"Erreur lors de l'extraction de l'OrderId: {str(e)}")
-        return None
+        if match2:
+            return match2.group(
 
 def enrich_xml(xml_content, commande_data):
     """Enrichit le XML avec les données de la commande"""
