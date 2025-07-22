@@ -53,12 +53,30 @@
       "classification_interimaire": null,
       "personne_absente": "Philippe VIAL Qualification personne remplac?e: Agent qualifie - Production Justification : Remplacement d&#39;une personne en arr?t maladie Facturation Pr?sence Rubrique Taux paie Type de coefficient...",
       "date_extraction": "2025-07-18T19:45:50Z"
+    },
+    {
+      "numero_commande": "CR000763",
+      "code_agence": "STC",
+      "code_unite": "CR8041",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Marie-Odile FRAISSINET",
+      "date_extraction": "2025-07-22T14:47:12Z"
+    },
+    {
+      "numero_commande": "CR000766",
+      "code_agence": "STC",
+      "code_unite": "CR8041",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Jonathan FAUSER",
+      "date_extraction": "2025-07-22T14:47:13Z"
     }
   ],
-  "lastUpdate": "2025-07-18T19:45:56.392Z",
+  "lastUpdate": "2025-07-22T14:47:19.486Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 6,
+    "totalCommandes": 8,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
