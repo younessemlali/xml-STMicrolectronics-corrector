@@ -116,12 +116,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "LYDIE BOVAERE Qualification personne remplac?e: Agent qualifie - Production Justification : REMPLACEMENT PARTIEL ET PAR GLISSEMENT Facturation Pr?sence Rubrique Taux paie Type de coefficient Coefficie...",
       "date_extraction": "2025-07-23T13:46:26Z"
+    },
+    {
+      "numero_commande": "CD000092",
+      "code_agence": "STC",
+      "code_unite": "4",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NICOLAS STROPPARO",
+      "date_extraction": "2025-07-23T21:47:01Z"
     }
   ],
-  "lastUpdate": "2025-07-23T13:46:31.387Z",
+  "lastUpdate": "2025-07-23T21:47:06.458Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 13,
+    "totalCommandes": 14,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
