@@ -89,12 +89,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "Henri ERRICO",
       "date_extraction": "2025-07-22T23:45:52Z"
+    },
+    {
+      "numero_commande": "CR000790",
+      "code_agence": "STC",
+      "code_unite": "CR8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "THOMAS JEAN MOREL Qualification personne remplac?e: Agent qualifie - Production Justification : REMPLACEMENT PARTIEL ET PAR GLISSEMENT Facturation Pr?sence Rubrique Taux paie Type de coefficient Coeff...",
+      "date_extraction": "2025-07-23T08:46:30Z"
     }
   ],
-  "lastUpdate": "2025-07-22T23:45:57.495Z",
+  "lastUpdate": "2025-07-23T08:46:36.931Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 10,
+    "totalCommandes": 11,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
