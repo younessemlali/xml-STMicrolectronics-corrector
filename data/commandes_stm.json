@@ -98,12 +98,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "THOMAS JEAN MOREL Qualification personne remplac?e: Agent qualifie - Production Justification : REMPLACEMENT PARTIEL ET PAR GLISSEMENT Facturation Pr?sence Rubrique Taux paie Type de coefficient Coeff...",
       "date_extraction": "2025-07-23T08:46:30Z"
+    },
+    {
+      "numero_commande": "CR000780",
+      "code_agence": "STC",
+      "code_unite": "CR8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ANIS BOUSSANDEL Qualification personne remplac?e: Agent qualifie - Production Justification : REMPLACEMENT PARTIEL ET PAR GLISSEMENT Facturation Pr?sence Rubrique Taux paie Type de coefficient Coeffic...",
+      "date_extraction": "2025-07-23T10:45:33Z"
     }
   ],
-  "lastUpdate": "2025-07-23T08:46:36.931Z",
+  "lastUpdate": "2025-07-23T10:45:37.749Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 11,
+    "totalCommandes": 12,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
