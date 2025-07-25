@@ -125,12 +125,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "NICOLAS STROPPARO",
       "date_extraction": "2025-07-23T21:47:01Z"
+    },
+    {
+      "numero_commande": "CR000797",
+      "code_agence": "STC",
+      "code_unite": "CR8041",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Jonathan FAUSER",
+      "date_extraction": "2025-07-25T13:45:39Z"
     }
   ],
-  "lastUpdate": "2025-07-23T21:47:06.458Z",
+  "lastUpdate": "2025-07-25T13:45:45.720Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 14,
+    "totalCommandes": 15,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
