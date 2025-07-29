@@ -152,12 +152,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "Jonathan FAUSER Qualification personne remplac?e: Agent qualifie - Production Justification : Remplacement partiel et par glissement Facturation Pr?sence Rubrique Taux paie Type de coefficient Coeffic...",
       "date_extraction": "2025-07-28T13:46:02Z"
+    },
+    {
+      "numero_commande": "CR000828",
+      "code_agence": "STC",
+      "code_unite": "CR8041",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Jonathan FAUSER",
+      "date_extraction": "2025-07-29T10:45:56Z"
+    },
+    {
+      "numero_commande": "CR000820",
+      "code_agence": "STC",
+      "code_unite": "CR8042",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Stephanie DI TOMMASO",
+      "date_extraction": "2025-07-29T10:45:57Z"
     }
   ],
-  "lastUpdate": "2025-07-28T13:46:07.070Z",
+  "lastUpdate": "2025-07-29T10:46:01.231Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 17,
+    "totalCommandes": 19,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
