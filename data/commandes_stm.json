@@ -170,12 +170,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "Stephanie DI TOMMASO",
       "date_extraction": "2025-07-29T10:45:57Z"
+    },
+    {
+      "numero_commande": "CR000839",
+      "code_agence": "STC",
+      "code_unite": "CR8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LYDIE BOVAERE Qualification personne remplac?e: Agent qualifie - Production Justification : REMPLACEMENT PARTIEL ET PAR GLISSEMENT Facturation Pr?sence Rubrique Taux paie Type de coefficient Coefficie...",
+      "date_extraction": "2025-07-30T01:45:52Z"
     }
   ],
-  "lastUpdate": "2025-07-29T10:46:01.231Z",
+  "lastUpdate": "2025-07-30T01:45:57.210Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 19,
+    "totalCommandes": 20,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
