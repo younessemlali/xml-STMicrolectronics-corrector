@@ -260,12 +260,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "Paul PARIS",
       "date_extraction": "2025-08-07T04:45:25Z"
+    },
+    {
+      "numero_commande": "CR000949",
+      "code_agence": "STC",
+      "code_unite": "CR8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAURA BONTEMPI Qualification personne remplac?e: Agent qualifie - Production Justification : remplacement partiel et par glissement Facturation Pr?sence Rubrique Taux paie Type de coefficient Coeffici...",
+      "date_extraction": "2025-08-07T05:47:50Z"
     }
   ],
-  "lastUpdate": "2025-08-07T04:45:30.896Z",
+  "lastUpdate": "2025-08-07T05:47:56.935Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 29,
+    "totalCommandes": 30,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
