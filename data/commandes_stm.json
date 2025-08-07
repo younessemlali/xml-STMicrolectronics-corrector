@@ -242,12 +242,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "Alexandre TROMBOTTO",
       "date_extraction": "2025-08-04T14:47:10Z"
+    },
+    {
+      "numero_commande": "CR000942",
+      "code_agence": "STC",
+      "code_unite": "CR8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ANIS BOUSSANDEL",
+      "date_extraction": "2025-08-07T04:45:24Z"
+    },
+    {
+      "numero_commande": "CR000945",
+      "code_agence": "STC",
+      "code_unite": "CR8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Paul PARIS",
+      "date_extraction": "2025-08-07T04:45:25Z"
     }
   ],
-  "lastUpdate": "2025-08-04T14:47:16.996Z",
+  "lastUpdate": "2025-08-07T04:45:30.896Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 27,
+    "totalCommandes": 29,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
