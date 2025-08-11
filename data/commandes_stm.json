@@ -314,12 +314,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "Theau ROBINOT",
       "date_extraction": "2025-08-11T14:46:13Z"
+    },
+    {
+      "numero_commande": "CD000119",
+      "code_agence": "STC",
+      "code_unite": "4",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "B4",
+      "personne_absente": "Philippe VIAL Qualification personne remplac?e: Conducteur qualifie - Support Logistique Justification : Remplacement d'une personne en arr?t maladie Facturation Pr?sence Rubrique Taux paie Type de co...",
+      "date_extraction": "2025-08-11T20:46:30Z"
     }
   ],
-  "lastUpdate": "2025-08-11T14:46:19.054Z",
+  "lastUpdate": "2025-08-11T20:46:36.619Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 35,
+    "totalCommandes": 36,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
