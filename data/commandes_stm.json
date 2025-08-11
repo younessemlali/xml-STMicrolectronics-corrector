@@ -305,12 +305,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "Yohan VAN HAUWAERT",
       "date_extraction": "2025-08-11T11:46:37Z"
+    },
+    {
+      "numero_commande": "CR001017",
+      "code_agence": "STC",
+      "code_unite": "CR8041",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Theau ROBINOT",
+      "date_extraction": "2025-08-11T14:46:13Z"
     }
   ],
-  "lastUpdate": "2025-08-11T11:46:45.348Z",
+  "lastUpdate": "2025-08-11T14:46:19.054Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 34,
+    "totalCommandes": 35,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
