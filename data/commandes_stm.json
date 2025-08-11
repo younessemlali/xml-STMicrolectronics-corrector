@@ -278,12 +278,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "DOROTHEE BOIS",
       "date_extraction": "2025-08-08T18:46:14Z"
+    },
+    {
+      "numero_commande": "CR001004",
+      "code_agence": "STC",
+      "code_unite": "CR8045",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Nadjim BECHAR",
+      "date_extraction": "2025-08-11T00:47:24Z"
     }
   ],
-  "lastUpdate": "2025-08-08T18:46:19.721Z",
+  "lastUpdate": "2025-08-11T00:47:30.066Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 31,
+    "totalCommandes": 32,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
