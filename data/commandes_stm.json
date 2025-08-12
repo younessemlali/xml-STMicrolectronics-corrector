@@ -323,12 +323,21 @@
       "classification_interimaire": "B4",
       "personne_absente": "Philippe VIAL Qualification personne remplac?e: Conducteur qualifie - Support Logistique Justification : Remplacement d'une personne en arr?t maladie Facturation Pr?sence Rubrique Taux paie Type de co...",
       "date_extraction": "2025-08-11T20:46:30Z"
+    },
+    {
+      "numero_commande": "CR001023",
+      "code_agence": "STC",
+      "code_unite": "CR8042",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Yohan VAN HAUWAERT",
+      "date_extraction": "2025-08-12T13:46:41Z"
     }
   ],
-  "lastUpdate": "2025-08-11T20:46:36.619Z",
+  "lastUpdate": "2025-08-12T13:47:19.539Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 36,
+    "totalCommandes": 37,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
