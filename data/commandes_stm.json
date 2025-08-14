@@ -341,12 +341,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "Paul PARIS Qualification personne remplac?e: Agent qualifie - Production Justification : REMPLACEMENT PARTIEL ET PAR GLISSEMENT Facturation Pr?sence Rubrique Taux paie Type de coefficient Coefficient ...",
       "date_extraction": "2025-08-14T02:45:25Z"
+    },
+    {
+      "numero_commande": "CR001033",
+      "code_agence": "STC",
+      "code_unite": "CR8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ANIS BOUSSANDEL Qualification personne remplac?e: Agent qualifie - Production Justification : REMPLACEMENT PARTIEL ET PAR GLISSEMENT Facturation Pr?sence Rubrique Taux paie Type de coefficient Coeffic...",
+      "date_extraction": "2025-08-14T08:45:43Z"
+    },
+    {
+      "numero_commande": "CR001039",
+      "code_agence": "STC",
+      "code_unite": "CR8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAURA BONTEMPI Qualification personne remplac?e: Agent qualifie - Production Justification : remplacement partiel et par glissement Facturation Pr?sence Rubrique Taux paie Type de coefficient Coeffici...",
+      "date_extraction": "2025-08-14T08:45:44Z"
     }
   ],
-  "lastUpdate": "2025-08-14T02:45:30.429Z",
+  "lastUpdate": "2025-08-14T08:45:49.079Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 38,
+    "totalCommandes": 40,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
