@@ -359,12 +359,57 @@
       "classification_interimaire": "A2",
       "personne_absente": "LAURA BONTEMPI Qualification personne remplac?e: Agent qualifie - Production Justification : remplacement partiel et par glissement Facturation Pr?sence Rubrique Taux paie Type de coefficient Coeffici...",
       "date_extraction": "2025-08-14T08:45:44Z"
+    },
+    {
+      "numero_commande": "CR001370",
+      "code_agence": null,
+      "code_unite": "CR8042",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Natacha JACQUOT",
+      "date_extraction": "2025-09-29T10:02:36Z"
+    },
+    {
+      "numero_commande": "CD000152",
+      "code_agence": null,
+      "code_unite": "4",
+      "statut": "6A - Ouvriers",
+      "classification_interimaire": "A2",
+      "personne_absente": "Philippe VIAL Qualification personne remplac?e: Agent qualifie - Production Justification : Remplacement d'une personne en arr?t maladie Facturation Pr?sence Rubrique Taux paie Type de coefficient Coe...",
+      "date_extraction": "2025-09-29T10:02:37Z"
+    },
+    {
+      "numero_commande": "CR001339",
+      "code_agence": null,
+      "code_unite": "CR8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ADNANE AMIRI",
+      "date_extraction": "2025-09-29T10:02:38Z"
+    },
+    {
+      "numero_commande": "CR001320",
+      "code_agence": null,
+      "code_unite": "CR8042",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Natacha JACQUOT",
+      "date_extraction": "2025-09-29T10:02:38Z"
+    },
+    {
+      "numero_commande": "CD000145",
+      "code_agence": null,
+      "code_unite": "CD8042",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": null,
+      "date_extraction": "2025-09-29T10:02:39Z"
     }
   ],
-  "lastUpdate": "2025-08-14T08:45:49.079Z",
+  "lastUpdate": "2025-09-29T10:02:44.329Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 40,
+    "totalCommandes": 45,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
