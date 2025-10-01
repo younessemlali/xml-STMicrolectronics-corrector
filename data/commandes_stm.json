@@ -404,12 +404,21 @@
       "classification_interimaire": "A2",
       "personne_absente": null,
       "date_extraction": "2025-09-29T10:02:39Z"
+    },
+    {
+      "numero_commande": "CR001785",
+      "code_agence": "663",
+      "code_unite": "CR8042",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Jeremie CONEDERA",
+      "date_extraction": "2025-10-01T16:48:37Z"
     }
   ],
-  "lastUpdate": "2025-09-29T10:02:44.329Z",
+  "lastUpdate": "2025-10-01T16:48:54.153Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 45,
+    "totalCommandes": 46,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
