@@ -413,12 +413,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "Jeremie CONEDERA",
       "date_extraction": "2025-10-01T16:48:37Z"
+    },
+    {
+      "numero_commande": "CR001784",
+      "code_agence": "663",
+      "code_unite": "CR8042",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Sebastien FERNANDEZ",
+      "date_extraction": "2025-10-01T20:46:03Z"
+    },
+    {
+      "numero_commande": "CR001783",
+      "code_agence": "663",
+      "code_unite": "CR8042",
+      "statut": "6A - Ouvriers",
+      "classification_interimaire": "A2",
+      "personne_absente": "Marion MOURET Qualification personne remplac?e: Agent qualifie - Production Justification : Remplacement partiel et par glissement Facturation Pr?sence Rubrique Taux paie Type de coefficient Coefficie...",
+      "date_extraction": "2025-10-01T20:46:04Z"
     }
   ],
-  "lastUpdate": "2025-10-01T16:48:54.153Z",
+  "lastUpdate": "2025-10-01T20:46:18.112Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 46,
+    "totalCommandes": 48,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
