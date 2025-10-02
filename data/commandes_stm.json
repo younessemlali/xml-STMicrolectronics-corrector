@@ -431,12 +431,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "Marion MOURET Qualification personne remplac?e: Agent qualifie - Production Justification : Remplacement partiel et par glissement Facturation Pr?sence Rubrique Taux paie Type de coefficient Coefficie...",
       "date_extraction": "2025-10-01T20:46:04Z"
+    },
+    {
+      "numero_commande": "CR001812",
+      "code_agence": "663",
+      "code_unite": "CR8043",
+      "statut": "6A - Ouvriers",
+      "classification_interimaire": "A2",
+      "personne_absente": "Michael OTTAVIANO Qualification personne remplac?e: Agent qualifie - Production Justification : REMPLACEMENT PARTIEL ET PAR GLISSEMENT Facturation Pr?sence Rubrique Taux paie Type de coefficient Coeff...",
+      "date_extraction": "2025-10-02T21:45:34Z"
     }
   ],
-  "lastUpdate": "2025-10-01T20:46:18.112Z",
+  "lastUpdate": "2025-10-02T21:45:46.108Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 48,
+    "totalCommandes": 49,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
