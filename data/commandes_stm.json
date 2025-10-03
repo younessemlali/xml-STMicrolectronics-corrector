@@ -440,12 +440,39 @@
       "classification_interimaire": "A2",
       "personne_absente": "Michael OTTAVIANO Qualification personne remplac?e: Agent qualifie - Production Justification : REMPLACEMENT PARTIEL ET PAR GLISSEMENT Facturation Pr?sence Rubrique Taux paie Type de coefficient Coeff...",
       "date_extraction": "2025-10-02T21:45:34Z"
+    },
+    {
+      "numero_commande": "CR001810",
+      "code_agence": "663",
+      "code_unite": "CR8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "PHILIPPE AMBLARD",
+      "date_extraction": "2025-10-03T04:45:58Z"
+    },
+    {
+      "numero_commande": "CD000225",
+      "code_agence": "663",
+      "code_unite": "CD8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "AMANDINE KLIMEK",
+      "date_extraction": "2025-10-03T04:45:59Z"
+    },
+    {
+      "numero_commande": "CD000224",
+      "code_agence": "663",
+      "code_unite": "CD8043",
+      "statut": "6A - Ouvriers",
+      "classification_interimaire": "A2",
+      "personne_absente": null,
+      "date_extraction": "2025-10-03T04:46:00Z"
     }
   ],
-  "lastUpdate": "2025-10-02T21:45:46.108Z",
+  "lastUpdate": "2025-10-03T04:46:13.183Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 49,
+    "totalCommandes": 52,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
