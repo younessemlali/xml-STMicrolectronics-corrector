@@ -485,12 +485,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "Loic LABAYE Qualification personne remplac?e: Agent qualifie - Production Justification : REMPLACEMENT PARTIEL ET PAR GLISSEMENT Facturation Pr?sence Rubrique Taux paie Type de coefficient Coefficient...",
       "date_extraction": "2025-10-03T16:45:47Z"
+    },
+    {
+      "numero_commande": "CR001857",
+      "code_agence": "663",
+      "code_unite": "CR8045",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Chlo? BOURDENET",
+      "date_extraction": "2025-10-05T20:45:40Z"
     }
   ],
-  "lastUpdate": "2025-10-03T16:45:58.959Z",
+  "lastUpdate": "2025-10-05T20:45:51.185Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 54,
+    "totalCommandes": 55,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
