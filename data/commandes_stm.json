@@ -494,12 +494,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "Chlo? BOURDENET",
       "date_extraction": "2025-10-05T20:45:40Z"
+    },
+    {
+      "numero_commande": "CR001888",
+      "code_agence": "663",
+      "code_unite": "CR8041",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Marie-Odile FRAISSINET",
+      "date_extraction": "2025-10-08T16:46:03Z"
     }
   ],
-  "lastUpdate": "2025-10-05T20:45:51.185Z",
+  "lastUpdate": "2025-10-08T16:46:17.881Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 55,
+    "totalCommandes": 56,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
