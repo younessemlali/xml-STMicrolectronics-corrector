@@ -557,12 +557,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "CORENTIN FOUCAULT",
       "date_extraction": "2025-10-09T11:46:37Z"
+    },
+    {
+      "numero_commande": "CR001913",
+      "code_agence": "663",
+      "code_unite": "CR8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "DEBORAH CURCIO",
+      "date_extraction": "2025-10-09T16:45:36Z"
     }
   ],
-  "lastUpdate": "2025-10-09T11:46:55.718Z",
+  "lastUpdate": "2025-10-09T16:45:49.509Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 62,
+    "totalCommandes": 63,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
