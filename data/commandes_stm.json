@@ -530,12 +530,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "OCEANE GALLAND",
       "date_extraction": "2025-10-09T08:47:08Z"
+    },
+    {
+      "numero_commande": "CR001919",
+      "code_agence": "663",
+      "code_unite": "CR8042",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Sullyvanne KAHLERRAS",
+      "date_extraction": "2025-10-09T09:46:02Z"
+    },
+    {
+      "numero_commande": "CD000243",
+      "code_agence": "663",
+      "code_unite": "4",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NICOLAS STROPPARO",
+      "date_extraction": "2025-10-09T09:46:03Z"
     }
   ],
-  "lastUpdate": "2025-10-09T08:47:22.576Z",
+  "lastUpdate": "2025-10-09T09:46:15.207Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 59,
+    "totalCommandes": 61,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
