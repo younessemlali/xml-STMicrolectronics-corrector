@@ -512,12 +512,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "Michael OTTAVIANO Qualification personne remplac?e: Agent qualifie - Production Justification : REMPLACEMENT PARTIEL ET PAR GLISSEMENT Facturation Pr?sence Rubrique Taux paie Type de coefficient Coeff...",
       "date_extraction": "2025-10-08T23:47:28Z"
+    },
+    {
+      "numero_commande": "CR001906",
+      "code_agence": "663",
+      "code_unite": "CR8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CEDRIC LESCURE",
+      "date_extraction": "2025-10-09T07:45:45Z"
     }
   ],
-  "lastUpdate": "2025-10-08T23:47:41.477Z",
+  "lastUpdate": "2025-10-09T07:46:01.232Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 57,
+    "totalCommandes": 58,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
