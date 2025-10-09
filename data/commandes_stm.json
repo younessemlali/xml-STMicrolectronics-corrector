@@ -521,12 +521,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "CEDRIC LESCURE",
       "date_extraction": "2025-10-09T07:45:45Z"
+    },
+    {
+      "numero_commande": "CD000249",
+      "code_agence": "663",
+      "code_unite": "CD8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "OCEANE GALLAND",
+      "date_extraction": "2025-10-09T08:47:08Z"
     }
   ],
-  "lastUpdate": "2025-10-09T07:46:01.232Z",
+  "lastUpdate": "2025-10-09T08:47:22.576Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 58,
+    "totalCommandes": 59,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
