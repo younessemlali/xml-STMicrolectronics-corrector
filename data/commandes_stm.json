@@ -566,12 +566,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "DEBORAH CURCIO",
       "date_extraction": "2025-10-09T16:45:36Z"
+    },
+    {
+      "numero_commande": "CR001920",
+      "code_agence": "663",
+      "code_unite": "CR8042",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Lisa PESENTI",
+      "date_extraction": "2025-10-10T01:46:38Z"
     }
   ],
-  "lastUpdate": "2025-10-09T16:45:49.509Z",
+  "lastUpdate": "2025-10-10T01:46:51.049Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 63,
+    "totalCommandes": 64,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
