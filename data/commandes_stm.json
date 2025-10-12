@@ -575,12 +575,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "Lisa PESENTI",
       "date_extraction": "2025-10-10T01:46:38Z"
+    },
+    {
+      "numero_commande": "CR001951",
+      "code_agence": "663",
+      "code_unite": "CR8045",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Aimene BOUSBIH",
+      "date_extraction": "2025-10-12T16:46:02Z"
     }
   ],
-  "lastUpdate": "2025-10-10T01:46:51.049Z",
+  "lastUpdate": "2025-10-12T16:46:14.360Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 64,
+    "totalCommandes": 65,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
