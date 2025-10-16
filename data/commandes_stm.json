@@ -665,12 +665,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "JALLIFIER NATHAN",
       "date_extraction": "2025-10-16T04:47:02Z"
+    },
+    {
+      "numero_commande": "CR001989",
+      "code_agence": "663",
+      "code_unite": "CR8042",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Arthur FILLON",
+      "date_extraction": "2025-10-16T12:46:40Z"
     }
   ],
-  "lastUpdate": "2025-10-16T04:47:13.921Z",
+  "lastUpdate": "2025-10-16T12:47:44.521Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 74,
+    "totalCommandes": 75,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
