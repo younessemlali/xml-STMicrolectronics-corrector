@@ -611,12 +611,57 @@
       "classification_interimaire": "A2",
       "personne_absente": "Alexandre TROMBOTTO",
       "date_extraction": "2025-10-15T18:45:51Z"
+    },
+    {
+      "numero_commande": "CD000259",
+      "code_agence": "663",
+      "code_unite": "CD8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ZAHRANE KADRI",
+      "date_extraction": "2025-10-16T03:45:35Z"
+    },
+    {
+      "numero_commande": "CR001980",
+      "code_agence": "663",
+      "code_unite": "CR8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MICHEL POCAS",
+      "date_extraction": "2025-10-16T03:45:36Z"
+    },
+    {
+      "numero_commande": "CR001980",
+      "code_agence": "663",
+      "code_unite": "CR8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MICHEL POCAS",
+      "date_extraction": "2025-10-16T03:45:37Z"
+    },
+    {
+      "numero_commande": "CR001975",
+      "code_agence": "663",
+      "code_unite": "CR8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MICKAEL OTTAVIANO",
+      "date_extraction": "2025-10-16T03:45:39Z"
+    },
+    {
+      "numero_commande": "CD000256",
+      "code_agence": "663",
+      "code_unite": "CD8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "OCEANE GALLAND Qualification personne remplac?e: Agent qualifie - Production Justification : REMPLACEMENT PARTIEL ET PAR GLISSEMENT Facturation Pr?sence Rubrique Taux paie Type de coefficient Coeffici...",
+      "date_extraction": "2025-10-16T03:45:40Z"
     }
   ],
-  "lastUpdate": "2025-10-15T18:46:03.452Z",
+  "lastUpdate": "2025-10-16T03:45:51.551Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 68,
+    "totalCommandes": 73,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
