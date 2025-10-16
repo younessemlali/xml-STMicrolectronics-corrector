@@ -656,12 +656,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "OCEANE GALLAND Qualification personne remplac?e: Agent qualifie - Production Justification : REMPLACEMENT PARTIEL ET PAR GLISSEMENT Facturation Pr?sence Rubrique Taux paie Type de coefficient Coeffici...",
       "date_extraction": "2025-10-16T03:45:40Z"
+    },
+    {
+      "numero_commande": "CR001976",
+      "code_agence": "663",
+      "code_unite": "CR8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JALLIFIER NATHAN",
+      "date_extraction": "2025-10-16T04:47:02Z"
     }
   ],
-  "lastUpdate": "2025-10-16T03:45:51.551Z",
+  "lastUpdate": "2025-10-16T04:47:13.921Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 73,
+    "totalCommandes": 74,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
