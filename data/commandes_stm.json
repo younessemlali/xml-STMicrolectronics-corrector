@@ -683,12 +683,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "GAETAN MICHEL",
       "date_extraction": "2025-10-17T00:46:26Z"
+    },
+    {
+      "numero_commande": "CD000267",
+      "code_agence": "663",
+      "code_unite": "CD8043",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "DANIEL POLITO",
+      "date_extraction": "2025-10-17T14:48:01Z"
     }
   ],
-  "lastUpdate": "2025-10-17T00:46:37.495Z",
+  "lastUpdate": "2025-10-17T14:48:15.224Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 76,
+    "totalCommandes": 77,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
