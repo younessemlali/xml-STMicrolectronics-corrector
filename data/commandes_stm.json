@@ -710,12 +710,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "Andrea ALFERO",
       "date_extraction": "2025-10-20T15:46:03Z"
+    },
+    {
+      "numero_commande": "CD000272",
+      "code_agence": null,
+      "code_unite": "CD8041",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Jean-Fran?ois Comes",
+      "date_extraction": "2025-10-20T17:49:31Z"
+    },
+    {
+      "numero_commande": "CD000272",
+      "code_agence": "663",
+      "code_unite": "CD8041",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Jean-Fran?ois Comes",
+      "date_extraction": "2025-10-20T17:49:33Z"
     }
   ],
-  "lastUpdate": "2025-10-20T15:46:14.265Z",
+  "lastUpdate": "2025-10-20T17:49:46.532Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 79,
+    "totalCommandes": 81,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
