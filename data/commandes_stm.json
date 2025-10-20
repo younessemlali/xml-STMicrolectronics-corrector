@@ -701,12 +701,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "Chlo? BOURDENET",
       "date_extraction": "2025-10-19T15:46:19Z"
+    },
+    {
+      "numero_commande": "CD000273",
+      "code_agence": "663",
+      "code_unite": "CD8041",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Andrea ALFERO",
+      "date_extraction": "2025-10-20T15:46:03Z"
     }
   ],
-  "lastUpdate": "2025-10-19T15:46:31.563Z",
+  "lastUpdate": "2025-10-20T15:46:14.265Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 78,
+    "totalCommandes": 79,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
