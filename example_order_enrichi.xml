@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Order>
+  <OrderId>CR000722</OrderId>
+  <OrderDate>2025-07-16</OrderDate>
+  <Client>
+    <Name>STMICROELECTRONICS</Name>
+    <Site>CROLLES 200</Site>
+  </Client>
+  <PositionDetails>
+    <PositionCharacteristics>
+      <PositionTitle>Agent de fabrication (F/H)</PositionTitle>
+      <PositionStatus>
+        <Code>OP</Code>
+        <Description>OP - Op?rateur</Description>
+      </PositionStatus>
+      <Description>Lancer des lots de production, convoyer et porter des lots, Contrôler la qualité d'équipements et de lots, Réaliser des opérations selon procédure, Réaliser un diagnostic pour traiter le problème ou contacter un spécialiste. Prendre et transmettre les consignes. Selon atelier d'affectation, changement de bouteille de résine</Description>
+      <PositionLevel>Direct</PositionLevel>
+      <PositionCoefficient>A2</PositionCoefficient>
+      <PositionSpecificCondition>
+        <ShiftWork>true</ShiftWork>
+        <Weekend>false</Weekend>
+      </PositionSpecificCondition>
+    </PositionCharacteristics>
+  </PositionDetails>
+  <ReplacementInfo>
+    <PersonneAbsente>LYDIE BOVAERE</PersonneAbsente>
+    <Reason>Remplacement</Reason>
+  </ReplacementInfo>
+</Order>
