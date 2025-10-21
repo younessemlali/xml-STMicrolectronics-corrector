@@ -5,6 +5,8 @@ from pathlib import Path
 import tempfile
 from datetime import datetime
 from xml_enricher import XMLEnricher
+import pandas as pd
+import io
 
 # Configuration de la page
 st.set_page_config(
@@ -47,6 +49,8 @@ st.markdown("Enrichissez automatiquement vos fichiers XML avec les données PIXI
 # Initialisation de la session
 if 'enriched_xml' not in st.session_state:
     st.session_state.enriched_xml = None
+if 'stats' not in st.session_state:
+    st.session_state.stats = None
 
 # Sidebar - Navigation
 st.sidebar.title("📋 Navigation")
@@ -84,7 +88,7 @@ else:
 
 # ============= PAGE 1: ENRICHISSEMENT XML =============
 if page == "🔧 Enrichissement XML":
-    st.header("🔧 Enrichissement XML")
+    st.header("🔧 Enrichissement XML Multi-Contrats")
     
     if not st.session_state.enricher:
         st.error("⚠️ Base de données non disponible")
@@ -101,9 +105,9 @@ if page == "🔧 Enrichissement XML":
     with col1:
         st.subheader("📤 Upload du fichier XML")
         xml_file = st.file_uploader(
-            "Sélectionnez votre fichier XML à enrichir",
+            "Sélectionnez votre fichier XML contenant un ou plusieurs contrats",
             type=['xml'],
-            help="Le fichier XML doit contenir un numéro de commande (CR, CD ou RT)"
+            help="Le fichier XML peut contenir plusieurs contrats. Chaque contrat avec un OrderId valide sera enrichi."
         )
     
     with col2:
@@ -120,112 +124,153 @@ if page == "🔧 Enrichissement XML":
         # Afficher un aperçu
         st.subheader("🔍 Analyse du fichier XML")
         
-        # Trouver le numéro de commande
-        order_id = st.session_state.enricher.find_order_id_in_xml(tmp_xml_path)
+        # Trouver tous les numéros de commande
+        orders = st.session_state.enricher.find_all_order_ids_in_xml(tmp_xml_path)
         
-        if order_id:
-            st.success(f"✅ Numéro de commande détecté: **{order_id}**")
+        if orders:
+            st.success(f"✅ **{len(orders)} contrat(s) détecté(s)** dans le fichier XML")
             
-            # Récupérer les données de la commande
-            commande = st.session_state.enricher.get_commande_info(order_id)
-            
-            if commande:
-                col1, col2, col3 = st.columns(3)
+            # Afficher les contrats détectés
+            with st.expander("📋 Liste des contrats détectés", expanded=True):
+                orders_with_data = []
+                orders_without_data = []
+                
+                for order_info in orders:
+                    order_id = order_info['order_id']
+                    commande = st.session_state.enricher.get_commande_info(order_id)
+                    
+                    if commande:
+                        orders_with_data.append({
+                            'OrderId': order_id,
+                            'Agence': commande.get('code_agence', 'N/A'),
+                            'Unité': commande.get('code_unite', 'N/A'),
+                            'Statut': commande.get('statut', 'N/A'),
+                            'Classification': commande.get('classification_interimaire', 'N/A'),
+                            'Données': '✅ Disponibles'
+                        })
+                    else:
+                        orders_without_data.append({
+                            'OrderId': order_id,
+                            'Agence': '-',
+                            'Unité': '-',
+                            'Statut': '-',
+                            'Classification': '-',
+                            'Données': '❌ Non trouvées'
+                        })
+                
+                # Afficher les résultats
+                col1, col2 = st.columns(2)
                 
                 with col1:
-                    st.markdown("**🏢 Agence**")
-                    st.info(commande.get('code_agence', 'N/A'))
+                    st.metric("✅ Contrats enrichissables", len(orders_with_data))
                 
                 with col2:
-                    st.markdown("**🔧 Unité**")
-                    st.info(commande.get('code_unite', 'N/A'))
+                    st.metric("❌ Contrats sans données", len(orders_without_data))
                 
-                with col3:
-                    st.markdown("**📅 Date extraction**")
-                    date_str = commande.get('date_extraction', 'N/A')
-                    if date_str != 'N/A':
-                        try:
-                            date_obj = datetime.fromisoformat(date_str.replace('Z', '+00:00'))
-                            st.info(date_obj.strftime('%d/%m/%Y %H:%M'))
-                        except:
-                            st.info(date_str)
+                # Tableau récapitulatif
+                all_orders = orders_with_data + orders_without_data
+                if all_orders:
+                    df = pd.DataFrame(all_orders)
+                    st.dataframe(df, use_container_width=True, hide_index=True)
+            
+            st.markdown("---")
+            
+            # Bouton d'enrichissement
+            if len(orders_with_data) > 0:
+                if st.button("🚀 Enrichir le fichier XML", type="primary", use_container_width=True):
+                    # Créer un placeholder pour la progression
+                    progress_bar = st.progress(0)
+                    status_text = st.empty()
+                    
+                    # Créer le fichier de sortie
+                    output_path = tempfile.NamedTemporaryFile(delete=False, suffix='_enrichi.xml').name
+                    
+                    # Fonction callback pour la progression
+                    def update_progress(current, total):
+                        progress = current / total
+                        progress_bar.progress(progress)
+                        status_text.text(f"Enrichissement: {current}/{total} contrats traités...")
+                    
+                    # Enrichir
+                    success, message, stats = st.session_state.enricher.enrich_xml(
+                        tmp_xml_path,
+                        output_path,
+                        progress_callback=update_progress
+                    )
+                    
+                    # Nettoyer la barre de progression
+                    progress_bar.empty()
+                    status_text.empty()
+                    
+                    if success:
+                        # Lire le fichier enrichi
+                        with open(output_path, 'rb') as f:
+                            st.session_state.enriched_xml = f.read()
+                        
+                        st.session_state.stats = stats
+                        
+                        st.balloons()
+                        st.success("✅ Fichier XML enrichi avec succès!")
+                        
+                        # Afficher les statistiques
+                        col1, col2, col3 = st.columns(3)
+                        
+                        with col1:
+                            st.metric("📦 Total contrats", stats['total'])
+                        
+                        with col2:
+                            st.metric("✅ Enrichis", stats['enrichis'], 
+                                    delta=f"{(stats['enrichis']/stats['total']*100):.0f}%")
+                        
+                        with col3:
+                            st.metric("❌ Non trouvés", stats['non_trouves'])
+                        
+                        # Détails des modifications
+                        with st.expander("📋 Détails des modifications par contrat"):
+                            details_df = pd.DataFrame(stats['details'])
+                            st.dataframe(details_df, use_container_width=True, hide_index=True)
                     else:
-                        st.info(date_str)
-                
+                        st.error(f"❌ {message}")
+            else:
+                st.warning("⚠️ Aucun contrat ne peut être enrichi (aucune donnée disponible)")
+            
+            # Téléchargement si enrichissement effectué
+            if st.session_state.enriched_xml and st.session_state.stats:
                 st.markdown("---")
-                
-                # Afficher les données qui seront enrichies
-                st.subheader("📝 Données d'enrichissement")
+                st.subheader("📥 Télécharger les résultats")
                 
                 col1, col2 = st.columns(2)
                 
                 with col1:
-                    st.markdown("**👔 Statut**")
-                    statut = commande.get('statut', 'Non disponible')
-                    if statut and statut != 'Non disponible':
-                        code_statut = statut.split('-')[0].strip() if '-' in statut else statut
-                        st.success(f"Code: `{code_statut}`")
-                        st.caption(f"Description complète: {statut}")
-                    else:
-                        st.warning("⚠️ Statut non disponible")
-                
-                with col2:
-                    st.markdown("**🎯 Classification**")
-                    classification = commande.get('classification_interimaire', 'Non disponible')
-                    if classification and classification != 'Non disponible':
-                        st.success(f"Coefficient: `{classification}`")
-                    else:
-                        st.warning("⚠️ Classification non disponible")
-                
-                st.markdown("---")
-                
-                # Bouton d'enrichissement
-                if st.button("🚀 Enrichir le fichier XML", type="primary", use_container_width=True):
-                    with st.spinner("Enrichissement en cours..."):
-                        # Créer le fichier de sortie
-                        output_path = tempfile.NamedTemporaryFile(delete=False, suffix='_enrichi.xml').name
-                        
-                        # Enrichir
-                        success, message = st.session_state.enricher.enrich_xml(
-                            tmp_xml_path,
-                            output_path
-                        )
-                        
-                        if success:
-                            # Lire le fichier enrichi
-                            with open(output_path, 'rb') as f:
-                                st.session_state.enriched_xml = f.read()
-                            
-                            st.balloons()
-                            st.success("✅ Fichier XML enrichi avec succès!")
-                            
-                            # Afficher les modifications
-                            with st.expander("📋 Détails des modifications"):
-                                st.text(message)
-                            
-                        else:
-                            st.error(f"❌ {message}")
-                
-                # Téléchargement si enrichissement effectué
-                if st.session_state.enriched_xml:
-                    st.markdown("---")
-                    st.subheader("📥 Télécharger le fichier enrichi")
-                    
                     # Générer le nom du fichier
-                    original_name = xml_file.name
-                    base_name = Path(original_name).stem
-                    new_name = f"{base_name}_enrichi_{order_id}.xml"
+                    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+                    xml_name = f"enrichi_{st.session_state.stats['enrichis']}contrats_{timestamp}.xml"
                     
                     st.download_button(
                         label="⬇️ Télécharger le XML enrichi",
                         data=st.session_state.enriched_xml,
-                        file_name=new_name,
+                        file_name=xml_name,
                         mime="application/xml",
                         use_container_width=True
                     )
-            else:
-                st.error(f"❌ Commande {order_id} introuvable dans la base de données")
-                st.info("💡 Vérifiez que le fichier commandes_stm.json est à jour")
+                
+                with col2:
+                    # Créer un rapport CSV
+                    if st.session_state.stats and 'details' in st.session_state.stats:
+                        csv_buffer = io.StringIO()
+                        df_report = pd.DataFrame(st.session_state.stats['details'])
+                        df_report.to_csv(csv_buffer, index=False)
+                        csv_data = csv_buffer.getvalue()
+                        
+                        csv_name = f"rapport_{timestamp}.csv"
+                        
+                        st.download_button(
+                            label="📊 Télécharger le rapport CSV",
+                            data=csv_data,
+                            file_name=csv_name,
+                            mime="text/csv",
+                            use_container_width=True
+                        )
         else:
             st.error("❌ Aucun numéro de commande détecté dans le XML")
             st.info("""
@@ -343,8 +388,8 @@ elif page == "ℹ️ Documentation":
     st.markdown("""
     ## 🎯 Objectif
     
-    Cette application permet d'enrichir automatiquement vos fichiers XML avec les données extraites
-    des emails de confirmation de commande PIXID de STMicroelectronics.
+    Cette application permet d'enrichir automatiquement vos fichiers XML (pouvant contenir plusieurs contrats)
+    avec les données extraites des emails de confirmation de commande PIXID de STMicroelectronics.
     
     ## 🔧 Fonctionnement
     
@@ -352,16 +397,23 @@ elif page == "ℹ️ Documentation":
     - Le fichier `commandes_stm.json` est chargé automatiquement au démarrage
     - Ce fichier contient toutes les commandes extraites des emails
     
-    ### 2. Enrichissement XML
-    - Uploadez votre fichier XML à enrichir
-    - L'application détecte automatiquement le numéro de commande
-    - Les balises suivantes sont enrichies:
+    ### 2. Enrichissement XML Multi-Contrats
+    - Uploadez votre fichier XML (peut contenir plusieurs contrats)
+    - L'application détecte **TOUS** les numéros de commande dans le fichier
+    - Pour chaque contrat trouvé dans la base, les balises suivantes sont enrichies:
       - `<Code>` dans `<PositionStatus>` → Statut (ex: "OP", "VAC")
       - `<PositionCoefficient>` → Classification (ex: "A2", "B1")
+    - Les contrats non trouvés dans la base restent inchangés
     
-    ### 3. Téléchargement
-    - Téléchargez votre fichier XML enrichi
-    - Le nom inclut le numéro de commande pour faciliter l'identification
+    ### 3. Suivi et Rapport
+    - **Barre de progression** pendant le traitement
+    - **Statistiques détaillées** : nombre total, enrichis, non trouvés
+    - **Rapport CSV téléchargeable** avec le détail de chaque contrat
+    
+    ### 4. Téléchargement
+    - Téléchargez votre fichier XML enrichi (tous les contrats dans un seul fichier)
+    - Téléchargez le rapport CSV pour audit/suivi
+    - Le nom inclut le nombre de contrats enrichis et un timestamp
     
     ## 📋 Structure des données
     
@@ -387,15 +439,18 @@ elif page == "ℹ️ Documentation":
     ## ⚠️ Important
     
     - Le fichier `commandes_stm.json` doit être à jour
-    - Le numéro de commande doit exister dans la base de données
-    - Vérifiez toujours le fichier enrichi avant utilisation
+    - L'encodage **ISO-8859-1** est préservé
+    - **Aucun namespace** n'est ajouté (pas de ns0:)
+    - Les contrats sans données restent intacts
+    - Vérifiez toujours le rapport CSV après enrichissement
     
     ## 🆘 Support
     
     En cas de problème:
     1. Vérifiez que le fichier JSON est bien chargé
-    2. Vérifiez que le numéro de commande est présent dans le XML
-    3. Vérifiez que la commande existe dans la base de données
+    2. Vérifiez que les numéros de commande sont présents dans le XML
+    3. Consultez le rapport CSV pour voir quels contrats ont été enrichis
+    4. Les fichiers XML de grande taille (15 000+ lignes) sont supportés
     
     ## 📞 Contact
     
@@ -405,4 +460,4 @@ elif page == "ℹ️ Documentation":
 # Footer
 st.sidebar.markdown("---")
 st.sidebar.markdown("**PIXID Automation Platform**")
-st.sidebar.caption("v2.0 - STMicroelectronics")
+st.sidebar.caption("v2.1 - Multi-Contrats - STMicroelectronics")
