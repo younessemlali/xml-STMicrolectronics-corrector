@@ -63,54 +63,19 @@ st.sidebar.subheader("📁 Base de données")
 # Initialiser l'enrichisseur automatiquement au démarrage
 if 'enricher' not in st.session_state:
     try:
-        # Chercher le fichier dans le répertoire de l'application
-        json_path = 'commandes_stm.json'
-        
-        # Si le fichier n'existe pas dans le répertoire courant, chercher ailleurs
-        if not os.path.exists(json_path):
-            # Essayer dans le même dossier que ce script
-            script_dir = os.path.dirname(os.path.abspath(__file__))
-            json_path = os.path.join(script_dir, 'commandes_stm.json')
-        
-        if os.path.exists(json_path):
-            # Créer l'enrichisseur automatiquement
-            st.session_state.enricher = XMLEnricher(json_path)
-            st.sidebar.success(f"✅ {len(st.session_state.enricher.commandes_data)} commandes chargées automatiquement")
-        else:
-            st.session_state.enricher = None
-            st.sidebar.warning("⚠️ Fichier commandes_stm.json introuvable")
-            st.sidebar.info("📤 Vous pouvez uploader le fichier ci-dessous")
-            
-            # Option de secours : uploader manuellement
-            json_file = st.sidebar.file_uploader(
-                "Charger commandes_stm.json",
-                type=['json'],
-                help="Fichier JSON contenant les données extraites des emails PIXID"
-            )
-            
-            if json_file:
-                try:
-                    # Sauvegarder temporairement
-                    with tempfile.NamedTemporaryFile(delete=False, suffix='.json') as tmp:
-                        tmp.write(json_file.getvalue())
-                        tmp_path = tmp.name
-                    
-                    # Créer l'enrichisseur
-                    st.session_state.enricher = XMLEnricher(tmp_path)
-                    st.sidebar.success(f"✅ {len(st.session_state.enricher.commandes_data)} commandes chargées")
-                    st.rerun()
-                    
-                except Exception as e:
-                    st.sidebar.error(f"❌ Erreur: {e}")
-        
+        # Charger directement depuis le fichier
+        st.session_state.enricher = XMLEnricher('commandes_stm.json')
+        st.sidebar.success(f"✅ {len(st.session_state.enricher.commandes_data)} commandes chargées")
+    except FileNotFoundError:
+        st.session_state.enricher = None
+        st.sidebar.error("❌ Fichier commandes_stm.json introuvable dans le repo")
     except Exception as e:
         st.session_state.enricher = None
-        st.sidebar.error(f"❌ Erreur de chargement: {e}")
-        st.sidebar.info("Veuillez vérifier que commandes_stm.json est dans le repo")
+        st.sidebar.error(f"❌ Erreur: {e}")
 else:
     # L'enrichisseur est déjà chargé
     if st.session_state.enricher:
-        st.sidebar.success(f"✅ {len(st.session_state.enricher.commandes_data)} commandes disponibles")
+        st.sidebar.info(f"✅ {len(st.session_state.enricher.commandes_data)} commandes disponibles")
 
 # ============= PAGE 1: ENRICHISSEMENT XML =============
 if page == "🔧 Enrichissement XML":
