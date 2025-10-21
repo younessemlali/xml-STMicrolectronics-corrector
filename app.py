@@ -5,6 +5,7 @@ from pathlib import Path
 import tempfile
 from datetime import datetime
 from xml_enricher import XMLEnricher
+import os
 
 # Configuration de la page
 st.set_page_config(
@@ -45,8 +46,6 @@ st.title("🔧 PIXID XML Enricher - STMicroelectronics")
 st.markdown("Enrichissez automatiquement vos fichiers XML avec les données PIXID extraites des emails")
 
 # Initialisation de la session
-if 'enricher' not in st.session_state:
-    st.session_state.enricher = None
 if 'enriched_xml' not in st.session_state:
     st.session_state.enriched_xml = None
 
@@ -57,30 +56,61 @@ page = st.sidebar.radio(
     ["🔧 Enrichissement XML", "🔍 Recherche commande", "📊 Statistiques", "ℹ️ Documentation"]
 )
 
-# Charger le fichier JSON des commandes
+# Charger automatiquement le fichier JSON des commandes
 st.sidebar.markdown("---")
 st.sidebar.subheader("📁 Base de données")
 
-json_file = st.sidebar.file_uploader(
-    "Charger commandes_stm.json",
-    type=['json'],
-    help="Fichier JSON contenant les données extraites des emails PIXID"
-)
-
-if json_file:
+# Initialiser l'enrichisseur automatiquement au démarrage
+if 'enricher' not in st.session_state:
     try:
-        # Sauvegarder temporairement
-        with tempfile.NamedTemporaryFile(delete=False, suffix='.json') as tmp:
-            tmp.write(json_file.getvalue())
-            tmp_path = tmp.name
+        # Chercher le fichier dans le répertoire de l'application
+        json_path = 'commandes_stm.json'
         
-        # Créer l'enrichisseur
-        st.session_state.enricher = XMLEnricher(tmp_path)
+        # Si le fichier n'existe pas dans le répertoire courant, chercher ailleurs
+        if not os.path.exists(json_path):
+            # Essayer dans le même dossier que ce script
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            json_path = os.path.join(script_dir, 'commandes_stm.json')
         
-        st.sidebar.success(f"✅ {len(st.session_state.enricher.commandes_data)} commandes chargées")
+        if os.path.exists(json_path):
+            # Créer l'enrichisseur automatiquement
+            st.session_state.enricher = XMLEnricher(json_path)
+            st.sidebar.success(f"✅ {len(st.session_state.enricher.commandes_data)} commandes chargées automatiquement")
+        else:
+            st.session_state.enricher = None
+            st.sidebar.warning("⚠️ Fichier commandes_stm.json introuvable")
+            st.sidebar.info("📤 Vous pouvez uploader le fichier ci-dessous")
+            
+            # Option de secours : uploader manuellement
+            json_file = st.sidebar.file_uploader(
+                "Charger commandes_stm.json",
+                type=['json'],
+                help="Fichier JSON contenant les données extraites des emails PIXID"
+            )
+            
+            if json_file:
+                try:
+                    # Sauvegarder temporairement
+                    with tempfile.NamedTemporaryFile(delete=False, suffix='.json') as tmp:
+                        tmp.write(json_file.getvalue())
+                        tmp_path = tmp.name
+                    
+                    # Créer l'enrichisseur
+                    st.session_state.enricher = XMLEnricher(tmp_path)
+                    st.sidebar.success(f"✅ {len(st.session_state.enricher.commandes_data)} commandes chargées")
+                    st.rerun()
+                    
+                except Exception as e:
+                    st.sidebar.error(f"❌ Erreur: {e}")
         
     except Exception as e:
-        st.sidebar.error(f"❌ Erreur: {e}")
+        st.session_state.enricher = None
+        st.sidebar.error(f"❌ Erreur de chargement: {e}")
+        st.sidebar.info("Veuillez vérifier que commandes_stm.json est dans le repo")
+else:
+    # L'enrichisseur est déjà chargé
+    if st.session_state.enricher:
+        st.sidebar.success(f"✅ {len(st.session_state.enricher.commandes_data)} commandes disponibles")
 
 # ============= PAGE 1: ENRICHISSEMENT XML =============
 if page == "🔧 Enrichissement XML":
