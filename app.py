@@ -263,7 +263,7 @@ def enrich_xml(xml_content, commande_data):
         
         # Formater le XML pour qu'il soit plus lisible
         dom = minidom.parseString(xml_str)
-        pretty_xml = dom.toprettyxml(indent='  ')
+        pretty_xml = dom.toprettyxml(indent='  ', encoding='iso-8859-1').decode('iso-8859-1')
         
         # Retirer la première ligne (déclaration XML) si elle est dupliquée
         lines = pretty_xml.split('\n')
@@ -273,10 +273,11 @@ def enrich_xml(xml_content, commande_data):
         # Retirer les lignes vides
         lines = [line for line in lines if line.strip()]
         
-        # Remettre la déclaration XML
+        # Remettre la déclaration XML en ISO-8859-1
         pretty_xml = '<?xml version="1.0" encoding="iso-8859-1"?>\n' + '\n'.join(lines)
         
-        return pretty_xml, fields_added
+        # Encoder le résultat final en ISO-8859-1
+        return pretty_xml.encode('iso-8859-1', errors='replace').decode('iso-8859-1'), fields_added
         
     except Exception as e:
         st.error(f"Erreur lors de l'enrichissement: {str(e)}")
