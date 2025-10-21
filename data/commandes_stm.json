@@ -4967,12 +4967,174 @@
       "classification_interimaire": "A2",
       "personne_absente": "Pamela BONHOMME Qualification personne remplac?e: Agent qualifie - Production Justification : Mme BONHOMME Pamela, EN MALADIE, OP?RATRICE DE PRODUCTION, NON CADRE, REMPLACEMENT PARTIEL ET PAR GLISSEME...",
       "date_extraction": "2025-10-21T21:45:59Z"
+    },
+    {
+      "numero_commande": "RT000817",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CLAIRE ESCARRAS Qualification personne remplac?e: Agent qualifie - Production Justification : Mme ESCARRAS CLAIRE, EN MALADIE, OP?RATRICE DE PRODUCTION, NON CADRE, REMPLACEMENT PARTIEL ET PAR GLISSEME...",
+      "date_extraction": "2025-10-21T22:46:10Z"
+    },
+    {
+      "numero_commande": "RT000823",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MURIEL GRISAFFI Qualification personne remplac?e: Agent qualifie - Production Justification : Mme GRISAFFI MURIEL, EN maladie, OP?RATRICE DE PRODUCTION, NON CADRE, REMPLACEMENT PARTIEL ET PAR GLISSEME...",
+      "date_extraction": "2025-10-21T22:46:12Z"
+    },
+    {
+      "numero_commande": "RT000822",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CARINE DUSSART Qualification personne remplac?e: Agent qualifie - Production Justification : MALADIE Facturation Pr?sence Rubrique Taux paie Type de coefficient Coefficient de facturation Base 100010 ...",
+      "date_extraction": "2025-10-21T22:46:14Z"
+    },
+    {
+      "numero_commande": "RT000828",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "GUILLAUME ESPINOSA Qualification personne remplac?e: Agent qualifie - Production Justification : formation Facturation Pr?sence Rubrique Taux paie Type de coefficient Coefficient de facturation Base 1...",
+      "date_extraction": "2025-10-21T22:46:15Z"
+    },
+    {
+      "numero_commande": "RT000821",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAURENCE LECCIA Qualification personne remplac?e: Agent qualifie - Production Justification : Mme LECCIA LAURENCE, EN MALADIE, OP?RATRICE DE PRODUCTION, NON CADRE, REMPLACEMENT PARTIEL ET PAR GLISSEME...",
+      "date_extraction": "2025-10-21T22:46:17Z"
+    },
+    {
+      "numero_commande": "RT000827",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FANNY LACROUX Qualification personne remplac?e: Agent qualifie - Production Justification : maladie Facturation Pr?sence Rubrique Taux paie Type de coefficient Coefficient de facturation Base 100010 -...",
+      "date_extraction": "2025-10-21T22:46:18Z"
+    },
+    {
+      "numero_commande": "RT000816",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NICOLAS BOYER Qualification personne remplac?e: Agent qualifie - Production Justification : M BOYER NICOLAS, EN MALADIE, OP?RATEUR DE PRODUCTION, NON CADRE, REMPLACEMENT PARTIEL ET PAR GLISSEMENT Fact...",
+      "date_extraction": "2025-10-21T22:46:19Z"
+    },
+    {
+      "numero_commande": "RT000819",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JEAN NOEL PILLOT Qualification personne remplac?e: Agent qualifie - Production Justification : Mr Jean Noel PILLOT EN CONGES CETR, OP?RATEUR DE PRODUCTION, NON CADRE, REMPLACEMENT PARTIEL ET PAR GLISS...",
+      "date_extraction": "2025-10-21T22:46:21Z"
+    },
+    {
+      "numero_commande": "RT000820",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ANTHONY GONCALVES Qualification personne remplac?e: Agent qualifie - Production Justification : M GONCALVES ANTHONY, EN conges, OP?RATEUR DE PRODUCTION, NON CADRE, REMPLACEMENT PARTIEL ET PAR GLISSEME...",
+      "date_extraction": "2025-10-21T22:46:22Z"
+    },
+    {
+      "numero_commande": "RT000818",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MELANIE BRUNEL Qualification personne remplac?e: Agent qualifie - Production Justification : Mme BRUNEL MELANIE, EN MALADIE, OP?RATRICE DE PRODUCTION, NON CADRE, REMPLACEMENT PARTIEL ET PAR GLISSEMENT...",
+      "date_extraction": "2025-10-21T22:46:24Z"
+    },
+    {
+      "numero_commande": "RT000824",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "GREGORY MERONO Qualification personne remplac?e: Agent qualifie - Production Justification : Maladie Facturation Pr?sence Rubrique Taux paie Type de coefficient Coefficient de facturation Base 100010 ...",
+      "date_extraction": "2025-10-21T22:46:26Z"
+    },
+    {
+      "numero_commande": "RT000824",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "GREGORY MERONO Qualification personne remplac?e: Agent qualifie - Production Justification : Maladie Facturation Pr?sence Rubrique Taux paie Type de coefficient Coefficient de facturation Base 100010 ...",
+      "date_extraction": "2025-10-21T22:46:28Z"
+    },
+    {
+      "numero_commande": "RT000826",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MARTINEZ HIGUERA Sara",
+      "date_extraction": "2025-10-21T22:46:29Z"
+    },
+    {
+      "numero_commande": "RT000825",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JULIEN TORRE Qualification personne remplac?e: Agent qualifie - Production Justification : Maladie Facturation Pr?sence Rubrique Taux paie Type de coefficient Coefficient de facturation Base 100010 - ...",
+      "date_extraction": "2025-10-21T22:46:31Z"
+    },
+    {
+      "numero_commande": "RT000197",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ANNIE BRES Qualification personne remplac?e: Agent qualifie - Production Justification : maladie Facturation Pr?sence Rubrique Taux paie Type de coefficient Coefficient de facturation Base 100010 - He...",
+      "date_extraction": "2025-10-21T22:46:32Z"
+    },
+    {
+      "numero_commande": "RT000814",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Christophe LAMBERT",
+      "date_extraction": "2025-10-21T22:46:34Z"
+    },
+    {
+      "numero_commande": "RT000198",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MICKAEL CHIRA Qualification personne remplac?e: Agent qualifie - Production Justification : cong?s Facturation Pr?sence Rubrique Taux paie Type de coefficient Coefficient de facturation Base 100010 - ...",
+      "date_extraction": "2025-10-21T22:46:35Z"
+    },
+    {
+      "numero_commande": "RT000815",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Fanny LACROUX",
+      "date_extraction": "2025-10-21T22:46:37Z"
     }
   ],
-  "lastUpdate": "2025-10-21T21:46:01.160Z",
+  "lastUpdate": "2025-10-21T22:46:43.318Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 552,
+    "totalCommandes": 570,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
