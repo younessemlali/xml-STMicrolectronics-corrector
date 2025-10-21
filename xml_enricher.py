@@ -172,22 +172,29 @@ class XMLEnricher:
                         coeff_element.text = classification
                         modifications.append(f"PositionCoefficient: '{old_value}' → '{classification}'")
             
-            # 6. Sauvegarder le XML enrichi
+            # 6. Sauvegarder le XML enrichi SANS namespaces
             if modifications:
-                # Lire l'encoding original du fichier source
-                with open(xml_path, 'r', encoding='iso-8859-1') as f:
-                    first_line = f.readline()
+                # Lire l'encoding original
+                encoding = 'iso-8859-1'
+                with open(xml_path, 'rb') as f:
+                    first_line = f.readline().decode('iso-8859-1', errors='ignore')
+                    if 'encoding=' in first_line:
+                        match = re.search(r'encoding=["\']([^"\']+)["\']', first_line)
+                        if match:
+                            encoding = match.group(1)
                 
-                # Détecter l'encoding original
-                encoding = 'iso-8859-1'  # Par défaut
-                if 'encoding=' in first_line:
-                    match = re.search(r'encoding=["\']([^"\']+)["\']', first_line)
-                    if match:
-                        encoding = match.group(1)
+                # Convertir en string et supprimer tous les ns0:
+                xml_string = ET.tostring(root, encoding='unicode')
+                xml_string = xml_string.replace('ns0:', '')
+                xml_string = xml_string.replace(':ns0', '')
                 
-                # Écrire sans namespaces automatiques
-                ET.register_namespace('', '')  # Éviter les ns0
-                tree.write(output_path, encoding=encoding, xml_declaration=True)
+                # Ajouter la déclaration XML
+                xml_declaration = f'<?xml version="1.0" encoding="{encoding}"?>\n'
+                final_xml = xml_declaration + xml_string
+                
+                # Écrire le fichier
+                with open(output_path, 'w', encoding=encoding) as f:
+                    f.write(final_xml)
                 
                 message = f"✅ XML enrichi avec succès!\n\nModifications effectuées:\n" + "\n".join(f"  • {mod}" for mod in modifications)
                 print(f"\n{message}")
