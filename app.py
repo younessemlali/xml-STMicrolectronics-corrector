@@ -1,575 +1,410 @@
-"""
-STMicroelectronics XML Corrector - Streamlit App
-Version sans lxml pour éviter les problèmes d'installation
-"""
-
 import streamlit as st
-import pandas as pd
 import json
-import requests
-from datetime import datetime
 import xml.etree.ElementTree as ET
-from xml.dom import minidom
-import io
-import re
+from pathlib import Path
+import tempfile
+from datetime import datetime
+from xml_enricher import XMLEnricher
 
-# Configuration
-GITHUB_RAW_URL = "https://raw.githubusercontent.com/younessemlali/xml-STMicrolectronics-corrector/main/data/commandes_stm.json"
-
-# Configuration Streamlit
+# Configuration de la page
 st.set_page_config(
-    page_title="STMicroelectronics XML Corrector",
+    page_title="PIXID XML Enricher",
     page_icon="🔧",
-    layout="wide",
-    initial_sidebar_state="expanded"
+    layout="wide"
 )
 
-# Style CSS
+# CSS personnalisé
 st.markdown("""
 <style>
-    .stApp {
-        max-width: 1200px;
-        margin: 0 auto;
-    }
     .success-box {
-        padding: 1rem;
-        border-radius: 0.5rem;
+        padding: 20px;
         background-color: #d4edda;
         border: 1px solid #c3e6cb;
-        color: #155724;
-        margin: 1rem 0;
+        border-radius: 5px;
+        margin: 10px 0;
     }
-    .error-box {
-        padding: 1rem;
-        border-radius: 0.5rem;
-        background-color: #f8d7da;
-        border: 1px solid #f5c6cb;
-        color: #721c24;
-        margin: 1rem 0;
+    .info-box {
+        padding: 15px;
+        background-color: #d1ecf1;
+        border: 1px solid #bee5eb;
+        border-radius: 5px;
+        margin: 10px 0;
     }
-    div[data-testid="stMetricValue"] {
-        font-size: 2rem;
+    .warning-box {
+        padding: 15px;
+        background-color: #fff3cd;
+        border: 1px solid #ffeeba;
+        border-radius: 5px;
+        margin: 10px 0;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# Cache pour les données
-@st.cache_data(ttl=300)  # Cache 5 minutes
-def load_commandes_data():
-    """Charge les données des commandes depuis GitHub"""
-    try:
-        response = requests.get(GITHUB_RAW_URL)
-        response.raise_for_status()
-        return response.json()
-    except Exception as e:
-        st.error(f"Erreur lors du chargement des données: {str(e)}")
-        return {"commandes": [], "lastUpdate": None, "metadata": {}}
+# Titre principal
+st.title("🔧 PIXID XML Enricher - STMicroelectronics")
+st.markdown("Enrichissez automatiquement vos fichiers XML avec les données PIXID extraites des emails")
 
-def extract_order_id_from_xml(xml_content):
-    """Extrait l'OrderId du fichier XML de manière robuste"""
+# Initialisation de la session
+if 'enricher' not in st.session_state:
+    st.session_state.enricher = None
+if 'enriched_xml' not in st.session_state:
+    st.session_state.enriched_xml = None
+
+# Sidebar - Navigation
+st.sidebar.title("📋 Navigation")
+page = st.sidebar.radio(
+    "Choisir une page",
+    ["🔧 Enrichissement XML", "🔍 Recherche commande", "📊 Statistiques", "ℹ️ Documentation"]
+)
+
+# Charger le fichier JSON des commandes
+st.sidebar.markdown("---")
+st.sidebar.subheader("📁 Base de données")
+
+json_file = st.sidebar.file_uploader(
+    "Charger commandes_stm.json",
+    type=['json'],
+    help="Fichier JSON contenant les données extraites des emails PIXID"
+)
+
+if json_file:
     try:
-        # Liste pour stocker tous les OrderIds trouvés
-        order_ids_found = []
+        # Sauvegarder temporairement
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.json') as tmp:
+            tmp.write(json_file.getvalue())
+            tmp_path = tmp.name
         
-        # ==== MÉTHODE 1: REGEX (la plus robuste) ====
-        # Pattern 1: OrderId avec IdValue directement dedans
-        patterns = [
-            # Pattern standard
-            r'<OrderId[^>]*>\s*<IdValue>([^<]+)</IdValue>',
-            # Pattern avec espaces/retours à la ligne
-            r'<OrderId[^>]*>\s*\n?\s*<IdValue>([^<]+)</IdValue>',
-            # Pattern avec namespace ou attributs
-            r'<[^:>]*:?OrderId[^>]*>\s*<[^:>]*:?IdValue[^>]*>([^<]+)</[^:>]*:?IdValue>',
-            # Pattern très flexible
-            r'<OrderId[^>]*>[\s\S]*?<IdValue[^>]*>([^<]+)</IdValue>[\s\S]*?</OrderId>',
-            # Pattern pour structure mal formée
-            r'OrderId[^>]*>[\s\S]*?<IdValue>([^<]+)</IdValue>'
-        ]
+        # Créer l'enrichisseur
+        st.session_state.enricher = XMLEnricher(tmp_path)
         
-        for pattern in patterns:
-            matches = re.findall(pattern, xml_content, re.IGNORECASE | re.DOTALL)
-            for match in matches:
-                cleaned = match.strip()
-                if cleaned and cleaned not in order_ids_found:
-                    order_ids_found.append(cleaned)
-        
-        # Si on a trouvé quelque chose avec regex, on retourne
-        if order_ids_found:
-            return order_ids_found[0]  # Retourner le premier trouvé
-        
-        # ==== MÉTHODE 2: XML PARSING ====
-        try:
-            # Essayer de parser le XML
-            # Nettoyer le XML des potentiels problèmes d'encoding
-            xml_clean = xml_content.encode('utf-8', 'ignore').decode('utf-8', 'ignore')
-            
-            # Parser
-            root = ET.fromstring(xml_clean)
-            
-            # Recherche dans toutes les variantes possibles
-            search_tags = ['OrderId', 'orderid', 'ORDERID', 'order_id', 'Order_Id']
-            value_tags = ['IdValue', 'idvalue', 'IDVALUE', 'id_value', 'Id_Value']
-            
-            # Chercher toutes les combinaisons possibles
-            for order_tag in search_tags:
-                for elem in root.iter():
-                    if order_tag.lower() in elem.tag.lower():
-                        # Chercher IdValue dans les enfants
-                        for value_tag in value_tags:
-                            for child in elem.iter():
-                                if value_tag.lower() in child.tag.lower() and child.text:
-                                    cleaned = child.text.strip()
-                                    if cleaned:
-                                        return cleaned
-            
-            # Méthode alternative : chercher tous les IdValue et vérifier le parent
-            for elem in root.iter():
-                elem_tag_lower = elem.tag.lower()
-                if 'idvalue' in elem_tag_lower or 'id_value' in elem_tag_lower:
-                    if elem.text and elem.text.strip():
-                        # Vérifier si un parent contient OrderId
-                        parent_elem = root
-                        for parent in root.iter():
-                            if elem in list(parent):
-                                parent_tag_lower = parent.tag.lower()
-                                if 'orderid' in parent_tag_lower or 'order_id' in parent_tag_lower:
-                                    return elem.text.strip()
-        
-        except ET.ParseError:
-            # Si le XML est mal formé, continuer avec d'autres méthodes
-            pass
-        except Exception:
-            # Ignorer autres erreurs de parsing
-            pass
-        
-        # ==== MÉTHODE 3: RECHERCHE TEXTUELLE BRUTE ====
-        # Recherche de patterns qui ressemblent à des numéros de commande
-        # Pattern pour trouver des valeurs qui ressemblent à des IDs de commande
-        id_patterns = [
-            r'<IdValue>([A-Z0-9]+)</IdValue>',  # Alphanumeric IDs
-            r'<IdValue>(RT\d+)</IdValue>',      # RT followed by numbers
-            r'<IdValue>(\d{6,})</IdValue>',     # At least 6 digits
-            r'<IdValue>([A-Z]{2,}\d+)</IdValue>' # Letters followed by numbers
-        ]
-        
-        for pattern in id_patterns:
-            matches = re.findall(pattern, xml_content, re.IGNORECASE)
-            for match in matches:
-                # Vérifier si c'est dans un contexte OrderId
-                context_check = xml_content.lower()
-                match_pos = context_check.find(match.lower())
-                if match_pos > 0:
-                    # Chercher OrderId dans les 200 caractères avant
-                    context_before = context_check[max(0, match_pos-200):match_pos]
-                    if 'orderid' in context_before:
-                        return match.strip()
-        
-        # ==== MÉTHODE 4: DERNIER RECOURS ====
-        # Si vraiment rien n'est trouvé, chercher n'importe quel IdValue
-        last_resort = re.search(r'<IdValue>([^<]+)</IdValue>', xml_content, re.IGNORECASE)
-        if last_resort:
-            return last_resort.group(1).strip()
-        
-        return None
+        st.sidebar.success(f"✅ {len(st.session_state.enricher.commandes_data)} commandes chargées")
         
     except Exception as e:
-        st.error(f"Erreur lors de l'extraction de l'OrderId: {str(e)}")
-        return None
+        st.sidebar.error(f"❌ Erreur: {e}")
 
-def enrich_xml(xml_content, commande_data):
-    """Enrichit le XML avec les données de la commande"""
-    try:
-        # Parser le XML avec ElementTree standard
-        root = ET.fromstring(xml_content)
+# ============= PAGE 1: ENRICHISSEMENT XML =============
+if page == "🔧 Enrichissement XML":
+    st.header("🔧 Enrichissement XML")
+    
+    if not st.session_state.enricher:
+        st.warning("⚠️ Veuillez d'abord charger le fichier commandes_stm.json dans la barre latérale")
+        st.info("""
+        **Comment obtenir le fichier commandes_stm.json ?**
         
-        # ===== 1. ENRICHIR PositionCoefficient dans PositionCharacteristics =====
-        classification = commande_data.get('classification_interimaire')
-        if classification:
-            # Chercher toutes les sections PositionCharacteristics
-            for pos_char in root.iter('PositionCharacteristics'):
-                # Trouver PositionLevel
-                pos_level = pos_char.find('PositionLevel')
-                if pos_level is not None:
-                    # Chercher si PositionCoefficient existe déjà
-                    pos_coeff = pos_char.find('PositionCoefficient')
-                    
-                    if pos_coeff is None:
-                        # ✅ CRÉER PositionCoefficient après PositionLevel
-                        # Trouver l'index de PositionLevel
-                        children = list(pos_char)
-                        level_index = children.index(pos_level)
-                        
-                        # Créer le nouvel élément
-                        pos_coeff = ET.Element('PositionCoefficient')
-                        pos_coeff.text = str(classification)
-                        
-                        # Insérer après PositionLevel
-                        pos_char.insert(level_index + 1, pos_coeff)
-                    else:
-                        # ✅ METTRE À JOUR la valeur existante
-                        pos_coeff.text = str(classification)
-        
-        # ===== 2. ENRICHIR section STMicroelectronicsData =====
-        # Créer ou trouver la section STMicroelectronics
-        stm_section = root.find('.//STMicroelectronicsData')
-        if stm_section is None:
-            # Ajouter à la fin du root
-            stm_section = ET.SubElement(root, 'STMicroelectronicsData')
-        
-        # Mapping des champs
-        field_mapping = {
-            'code_agence': 'AgencyCode',
-            'code_unite': 'UnitCode',
-            'statut': 'Status',
-            'niveau_convention_collective': 'CollectiveAgreementLevel',
-            'classification_interimaire': 'TempWorkerClassification',
-            'personne_absente': 'AbsentPerson'
-        }
-        
-        # Ajouter ou mettre à jour les champs
-        fields_added = 0
-        for field_key, xml_tag in field_mapping.items():
-            if field_key in commande_data and commande_data[field_key]:
-                # Chercher si l'élément existe déjà
-                elem = stm_section.find(xml_tag)
-                if elem is None:
-                    elem = ET.SubElement(stm_section, xml_tag)
-                elem.text = str(commande_data[field_key])
-                fields_added += 1
-        
-        # +1 si PositionCoefficient a été ajouté/modifié
-        if classification:
-            fields_added += 1
-        
-        # Ajouter les métadonnées d'enrichissement
-        metadata = stm_section.find('EnrichmentMetadata')
-        if metadata is None:
-            metadata = ET.SubElement(stm_section, 'EnrichmentMetadata')
-        
-        # Timestamp
-        timestamp_elem = metadata.find('Timestamp')
-        if timestamp_elem is None:
-            timestamp_elem = ET.SubElement(metadata, 'Timestamp')
-        timestamp_elem.text = datetime.now().isoformat()
-        
-        # Source
-        source_elem = metadata.find('Source')
-        if source_elem is None:
-            source_elem = ET.SubElement(metadata, 'Source')
-        source_elem.text = 'STMicroelectronics XML Corrector'
-        
-        # Convertir en string avec formatage
-        xml_str = ET.tostring(root, encoding='unicode')
-        
-        # Formater le XML pour qu'il soit plus lisible
-        dom = minidom.parseString(xml_str)
-        pretty_xml = dom.toprettyxml(indent='  ', encoding='iso-8859-1').decode('iso-8859-1')
-        
-        # Retirer la première ligne (déclaration XML) si elle est dupliquée
-        lines = pretty_xml.split('\n')
-        if lines[0].startswith('<?xml'):
-            lines = lines[1:]
-        
-        # Retirer les lignes vides
-        lines = [line for line in lines if line.strip()]
-        
-        # Remettre la déclaration XML en ISO-8859-1
-        pretty_xml = '<?xml version="1.0" encoding="iso-8859-1"?>\n' + '\n'.join(lines)
-        
-        # Encoder le résultat final en ISO-8859-1
-        return pretty_xml.encode('iso-8859-1', errors='replace').decode('iso-8859-1'), fields_added
-        
-    except Exception as e:
-        st.error(f"Erreur lors de l'enrichissement: {str(e)}")
-        return None, 0
-
-def main():
-    # Header avec logo
-    col1, col2 = st.columns([3, 1])
+        Ce fichier est généré automatiquement par le système Google Apps Script qui analyse
+        les emails PIXID et extrait les données. Il contient toutes les commandes avec leur
+        statut et classification.
+        """)
+        st.stop()
+    
+    col1, col2 = st.columns([2, 1])
+    
     with col1:
-        st.title("🔧 STMicroelectronics XML Corrector")
-        st.markdown("**Enrichissez vos fichiers XML avec les données des commandes**")
+        st.subheader("📤 Upload du fichier XML")
+        xml_file = st.file_uploader(
+            "Sélectionnez votre fichier XML à enrichir",
+            type=['xml'],
+            help="Le fichier XML doit contenir un numéro de commande (CR, CD ou RT)"
+        )
+    
     with col2:
-        # Logo placeholder
-        st.markdown("### STMicroelectronics")
+        st.subheader("📊 Informations")
+        if st.session_state.enricher:
+            total_commandes = len(st.session_state.enricher.commandes_data)
+            st.metric("Commandes disponibles", total_commandes)
     
-    # Charger les données
-    with st.spinner("Chargement des données depuis GitHub..."):
-        data = load_commandes_data()
+    if xml_file:
+        # Sauvegarder temporairement le XML
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.xml', mode='wb') as tmp_xml:
+            tmp_xml.write(xml_file.getvalue())
+            tmp_xml_path = tmp_xml.name
+        
+        # Afficher un aperçu
+        st.subheader("🔍 Analyse du fichier XML")
+        
+        # Trouver le numéro de commande
+        order_id = st.session_state.enricher.find_order_id_in_xml(tmp_xml_path)
+        
+        if order_id:
+            st.success(f"✅ Numéro de commande détecté: **{order_id}**")
+            
+            # Récupérer les données de la commande
+            commande = st.session_state.enricher.get_commande_info(order_id)
+            
+            if commande:
+                col1, col2, col3 = st.columns(3)
+                
+                with col1:
+                    st.markdown("**🏢 Agence**")
+                    st.info(commande.get('code_agence', 'N/A'))
+                
+                with col2:
+                    st.markdown("**🔧 Unité**")
+                    st.info(commande.get('code_unite', 'N/A'))
+                
+                with col3:
+                    st.markdown("**📅 Date extraction**")
+                    date_str = commande.get('date_extraction', 'N/A')
+                    if date_str != 'N/A':
+                        try:
+                            date_obj = datetime.fromisoformat(date_str.replace('Z', '+00:00'))
+                            st.info(date_obj.strftime('%d/%m/%Y %H:%M'))
+                        except:
+                            st.info(date_str)
+                    else:
+                        st.info(date_str)
+                
+                st.markdown("---")
+                
+                # Afficher les données qui seront enrichies
+                st.subheader("📝 Données d'enrichissement")
+                
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    st.markdown("**👔 Statut**")
+                    statut = commande.get('statut', 'Non disponible')
+                    if statut and statut != 'Non disponible':
+                        code_statut = statut.split('-')[0].strip() if '-' in statut else statut
+                        st.success(f"Code: `{code_statut}`")
+                        st.caption(f"Description complète: {statut}")
+                    else:
+                        st.warning("⚠️ Statut non disponible")
+                
+                with col2:
+                    st.markdown("**🎯 Classification**")
+                    classification = commande.get('classification_interimaire', 'Non disponible')
+                    if classification and classification != 'Non disponible':
+                        st.success(f"Coefficient: `{classification}`")
+                    else:
+                        st.warning("⚠️ Classification non disponible")
+                
+                st.markdown("---")
+                
+                # Bouton d'enrichissement
+                if st.button("🚀 Enrichir le fichier XML", type="primary", use_container_width=True):
+                    with st.spinner("Enrichissement en cours..."):
+                        # Créer le fichier de sortie
+                        output_path = tempfile.NamedTemporaryFile(delete=False, suffix='_enrichi.xml').name
+                        
+                        # Enrichir
+                        success, message = st.session_state.enricher.enrich_xml(
+                            tmp_xml_path,
+                            output_path
+                        )
+                        
+                        if success:
+                            # Lire le fichier enrichi
+                            with open(output_path, 'rb') as f:
+                                st.session_state.enriched_xml = f.read()
+                            
+                            st.balloons()
+                            st.success("✅ Fichier XML enrichi avec succès!")
+                            
+                            # Afficher les modifications
+                            with st.expander("📋 Détails des modifications"):
+                                st.text(message)
+                            
+                        else:
+                            st.error(f"❌ {message}")
+                
+                # Téléchargement si enrichissement effectué
+                if st.session_state.enriched_xml:
+                    st.markdown("---")
+                    st.subheader("📥 Télécharger le fichier enrichi")
+                    
+                    # Générer le nom du fichier
+                    original_name = xml_file.name
+                    base_name = Path(original_name).stem
+                    new_name = f"{base_name}_enrichi_{order_id}.xml"
+                    
+                    st.download_button(
+                        label="⬇️ Télécharger le XML enrichi",
+                        data=st.session_state.enriched_xml,
+                        file_name=new_name,
+                        mime="application/xml",
+                        use_container_width=True
+                    )
+            else:
+                st.error(f"❌ Commande {order_id} introuvable dans la base de données")
+                st.info("💡 Vérifiez que le fichier commandes_stm.json est à jour")
+        else:
+            st.error("❌ Aucun numéro de commande détecté dans le XML")
+            st.info("""
+            Le numéro de commande doit être au format:
+            - CR000xxx (Crolles)
+            - CD000xxx (Crolles Direct)
+            - RT000xxx (Rousset)
+            """)
+
+# ============= PAGE 2: RECHERCHE =============
+elif page == "🔍 Recherche commande":
+    st.header("🔍 Recherche de commande")
     
-    # Statistiques
-    st.markdown("---")
+    if not st.session_state.enricher:
+        st.warning("⚠️ Veuillez d'abord charger le fichier commandes_stm.json dans la barre latérale")
+        st.stop()
+    
+    # Champ de recherche
+    query = st.text_input(
+        "🔎 Rechercher une commande",
+        placeholder="Numéro de commande, code agence, code unité...",
+        help="Ex: CR000722, STC, CR8043..."
+    )
+    
+    if query:
+        results = st.session_state.enricher.search_commandes(query)
+        
+        st.subheader(f"📊 Résultats ({len(results)} trouvé{'s' if len(results) > 1 else ''})")
+        
+        if results:
+            for i, cmd in enumerate(results[:20], 1):  # Limiter à 20 résultats
+                with st.expander(f"📋 {cmd['numero_commande']} - {cmd.get('personne_absente', 'N/A')[:50]}"):
+                    col1, col2 = st.columns(2)
+                    
+                    with col1:
+                        st.markdown(f"**🏢 Agence:** {cmd.get('code_agence', 'N/A')}")
+                        st.markdown(f"**🔧 Unité:** {cmd.get('code_unite', 'N/A')}")
+                        st.markdown(f"**👔 Statut:** {cmd.get('statut', 'N/A')}")
+                    
+                    with col2:
+                        st.markdown(f"**🎯 Classification:** {cmd.get('classification_interimaire', 'N/A')}")
+                        st.markdown(f"**👤 Personne:** {cmd.get('personne_absente', 'N/A')[:100]}")
+                        
+                        date_str = cmd.get('date_extraction', 'N/A')
+                        if date_str != 'N/A':
+                            try:
+                                date_obj = datetime.fromisoformat(date_str.replace('Z', '+00:00'))
+                                st.markdown(f"**📅 Date:** {date_obj.strftime('%d/%m/%Y %H:%M')}")
+                            except:
+                                st.markdown(f"**📅 Date:** {date_str}")
+            
+            if len(results) > 20:
+                st.info(f"💡 {len(results) - 20} résultats supplémentaires non affichés")
+        else:
+            st.info("Aucun résultat trouvé")
+
+# ============= PAGE 3: STATISTIQUES =============
+elif page == "📊 Statistiques":
+    st.header("📊 Statistiques des commandes")
+    
+    if not st.session_state.enricher:
+        st.warning("⚠️ Veuillez d'abord charger le fichier commandes_stm.json dans la barre latérale")
+        st.stop()
+    
+    commandes = list(st.session_state.enricher.commandes_data.values())
+    
+    # Métriques globales
     col1, col2, col3, col4 = st.columns(4)
     
-    commandes = data.get('commandes', [])
-    
     with col1:
-        st.metric("📦 Total commandes", len(commandes))
+        st.metric("Total commandes", len(commandes))
+    
     with col2:
-        if data.get('lastUpdate'):
-            try:
-                last_update = datetime.fromisoformat(data['lastUpdate'].replace('Z', '+00:00'))
-                st.metric("🕐 Dernière MAJ", last_update.strftime('%d/%m %H:%M'))
-            except:
-                st.metric("🕐 Dernière MAJ", "N/A")
-        else:
-            st.metric("🕐 Dernière MAJ", "Jamais")
+        agences = set(c.get('code_agence') for c in commandes if c.get('code_agence'))
+        st.metric("Agences", len(agences))
+    
     with col3:
-        st.metric("📁 Source", "Google Sheets")
+        unites = set(c.get('code_unite') for c in commandes if c.get('code_unite'))
+        st.metric("Unités", len(unites))
+    
     with col4:
-        st.metric("🔄 Sync", "Auto 15min")
+        statuts = set(c.get('statut') for c in commandes if c.get('statut'))
+        st.metric("Statuts", len(statuts))
     
     st.markdown("---")
     
-    # Tabs principaux
-    tab1, tab2, tab3 = st.tabs(["📤 Enrichir XML", "📊 Données disponibles", "ℹ️ Guide d'utilisation"])
+    # Statistiques par type
+    col1, col2 = st.columns(2)
     
-    with tab1:
-        st.subheader("Enrichissement de fichier XML")
+    with col1:
+        st.subheader("📊 Répartition par agence")
+        agence_count = {}
+        for cmd in commandes:
+            agence = cmd.get('code_agence', 'N/A')
+            agence_count[agence] = agence_count.get(agence, 0) + 1
         
-        # Zone d'upload
-        uploaded_file = st.file_uploader(
-            "Sélectionnez votre fichier XML",
-            type=['xml'],
-            help="Le fichier doit contenir un OrderId pour permettre la correspondance avec les données"
-        )
-        
-        if uploaded_file is not None:
-            # Lire le contenu du fichier
-            xml_content = uploaded_file.read()
-            
-            try:
-                xml_content = xml_content.decode('utf-8')
-            except:
-                try:
-                    xml_content = xml_content.decode('latin-1')
-                except:
-                    st.error("Impossible de décoder le fichier. Assurez-vous qu'il s'agit d'un fichier XML valide.")
-                    return
-            
-            # Extraire l'OrderId
-            order_id = extract_order_id_from_xml(xml_content)
-            
-            # Affichage en colonnes
-            col1, col2 = st.columns([1, 2])
-            
-            with col1:
-                st.info(f"**📄 Fichier:** {uploaded_file.name}")
-                st.info(f"**📏 Taille:** {len(xml_content) / 1024:.1f} KB")
-                
-                if order_id:
-                    st.success(f"**🔍 OrderId détecté:** {order_id}")
-                else:
-                    st.error("**❌ OrderId:** Non trouvé")
-            
-            with col2:
-                if order_id:
-                    # Rechercher dans les données
-                    commande_found = None
-                    
-                    for cmd in commandes:
-                        if str(cmd.get('numero_commande', '')).strip() == str(order_id).strip():
-                            commande_found = cmd
-                            break
-                    
-                    if commande_found:
-                        st.success("✅ **Données trouvées dans la base!**")
-                        
-                        # Afficher les données trouvées
-                        with st.expander("📋 **Voir les données qui seront ajoutées**", expanded=True):
-                            # Filtrer les données à afficher
-                            display_data = {}
-                            field_names = {
-                                'code_agence': 'Code Agence',
-                                'code_unite': 'Code Unité',
-                                'statut': 'Statut',
-                                'niveau_convention_collective': 'Niveau Convention Collective',
-                                'classification_interimaire': 'Classification Intérimaire',
-                                'personne_absente': 'Personne Absente'
-                            }
-                            
-                            for field, display_name in field_names.items():
-                                if field in commande_found and commande_found[field]:
-                                    display_data[display_name] = commande_found[field]
-                            
-                            if display_data:
-                                for field, value in display_data.items():
-                                    st.write(f"**{field}:** {value}")
-                            else:
-                                st.warning("Aucune donnée supplémentaire disponible pour cette commande")
-                        
-                        # Bouton pour enrichir
-                        if st.button("🚀 **Enrichir le XML**", type="primary", use_container_width=True):
-                            with st.spinner("Enrichissement en cours..."):
-                                enriched_xml, fields_count = enrich_xml(xml_content, commande_found)
-                                
-                                if enriched_xml:
-                                    st.success(f"✅ **XML enrichi avec succès!** ({fields_count} champs ajoutés)")
-                                    
-                                    # Prévisualisation
-                                    with st.expander("👁️ **Aperçu du XML enrichi**", expanded=False):
-                                        st.code(enriched_xml, language='xml')
-                                    
-                                    # Bouton de téléchargement
-                                    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-                                    filename = f"enriched_{order_id}_{timestamp}.xml"
-                                    
-                                    st.download_button(
-                                        label="📥 **Télécharger le XML enrichi**",
-                                        data=enriched_xml,
-                                        file_name=filename,
-                                        mime="application/xml",
-                                        type="primary",
-                                        use_container_width=True
-                                    )
-                                else:
-                                    st.error("❌ Erreur lors de l'enrichissement du XML")
-                    else:
-                        st.warning(f"⚠️ **Aucune donnée trouvée pour la commande {order_id}**")
-                        st.info("Cette commande n'a pas encore été synchronisée depuis les emails STMicroelectronics.")
-                        st.info("Vérifiez dans l'onglet 'Données disponibles' si la commande existe.")
-                else:
-                    st.error("❌ **Impossible de détecter l'OrderId dans le fichier XML**")
-                    st.info("Assurez-vous que votre fichier contient une balise OrderId, order_id, numero_commande ou similaire.")
-                    
-                    # Option de debug
-                    with st.expander("🔍 Voir un aperçu du fichier XML pour debug"):
-                        # Afficher les 100 premières lignes
-                        lines = xml_content.split('\n')[:100]
-                        preview = '\n'.join(lines)
-                        if len(xml_content.split('\n')) > 100:
-                            preview += "\n\n... (fichier tronqué) ..."
-                        st.code(preview, language='xml')
+        for agence, count in sorted(agence_count.items(), key=lambda x: -x[1])[:10]:
+            st.metric(agence, count)
     
-    with tab2:
-        st.subheader("📊 Commandes disponibles")
+    with col2:
+        st.subheader("📊 Répartition par statut")
+        statut_count = {}
+        for cmd in commandes:
+            statut = cmd.get('statut', 'N/A')
+            statut_short = statut.split('-')[0].strip() if statut and '-' in statut else statut
+            statut_count[statut_short] = statut_count.get(statut_short, 0) + 1
         
-        if commandes:
-            # Créer un DataFrame
-            df = pd.DataFrame(commandes)
-            
-            # Barre de recherche
-            search_term = st.text_input("🔍 Rechercher une commande", placeholder="Numéro, agence, unité, statut...")
-            
-            # Filtrer si recherche
-            if search_term:
-                mask = df.astype(str).apply(lambda x: x.str.contains(search_term, case=False, na=False)).any(axis=1)
-                df_filtered = df[mask]
-            else:
-                df_filtered = df
-            
-            st.write(f"**{len(df_filtered)} commande(s)** sur {len(df)} au total")
-            
-            # Afficher le tableau
-            if not df_filtered.empty:
-                # Configurer l'affichage des colonnes
-                column_config = {
-                    "numero_commande": st.column_config.TextColumn("N° Commande", width="small"),
-                    "code_agence": st.column_config.TextColumn("Code Agence", width="small"),
-                    "code_unite": st.column_config.TextColumn("Code Unité", width="small"),
-                    "statut": st.column_config.TextColumn("Statut", width="medium"),
-                    "niveau_convention_collective": st.column_config.TextColumn("Niveau CC", width="medium"),
-                    "classification_interimaire": st.column_config.TextColumn("Classification", width="medium"),
-                    "personne_absente": st.column_config.TextColumn("Remplace", width="medium"),
-                    "date_extraction": st.column_config.TextColumn("Date extraction", width="small")
-                }
-                
-                # Réorganiser les colonnes
-                columns_order = ['numero_commande', 'code_agence', 'code_unite', 'statut', 
-                               'niveau_convention_collective', 'classification_interimaire', 
-                               'personne_absente', 'date_extraction']
-                
-                # Afficher seulement les colonnes qui existent
-                available_columns = [col for col in columns_order if col in df_filtered.columns]
-                
-                st.dataframe(
-                    df_filtered[available_columns],
-                    use_container_width=True,
-                    hide_index=True,
-                    column_config=column_config
-                )
-            else:
-                st.info("Aucune commande trouvée avec ce critère de recherche")
-        else:
-            st.warning("Aucune donnée disponible")
-            st.info("Les données seront disponibles après la première synchronisation du script Google Apps")
-    
-    with tab3:
-        st.subheader("ℹ️ Guide d'utilisation")
-        
-        st.markdown("""
-        ### 📋 Comment enrichir vos fichiers XML ?
-        
-        **1. 📤 Uploadez votre fichier XML**
-        - Le fichier doit contenir un identifiant de commande (OrderId, numero_commande, etc.)
-        - Format supporté : .xml
-        
-        **2. 🔍 Détection automatique**
-        - L'application détecte automatiquement l'identifiant de commande
-        - Les données correspondantes sont recherchées dans la base
-        
-        **3. ✨ Enrichissement**
-        - Cliquez sur "Enrichir le XML"
-        - Les données manquantes sont ajoutées automatiquement
-        - Une section `<STMicroelectronicsData>` est créée ou mise à jour
-        
-        **4. 📥 Téléchargement**
-        - Téléchargez le fichier XML enrichi
-        - Le fichier original reste intact
-        
-        ---
-        
-        ### 📄 Structure ajoutée au XML
-        
-        ```xml
-        <STMicroelectronicsData>
-            <AgencyCode>AG-75-001</AgencyCode>
-            <UnitCode>UN-123</UnitCode>
-            <Status>Confirmée</Status>
-            <CollectiveAgreementLevel>Niveau IV</CollectiveAgreementLevel>
-            <TempWorkerClassification>Technicien</TempWorkerClassification>
-            <AbsentPerson>Marie DUPONT</AbsentPerson>
-            <EnrichmentMetadata>
-                <Timestamp>2024-01-15T10:30:00</Timestamp>
-                <Source>STMicroelectronics XML Corrector</Source>
-            </EnrichmentMetadata>
-        </STMicroelectronicsData>
-        ```
-        
-        ---
-        
-        ### 🔄 Flux de données
-        
-        1. **Emails STMicroelectronics** (dans Google Drive)
-        2. **Google Apps Script** (extraction toutes les 15 min)
-        3. **Google Sheets** (stockage des données)
-        4. **GitHub** (fichier JSON)
-        5. **Cette application** (enrichissement XML)
-        
-        ---
-        
-        ### ❓ Résolution des problèmes
-        
-        **"OrderId non trouvé"**
-        - Vérifiez que votre XML contient une balise avec l'identifiant
-        - Balises supportées : OrderId, order_id, numero_commande, Order, etc.
-        
-        **"Aucune donnée trouvée"**
-        - La commande n'est pas encore dans la base
-        - Vérifiez dans l'onglet "Données disponibles"
-        - Attendez la prochaine synchronisation (15 min)
-        
-        **"Erreur lors de l'enrichissement"**
-        - Vérifiez que le fichier XML est valide
-        - Contactez le support si le problème persiste
-        
-        ---
-        
-        ### 📞 Support
-        
-        En cas de problème : [github.com/younessemlali](https://github.com/younessemlali)
-        """)
+        for statut, count in sorted(statut_count.items(), key=lambda x: -x[1])[:10]:
+            st.metric(statut, count)
 
-# Lancer l'application
-if __name__ == "__main__":
-    main()
+# ============= PAGE 4: DOCUMENTATION =============
+elif page == "ℹ️ Documentation":
+    st.header("ℹ️ Documentation")
+    
+    st.markdown("""
+    ## 🎯 Objectif
+    
+    Cette application permet d'enrichir automatiquement vos fichiers XML avec les données extraites
+    des emails de confirmation de commande PIXID de STMicroelectronics.
+    
+    ## 🔧 Fonctionnement
+    
+    ### 1. Chargement des données
+    - Uploadez le fichier `commandes_stm.json` dans la barre latérale
+    - Ce fichier contient toutes les commandes extraites des emails
+    
+    ### 2. Enrichissement XML
+    - Uploadez votre fichier XML à enrichir
+    - L'application détecte automatiquement le numéro de commande
+    - Les balises suivantes sont enrichies:
+      - `<Code>` dans `<PositionStatus>` → Statut (ex: "OP", "VAC")
+      - `<PositionCoefficient>` → Classification (ex: "A2", "B1")
+    
+    ### 3. Téléchargement
+    - Téléchargez votre fichier XML enrichi
+    - Le nom inclut le numéro de commande pour faciliter l'identification
+    
+    ## 📋 Structure des données
+    
+    ### Balises enrichies
+    
+    ```xml
+    <PositionCharacteristics>
+      <PositionTitle>Agent de fabrication (F/H)</PositionTitle>
+      <PositionStatus>
+        <Code>OP</Code>                    <!-- ✅ ENRICHI -->
+        <Description>Opérateur</Description>
+      </PositionStatus>
+      <PositionLevel>Direct</PositionLevel>
+      <PositionCoefficient>A2</PositionCoefficient>  <!-- ✅ ENRICHI -->
+    </PositionCharacteristics>
+    ```
+    
+    ### Formats de numéro de commande supportés
+    - **CR000xxx**: Commandes Crolles
+    - **CD000xxx**: Commandes Crolles Direct  
+    - **RT000xxx**: Commandes Rousset
+    
+    ## ⚠️ Important
+    
+    - Le fichier `commandes_stm.json` doit être à jour
+    - Le numéro de commande doit exister dans la base de données
+    - Vérifiez toujours le fichier enrichi avant utilisation
+    
+    ## 🆘 Support
+    
+    En cas de problème:
+    1. Vérifiez que le fichier JSON est bien chargé
+    2. Vérifiez que le numéro de commande est présent dans le XML
+    3. Vérifiez que la commande existe dans la base de données
+    
+    ## 📞 Contact
+    
+    Pour toute question ou support technique, contactez l'équipe PIXID Automation.
+    """)
+
+# Footer
+st.sidebar.markdown("---")
+st.sidebar.markdown("**PIXID Automation Platform**")
+st.sidebar.caption("v2.0 - STMicroelectronics")
