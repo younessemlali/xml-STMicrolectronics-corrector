@@ -274,7 +274,7 @@ def enrich_xml(xml_content, commande_data):
         lines = [line for line in lines if line.strip()]
         
         # Remettre la déclaration XML
-        pretty_xml = '<?xml version="1.0" encoding="UTF-8"?>\n' + '\n'.join(lines)
+        pretty_xml = '<?xml version="1.0" encoding="iso-8859-1"?>\n' + '\n'.join(lines)
         
         return pretty_xml, fields_added
         
