@@ -57,7 +57,15 @@ class XMLEnricher:
             tree = ET.parse(xml_path)
             root = tree.getroot()
             
-            # Patterns de recherche pour le numéro de commande
+            # D'abord chercher directement dans tout le texte XML (plus fiable)
+            xml_string = ET.tostring(root, encoding='unicode')
+            matches = re.findall(r'(CR\d{6}|CD\d{6}|RT\d{6})', xml_string)
+            if matches:
+                order_id = matches[0]
+                print(f"🔍 Numéro de commande trouvé: {order_id}")
+                return order_id
+            
+            # Si pas trouvé, essayer avec les patterns
             patterns = [
                 './/OrderId',
                 './/CustomerOrderNumber', 
@@ -70,16 +78,8 @@ class XMLEnricher:
                 element = root.find(pattern)
                 if element is not None and element.text:
                     order_id = element.text.strip()
-                    print(f"🔍 Numéro de commande trouvé: {order_id}")
+                    print(f"🔍 Numéro de commande trouvé (pattern): {order_id}")
                     return order_id
-            
-            # Recherche dans tout le texte si patterns ne fonctionnent pas
-            xml_string = ET.tostring(root, encoding='unicode')
-            matches = re.findall(r'(CR\d{6}|CD\d{6}|RT\d{6})', xml_string)
-            if matches:
-                order_id = matches[0]
-                print(f"🔍 Numéro de commande trouvé (regex): {order_id}")
-                return order_id
                 
             print("⚠️ Aucun numéro de commande trouvé dans le XML")
             return None
@@ -128,7 +128,20 @@ class XMLEnricher:
                 # Extraire juste le code (ex: "OP" de "OP - Opérateur")
                 code_statut = statut.split('-')[0].strip() if '-' in statut else statut.strip()
                 
-                # Rechercher toutes les balises PositionStatus/Code
+                # Chercher sans namespace d'abord
+                for position_status in root.findall('.//PositionStatus'):
+                    code_element = position_status.find('Code')
+                    if code_element is not None:
+                        old_value = code_element.text or ""
+                        code_element.text = code_statut
+                        modifications.append(f"Code: '{old_value}' → '{code_statut}'")
+                    
+                    desc_element = position_status.find('Description')
+                    if desc_element is not None:
+                        desc_element.text = statut
+                        modifications.append(f"Description: → '{statut}'")
+                
+                # Puis avec namespace si besoin
                 for position_status in root.findall('.//{*}PositionStatus'):
                     code_element = position_status.find('{*}Code')
                     if code_element is not None:
@@ -136,7 +149,6 @@ class XMLEnricher:
                         code_element.text = code_statut
                         modifications.append(f"Code: '{old_value}' → '{code_statut}'")
                     
-                    # Mettre à jour aussi la Description si elle existe
                     desc_element = position_status.find('{*}Description')
                     if desc_element is not None:
                         desc_element.text = statut
@@ -144,6 +156,15 @@ class XMLEnricher:
             
             # 5. Enrichir la classification (PositionCoefficient)
             if classification:
+                # Sans namespace
+                for position_chars in root.findall('.//PositionCharacteristics'):
+                    coeff_element = position_chars.find('PositionCoefficient')
+                    if coeff_element is not None:
+                        old_value = coeff_element.text or ""
+                        coeff_element.text = classification
+                        modifications.append(f"PositionCoefficient: '{old_value}' → '{classification}'")
+                
+                # Avec namespace
                 for position_chars in root.findall('.//{*}PositionCharacteristics'):
                     coeff_element = position_chars.find('{*}PositionCoefficient')
                     if coeff_element is not None:
