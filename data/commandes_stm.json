@@ -737,12 +737,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "Jean-Fran?ois Comes",
       "date_extraction": "2025-10-20T19:56:48Z"
+    },
+    {
+      "numero_commande": "CD000274",
+      "code_agence": "663",
+      "code_unite": "CD8041",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "HAMADI BOURECHAK",
+      "date_extraction": "2025-10-21T02:45:38Z"
     }
   ],
-  "lastUpdate": "2025-10-20T19:57:10.550Z",
+  "lastUpdate": "2025-10-21T02:45:49.553Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 82,
+    "totalCommandes": 83,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
