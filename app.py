@@ -182,6 +182,34 @@ def enrich_xml(xml_content, commande_data):
         # Parser le XML avec ElementTree standard
         root = ET.fromstring(xml_content)
         
+        # ===== 1. ENRICHIR PositionCoefficient dans PositionCharacteristics =====
+        classification = commande_data.get('classification_interimaire')
+        if classification:
+            # Chercher toutes les sections PositionCharacteristics
+            for pos_char in root.iter('PositionCharacteristics'):
+                # Trouver PositionLevel
+                pos_level = pos_char.find('PositionLevel')
+                if pos_level is not None:
+                    # Chercher si PositionCoefficient existe déjà
+                    pos_coeff = pos_char.find('PositionCoefficient')
+                    
+                    if pos_coeff is None:
+                        # ✅ CRÉER PositionCoefficient après PositionLevel
+                        # Trouver l'index de PositionLevel
+                        children = list(pos_char)
+                        level_index = children.index(pos_level)
+                        
+                        # Créer le nouvel élément
+                        pos_coeff = ET.Element('PositionCoefficient')
+                        pos_coeff.text = str(classification)
+                        
+                        # Insérer après PositionLevel
+                        pos_char.insert(level_index + 1, pos_coeff)
+                    else:
+                        # ✅ METTRE À JOUR la valeur existante
+                        pos_coeff.text = str(classification)
+        
+        # ===== 2. ENRICHIR section STMicroelectronicsData =====
         # Créer ou trouver la section STMicroelectronics
         stm_section = root.find('.//STMicroelectronicsData')
         if stm_section is None:
@@ -208,6 +236,10 @@ def enrich_xml(xml_content, commande_data):
                     elem = ET.SubElement(stm_section, xml_tag)
                 elem.text = str(commande_data[field_key])
                 fields_added += 1
+        
+        # +1 si PositionCoefficient a été ajouté/modifié
+        if classification:
+            fields_added += 1
         
         # Ajouter les métadonnées d'enrichissement
         metadata = stm_section.find('EnrichmentMetadata')
