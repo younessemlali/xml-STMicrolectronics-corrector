@@ -5,7 +5,6 @@ from pathlib import Path
 import tempfile
 from datetime import datetime
 from xml_enricher import XMLEnricher
-import os
 
 # Configuration de la page
 st.set_page_config(
@@ -63,12 +62,18 @@ st.sidebar.subheader("📁 Base de données")
 # Initialiser l'enrichisseur automatiquement au démarrage
 if 'enricher' not in st.session_state:
     try:
-        # Charger directement depuis le fichier
-        st.session_state.enricher = XMLEnricher('commandes_stm.json')
+        # Essayer d'abord data/commandes_stm.json
+        json_path = 'data/commandes_stm.json'
+        if not Path(json_path).exists():
+            # Sinon chercher à la racine
+            json_path = 'commandes_stm.json'
+        
+        st.session_state.enricher = XMLEnricher(json_path)
         st.sidebar.success(f"✅ {len(st.session_state.enricher.commandes_data)} commandes chargées")
     except FileNotFoundError:
         st.session_state.enricher = None
-        st.sidebar.error("❌ Fichier commandes_stm.json introuvable dans le repo")
+        st.sidebar.error("❌ Fichier commandes_stm.json introuvable")
+        st.sidebar.info("💡 Placez commandes_stm.json dans /data/ ou à la racine")
     except Exception as e:
         st.session_state.enricher = None
         st.sidebar.error(f"❌ Erreur: {e}")
@@ -82,13 +87,12 @@ if page == "🔧 Enrichissement XML":
     st.header("🔧 Enrichissement XML")
     
     if not st.session_state.enricher:
-        st.warning("⚠️ Veuillez d'abord charger le fichier commandes_stm.json dans la barre latérale")
+        st.error("⚠️ Base de données non disponible")
         st.info("""
-        **Comment obtenir le fichier commandes_stm.json ?**
+        **Fichier manquant: commandes_stm.json**
         
-        Ce fichier est généré automatiquement par le système Google Apps Script qui analyse
-        les emails PIXID et extrait les données. Il contient toutes les commandes avec leur
-        statut et classification.
+        Ce fichier est généré automatiquement par le système Google Apps Script.
+        Placez-le dans le dossier `/data/` ou à la racine du projet.
         """)
         st.stop()
     
@@ -104,9 +108,8 @@ if page == "🔧 Enrichissement XML":
     
     with col2:
         st.subheader("📊 Informations")
-        if st.session_state.enricher:
-            total_commandes = len(st.session_state.enricher.commandes_data)
-            st.metric("Commandes disponibles", total_commandes)
+        total_commandes = len(st.session_state.enricher.commandes_data)
+        st.metric("Commandes disponibles", total_commandes)
     
     if xml_file:
         # Sauvegarder temporairement le XML
@@ -237,7 +240,7 @@ elif page == "🔍 Recherche commande":
     st.header("🔍 Recherche de commande")
     
     if not st.session_state.enricher:
-        st.warning("⚠️ Veuillez d'abord charger le fichier commandes_stm.json dans la barre latérale")
+        st.warning("⚠️ Base de données non disponible")
         st.stop()
     
     # Champ de recherche
@@ -284,7 +287,7 @@ elif page == "📊 Statistiques":
     st.header("📊 Statistiques des commandes")
     
     if not st.session_state.enricher:
-        st.warning("⚠️ Veuillez d'abord charger le fichier commandes_stm.json dans la barre latérale")
+        st.warning("⚠️ Base de données non disponible")
         st.stop()
     
     commandes = list(st.session_state.enricher.commandes_data.values())
@@ -346,7 +349,7 @@ elif page == "ℹ️ Documentation":
     ## 🔧 Fonctionnement
     
     ### 1. Chargement des données
-    - Uploadez le fichier `commandes_stm.json` dans la barre latérale
+    - Le fichier `commandes_stm.json` est chargé automatiquement au démarrage
     - Ce fichier contient toutes les commandes extraites des emails
     
     ### 2. Enrichissement XML
