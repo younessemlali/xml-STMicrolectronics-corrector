@@ -174,7 +174,20 @@ class XMLEnricher:
             
             # 6. Sauvegarder le XML enrichi
             if modifications:
-                tree.write(output_path, encoding='utf-8', xml_declaration=True)
+                # Lire l'encoding original du fichier source
+                with open(xml_path, 'r', encoding='iso-8859-1') as f:
+                    first_line = f.readline()
+                
+                # Détecter l'encoding original
+                encoding = 'iso-8859-1'  # Par défaut
+                if 'encoding=' in first_line:
+                    match = re.search(r'encoding=["\']([^"\']+)["\']', first_line)
+                    if match:
+                        encoding = match.group(1)
+                
+                # Écrire sans namespaces automatiques
+                ET.register_namespace('', '')  # Éviter les ns0
+                tree.write(output_path, encoding=encoding, xml_declaration=True)
                 
                 message = f"✅ XML enrichi avec succès!\n\nModifications effectuées:\n" + "\n".join(f"  • {mod}" for mod in modifications)
                 print(f"\n{message}")
