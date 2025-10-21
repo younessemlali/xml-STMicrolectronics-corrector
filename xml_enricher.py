@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """
 Script d'enrichissement XML PIXID - STMicroelectronics
-Enrichit les fichiers XML avec les données extraites des emails (statut et classification)
+Enrichit TOUS les contrats XML avec les données extraites des emails
+Version améliorée : traite plusieurs contrats par fichier
 """
 
 import json
 import xml.etree.ElementTree as ET
 import re
 from pathlib import Path
-from typing import Dict, Optional, Tuple
+from typing import Dict, Optional, Tuple, List
 
 
 class XMLEnricher:
@@ -43,146 +44,154 @@ class XMLEnricher:
         
         return commandes
     
-    def find_order_id_in_xml(self, xml_path: str) -> Optional[str]:
+    def find_all_order_ids_in_xml(self, xml_path: str) -> List[Dict]:
         """
-        Recherche le numéro de commande dans le fichier XML
+        Recherche TOUS les numéros de commande dans le fichier XML
         
         Args:
             xml_path: Chemin vers le fichier XML
             
         Returns:
-            Numéro de commande trouvé ou None
+            Liste de dictionnaires {order_id, element} pour chaque Order trouvé
         """
         try:
             tree = ET.parse(xml_path)
             root = tree.getroot()
             
-            # D'abord chercher directement dans tout le texte XML (plus fiable)
-            xml_string = ET.tostring(root, encoding='unicode')
-            matches = re.findall(r'(CR\d{6}|CD\d{6}|RT\d{6})', xml_string)
-            if matches:
-                order_id = matches[0]
-                print(f"🔍 Numéro de commande trouvé: {order_id}")
-                return order_id
+            orders_found = []
             
-            # Si pas trouvé, essayer avec les patterns
-            patterns = [
-                './/OrderId',
-                './/CustomerOrderNumber', 
-                './/OrderNumber',
-                './/{*}OrderId',
-                './/{*}CustomerOrderNumber'
-            ]
+            # Chercher tous les éléments Order (avec ou sans namespace)
+            for order_elem in root.iter():
+                tag_lower = order_elem.tag.lower()
+                if 'order' in tag_lower and tag_lower.endswith('order'):
+                    # Chercher OrderId dans cet Order
+                    order_id = self._extract_order_id_from_element(order_elem)
+                    if order_id:
+                        orders_found.append({
+                            'order_id': order_id,
+                            'element': order_elem
+                        })
             
-            for pattern in patterns:
-                element = root.find(pattern)
-                if element is not None and element.text:
-                    order_id = element.text.strip()
-                    print(f"🔍 Numéro de commande trouvé (pattern): {order_id}")
-                    return order_id
-                
-            print("⚠️ Aucun numéro de commande trouvé dans le XML")
-            return None
+            print(f"🔍 {len(orders_found)} contrat(s) détecté(s) dans le XML")
+            return orders_found
             
         except Exception as e:
             print(f"❌ Erreur lors de la lecture du XML: {e}")
-            return None
+            return []
     
-    def enrich_xml(self, xml_path: str, output_path: str) -> Tuple[bool, str]:
+    def _extract_order_id_from_element(self, order_elem: ET.Element) -> Optional[str]:
         """
-        Enrichit le fichier XML avec les données PIXID
+        Extrait l'OrderId d'un élément Order
+        
+        Args:
+            order_elem: Element XML représentant un Order
+            
+        Returns:
+            OrderId trouvé ou None
+        """
+        # Patterns de recherche pour OrderId
+        patterns = [r'(CR\d{6})', r'(CD\d{6})', r'(RT\d{6})']
+        
+        # Stratégie 1: Chercher dans OrderId/IdValue
+        for child in order_elem.iter():
+            tag_lower = child.tag.lower()
+            if 'orderid' in tag_lower or 'idvalue' in tag_lower:
+                if child.text:
+                    for pattern in patterns:
+                        match = re.search(pattern, child.text)
+                        if match:
+                            return match.group(1)
+        
+        # Stratégie 2: Chercher dans tout le texte de l'Order
+        order_text = ET.tostring(order_elem, encoding='unicode')
+        for pattern in patterns:
+            matches = re.findall(pattern, order_text)
+            if matches:
+                return matches[0]
+        
+        return None
+    
+    def enrich_xml(self, xml_path: str, output_path: str, progress_callback=None) -> Tuple[bool, str, Dict]:
+        """
+        Enrichit TOUS les contrats du fichier XML avec les données PIXID
         
         Args:
             xml_path: Chemin vers le fichier XML source
             output_path: Chemin vers le fichier XML enrichi
+            progress_callback: Fonction callback(current, total) pour progression
             
         Returns:
-            (succès: bool, message: str)
+            (succès: bool, message: str, stats: dict)
         """
         try:
-            # 1. Trouver le numéro de commande
-            order_id = self.find_order_id_in_xml(xml_path)
-            if not order_id:
-                return False, "Aucun numéro de commande trouvé dans le XML"
+            # Lire l'encoding original
+            encoding = 'iso-8859-1'
+            with open(xml_path, 'rb') as f:
+                first_line = f.readline().decode('iso-8859-1', errors='ignore')
+                if 'encoding=' in first_line:
+                    match = re.search(r'encoding=["\']([^"\']+)["\']', first_line)
+                    if match:
+                        encoding = match.group(1)
             
-            # 2. Récupérer les données de la commande
-            if order_id not in self.commandes_data:
-                return False, f"Commande {order_id} non trouvée dans la base de données"
+            # 1. Trouver tous les Orders
+            orders = self.find_all_order_ids_in_xml(xml_path)
             
-            commande = self.commandes_data[order_id]
-            statut = commande.get('statut')
-            classification = commande.get('classification_interimaire')
+            if not orders:
+                return False, "Aucun numéro de commande trouvé dans le XML", {
+                    'total': 0,
+                    'enrichis': 0,
+                    'non_trouves': 0,
+                    'details': []
+                }
             
-            print(f"\n📋 Données de la commande {order_id}:")
-            print(f"   Statut: {statut}")
-            print(f"   Classification: {classification}")
-            
-            # 3. Parser le XML
+            # 2. Parser le XML
             tree = ET.parse(xml_path)
             root = tree.getroot()
             
-            modifications = []
+            # Statistiques
+            stats = {
+                'total': len(orders),
+                'enrichis': 0,
+                'non_trouves': 0,
+                'details': []
+            }
             
-            # 4. Enrichir le statut (Code dans PositionStatus)
-            if statut:
-                # Extraire juste le code (ex: "OP" de "OP - Opérateur")
-                code_statut = statut.split('-')[0].strip() if '-' in statut else statut.strip()
+            # 3. Enrichir chaque Order
+            for idx, order_info in enumerate(orders):
+                order_id = order_info['order_id']
+                order_elem = order_info['element']
                 
-                # Chercher sans namespace d'abord
-                for position_status in root.findall('.//PositionStatus'):
-                    code_element = position_status.find('Code')
-                    if code_element is not None:
-                        old_value = code_element.text or ""
-                        code_element.text = code_statut
-                        modifications.append(f"Code: '{old_value}' → '{code_statut}'")
+                # Callback progression
+                if progress_callback:
+                    progress_callback(idx + 1, len(orders))
+                
+                # Récupérer les données de la commande
+                commande = self.commandes_data.get(order_id)
+                
+                if commande:
+                    # Enrichir cet Order
+                    modifications = self._enrich_order_element(order_elem, commande)
                     
-                    desc_element = position_status.find('Description')
-                    if desc_element is not None:
-                        desc_element.text = statut
-                        modifications.append(f"Description: → '{statut}'")
-                
-                # Puis avec namespace si besoin
-                for position_status in root.findall('.//{*}PositionStatus'):
-                    code_element = position_status.find('{*}Code')
-                    if code_element is not None:
-                        old_value = code_element.text or ""
-                        code_element.text = code_statut
-                        modifications.append(f"Code: '{old_value}' → '{code_statut}'")
-                    
-                    desc_element = position_status.find('{*}Description')
-                    if desc_element is not None:
-                        desc_element.text = statut
-                        modifications.append(f"Description: → '{statut}'")
+                    stats['enrichis'] += 1
+                    stats['details'].append({
+                        'order_id': order_id,
+                        'statut': 'enrichi',
+                        'code_statut': commande.get('statut', 'N/A'),
+                        'classification': commande.get('classification_interimaire', 'N/A'),
+                        'modifications': len(modifications)
+                    })
+                else:
+                    stats['non_trouves'] += 1
+                    stats['details'].append({
+                        'order_id': order_id,
+                        'statut': 'non_trouve',
+                        'code_statut': 'N/A',
+                        'classification': 'N/A',
+                        'modifications': 0
+                    })
             
-            # 5. Enrichir la classification (PositionCoefficient)
-            if classification:
-                # Sans namespace
-                for position_chars in root.findall('.//PositionCharacteristics'):
-                    coeff_element = position_chars.find('PositionCoefficient')
-                    if coeff_element is not None:
-                        old_value = coeff_element.text or ""
-                        coeff_element.text = classification
-                        modifications.append(f"PositionCoefficient: '{old_value}' → '{classification}'")
-                
-                # Avec namespace
-                for position_chars in root.findall('.//{*}PositionCharacteristics'):
-                    coeff_element = position_chars.find('{*}PositionCoefficient')
-                    if coeff_element is not None:
-                        old_value = coeff_element.text or ""
-                        coeff_element.text = classification
-                        modifications.append(f"PositionCoefficient: '{old_value}' → '{classification}'")
-            
-            # 6. Sauvegarder le XML enrichi SANS namespaces
-            if modifications:
-                # Lire l'encoding original
-                encoding = 'iso-8859-1'
-                with open(xml_path, 'rb') as f:
-                    first_line = f.readline().decode('iso-8859-1', errors='ignore')
-                    if 'encoding=' in first_line:
-                        match = re.search(r'encoding=["\']([^"\']+)["\']', first_line)
-                        if match:
-                            encoding = match.group(1)
-                
+            # 4. Sauvegarder le XML enrichi SANS namespaces
+            if stats['enrichis'] > 0:
                 # Convertir en string et supprimer tous les ns0:
                 xml_string = ET.tostring(root, encoding='unicode')
                 xml_string = xml_string.replace('ns0:', '')
@@ -196,16 +205,68 @@ class XMLEnricher:
                 with open(output_path, 'w', encoding=encoding) as f:
                     f.write(final_xml)
                 
-                message = f"✅ XML enrichi avec succès!\n\nModifications effectuées:\n" + "\n".join(f"  • {mod}" for mod in modifications)
+                message = f"✅ XML enrichi avec succès!\n\n"
+                message += f"📊 Statistiques:\n"
+                message += f"  • Total contrats: {stats['total']}\n"
+                message += f"  • Enrichis: {stats['enrichis']}\n"
+                message += f"  • Non trouvés: {stats['non_trouves']}"
+                
                 print(f"\n{message}")
-                return True, message
+                return True, message, stats
             else:
-                return False, "Aucune balise à modifier trouvée dans le XML"
+                return False, "Aucune commande trouvée dans la base de données", stats
                 
         except ET.ParseError as e:
-            return False, f"Erreur de parsing XML: {e}"
+            return False, f"Erreur de parsing XML: {e}", {'total': 0, 'enrichis': 0, 'non_trouves': 0, 'details': []}
         except Exception as e:
-            return False, f"Erreur inattendue: {e}"
+            return False, f"Erreur inattendue: {e}", {'total': 0, 'enrichis': 0, 'non_trouves': 0, 'details': []}
+    
+    def _enrich_order_element(self, order_elem: ET.Element, commande: dict) -> List[str]:
+        """
+        Enrichit un élément Order spécifique avec les données
+        
+        Args:
+            order_elem: Element XML de l'Order
+            commande: Données de la commande
+            
+        Returns:
+            Liste des modifications effectuées
+        """
+        modifications = []
+        statut = commande.get('statut')
+        classification = commande.get('classification_interimaire')
+        
+        # 1. Enrichir le statut (Code dans PositionStatus)
+        if statut:
+            code_statut = statut.split('-')[0].strip() if '-' in statut else statut.strip()
+            
+            for position_status in order_elem.iter():
+                tag_lower = position_status.tag.lower()
+                if 'positionstatus' in tag_lower:
+                    # Chercher Code
+                    for child in position_status:
+                        child_tag_lower = child.tag.lower()
+                        if 'code' in child_tag_lower and child_tag_lower.endswith('code'):
+                            old_value = child.text or ""
+                            child.text = code_statut
+                            modifications.append(f"Code: '{old_value}' → '{code_statut}'")
+                        elif 'description' in child_tag_lower:
+                            child.text = statut
+                            modifications.append(f"Description: → '{statut}'")
+        
+        # 2. Enrichir la classification (PositionCoefficient)
+        if classification:
+            for position_chars in order_elem.iter():
+                tag_lower = position_chars.tag.lower()
+                if 'positioncharacteristics' in tag_lower:
+                    for child in position_chars:
+                        child_tag_lower = child.tag.lower()
+                        if 'positioncoefficient' in child_tag_lower:
+                            old_value = child.text or ""
+                            child.text = classification
+                            modifications.append(f"PositionCoefficient: '{old_value}' → '{classification}'")
+        
+        return modifications
     
     def get_commande_info(self, order_id: str) -> Optional[dict]:
         """
@@ -262,10 +323,11 @@ def main():
     enricher = XMLEnricher(json_path)
     
     # Enrichir le XML
-    success, message = enricher.enrich_xml(xml_path, output_path)
+    success, message, stats = enricher.enrich_xml(xml_path, output_path)
     
     if success:
         print(f"\n✅ Fichier enrichi sauvegardé: {output_path}")
+        print(f"📊 {stats['enrichis']} contrat(s) enrichi(s) sur {stats['total']}")
     else:
         print(f"\n❌ Échec: {message}")
         sys.exit(1)
