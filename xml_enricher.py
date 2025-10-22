@@ -2,27 +2,29 @@
 """
 Script d'enrichissement XML PIXID - STMicroelectronics
 Enrichit TOUS les contrats XML avec les données extraites des emails
-Version conforme HR-XML/SIDES : détection via ReferenceInformation
+Version lxml : namespace-agnostique, parser robuste pour gros fichiers
 """
 
 import json
-import xml.etree.ElementTree as ET
 import re
 from pathlib import Path
 from typing import Dict, Optional, Tuple, List
+from io import BytesIO
+
+try:
+    from lxml import etree
+except ImportError:
+    raise ImportError("Le module lxml est requis. Installez-le avec: pip install lxml")
 
 
 class XMLEnricher:
     """Classe pour enrichir les fichiers XML avec les données PIXID"""
     
-    # Namespace HR-XML obligatoire
-    NS = {'hr': 'http://ns.hr-xml.org/2004-08-02'}
-    
-    # Patterns pour numéros de commande
-    ORDER_PATTERNS = [r'(CR\d{6})', r'(CD\d{6})', r'(RT\d{6})']
+    # Patterns pour numéros de commande (RT prioritaire pour PIXID)
+    ORDER_PATTERNS = [r'(RT\d{6})', r'(CR\d{6})', r'(CD\d{6})']
     
     # Regex pour classification (fallback)
-    CLASSIFICATION_REGEX = r'^[A-E]\d{1,2}$'
+    CLASSIFICATION_REGEX = re.compile(r'^[A-E]\d{1,2}$')
     
     def __init__(self, json_path: str):
         """
@@ -57,52 +59,59 @@ class XMLEnricher:
         """
         Recherche TOUS les contrats dans le fichier XML via ReferenceInformation
         
-        Détecte les contextes de contrat selon le standard HR-XML/SIDES :
-        - Cherche tous les ReferenceInformation
-        - Vérifie présence de OrderId/IdValue ET AssignmentId/IdValue
-        - Retourne le contexte parent complet de chaque contrat
+        Utilise XPath namespace-agnostique avec local-name() pour détecter :
+        - Tous les ReferenceInformation contenant OrderId/IdValue
+        - Ne requiert PAS AssignmentId (optionnel)
         
         Args:
             xml_path: Chemin vers le fichier XML
             
         Returns:
             Liste de dictionnaires avec :
-            - 'order_id': Numéro de commande
-            - 'assignment_id': Numéro d'affectation
-            - 'context': Element XML du contexte parent
+            - 'order_id': Numéro de commande (RT/CR/CD + 6 chiffres)
+            - 'assignment_id': Numéro d'affectation (si présent)
+            - 'context': Element lxml du contexte parent
         """
         try:
-            tree = ET.parse(xml_path)
-            root = tree.getroot()
+            # Parser robuste pour gros fichiers
+            parser = etree.XMLParser(
+                remove_blank_text=True,
+                recover=True,
+                huge_tree=True
+            )
+            
+            tree = etree.parse(xml_path, parser)
+            
+            # XPath namespace-agnostique : trouve tous les contextes de contrat
+            # Un contrat = parent de ReferenceInformation ayant OrderId/IdValue
+            xpath_query = (
+                "//*[local-name()='ReferenceInformation']"
+                "[*[local-name()='OrderId']/*[local-name()='IdValue']]/.."
+            )
+            
+            contexts = tree.xpath(xpath_query)
             
             contracts_found = []
             
-            # Stratégie 1 : Avec namespace HR-XML
-            ref_infos_with_ns = root.findall('.//hr:ReferenceInformation', self.NS)
+            for context in contexts:
+                contract = self._extract_contract_info(context)
+                if contract:
+                    contracts_found.append(contract)
             
-            if ref_infos_with_ns:
-                print(f"🔍 Détection avec namespace HR-XML...")
-                for ref_info in ref_infos_with_ns:
-                    contract = self._extract_contract_from_ref_info(ref_info, use_namespace=True)
-                    if contract:
-                        contracts_found.append(contract)
-            
-            # Stratégie 2 : Sans namespace (fallback)
-            if not contracts_found:
-                print(f"🔍 Détection sans namespace (fallback)...")
-                for ref_info in root.iter():
-                    tag_lower = ref_info.tag.lower()
-                    if 'referenceinformation' in tag_lower:
-                        contract = self._extract_contract_from_ref_info(ref_info, use_namespace=False)
-                        if contract:
-                            contracts_found.append(contract)
-            
+            # Logs détaillés
             print(f"✅ {len(contracts_found)} contrat(s) détecté(s) dans le XML")
             
-            # Afficher les OrderId détectés
             if contracts_found:
-                order_ids = [c['order_id'] for c in contracts_found]
-                print(f"   OrderIds: {', '.join(order_ids)}")
+                # Afficher échantillon des OrderIds
+                sample_size = min(10, len(contracts_found))
+                sample_ids = [c['order_id'] for c in contracts_found[:sample_size]]
+                print(f"   Exemple OrderIds: {', '.join(sample_ids)}")
+                if len(contracts_found) > sample_size:
+                    print(f"   ... et {len(contracts_found) - sample_size} autres contrats")
+            else:
+                print("   ⚠️  Aucun contrat détecté. Vérifiez que le XML contient:")
+                print("       - Des éléments ReferenceInformation")
+                print("       - Avec OrderId/IdValue contenant RT/CR/CD + 6 chiffres")
             
             return contracts_found
             
@@ -112,61 +121,54 @@ class XMLEnricher:
             traceback.print_exc()
             return []
     
-    def _extract_contract_from_ref_info(self, ref_info: ET.Element, use_namespace: bool) -> Optional[Dict]:
+    def _extract_contract_info(self, context: etree.Element) -> Optional[Dict]:
         """
-        Extrait les informations d'un contrat depuis un ReferenceInformation
+        Extrait les informations d'un contrat depuis son contexte
         
         Args:
-            ref_info: Element ReferenceInformation
-            use_namespace: Utiliser le namespace HR-XML ou non
+            context: Element lxml du contexte (parent de ReferenceInformation)
             
         Returns:
             Dictionnaire avec order_id, assignment_id, context ou None
         """
         try:
-            if use_namespace:
-                # Avec namespace
-                order_id_elem = ref_info.find('hr:OrderId/hr:IdValue', self.NS)
-                assign_id_elem = ref_info.find('hr:AssignmentId/hr:IdValue', self.NS)
-            else:
-                # Sans namespace (chercher par nom de tag)
-                order_id_elem = None
-                assign_id_elem = None
-                
-                for child in ref_info.iter():
-                    tag_lower = child.tag.lower()
-                    if 'idvalue' in tag_lower:
-                        # Vérifier le parent
-                        parent_tag = child.getparent().tag.lower() if hasattr(child, 'getparent') else ''
-                        if 'orderid' in parent_tag:
-                            order_id_elem = child
-                        elif 'assignmentid' in parent_tag:
-                            assign_id_elem = child
+            # Chercher ReferenceInformation dans le contexte
+            ref_info = context.xpath(".//*[local-name()='ReferenceInformation']")
             
-            # Vérifier que les deux éléments existent
-            if order_id_elem is not None and assign_id_elem is not None:
-                order_id_text = order_id_elem.text
-                assign_id_text = assign_id_elem.text
-                
-                if order_id_text and assign_id_text:
-                    # Extraire le numéro de commande avec regex
-                    order_id = self._extract_order_id_from_text(order_id_text)
-                    
-                    if order_id:
-                        # Remonter au contexte parent du contrat
-                        context = ref_info.getparent() if hasattr(ref_info, 'getparent') else ref_info
-                        
-                        return {
-                            'order_id': order_id,
-                            'assignment_id': assign_id_text.strip(),
-                            'context': context
-                        }
+            if not ref_info:
+                return None
+            
+            ref_info = ref_info[0]
+            
+            # Extraire OrderId/IdValue
+            order_id_nodes = ref_info.xpath("*[local-name()='OrderId']/*[local-name()='IdValue']")
+            
+            if not order_id_nodes or not order_id_nodes[0].text:
+                return None
+            
+            order_id_text = order_id_nodes[0].text.strip()
+            
+            # Extraire le numéro de commande avec patterns
+            order_id = self._extract_order_id_from_text(order_id_text)
+            
+            if not order_id:
+                return None
+            
+            # Extraire AssignmentId/IdValue (optionnel)
+            assign_id = "N/A"
+            assign_id_nodes = ref_info.xpath("*[local-name()='AssignmentId']/*[local-name()='IdValue']")
+            if assign_id_nodes and assign_id_nodes[0].text:
+                assign_id = assign_id_nodes[0].text.strip()
+            
+            return {
+                'order_id': order_id,
+                'assignment_id': assign_id,
+                'context': context
+            }
         
         except Exception as e:
-            # Silent fail pour continuer l'extraction des autres contrats
-            pass
-        
-        return None
+            # Silent fail pour continuer l'extraction
+            return None
     
     def _extract_order_id_from_text(self, text: str) -> Optional[str]:
         """
@@ -176,7 +178,7 @@ class XMLEnricher:
             text: Texte contenant potentiellement un numéro de commande
             
         Returns:
-            Numéro de commande ou None
+            Numéro de commande (RT/CR/CD + 6 chiffres) ou None
         """
         for pattern in self.ORDER_PATTERNS:
             match = re.search(pattern, text)
@@ -197,16 +199,19 @@ class XMLEnricher:
             (succès: bool, message: str, stats: dict)
         """
         try:
-            # Lire l'encoding original
-            encoding = 'iso-8859-1'
-            with open(xml_path, 'rb') as f:
-                first_line = f.readline().decode('iso-8859-1', errors='ignore')
-                if 'encoding=' in first_line:
-                    match = re.search(r'encoding=["\']([^"\']+)["\']', first_line)
-                    if match:
-                        encoding = match.group(1)
+            # Parser robuste
+            parser = etree.XMLParser(
+                remove_blank_text=True,
+                recover=True,
+                huge_tree=True
+            )
             
-            # 1. Trouver tous les contrats via ReferenceInformation
+            tree = etree.parse(xml_path, parser)
+            
+            # Récupérer l'encodage original
+            encoding = tree.docinfo.encoding or 'iso-8859-1'
+            
+            # 1. Trouver tous les contrats
             contracts = self.find_all_order_ids_in_xml(xml_path)
             
             if not contracts:
@@ -214,15 +219,9 @@ class XMLEnricher:
                     'total': 0,
                     'enrichis': 0,
                     'non_trouves': 0,
+                    'fallback_used': 0,
                     'details': []
                 }
-            
-            # 2. Parser le XML pour modification
-            tree = ET.parse(xml_path)
-            root = tree.getroot()
-            
-            # Enregistrer le namespace pour sauvegarde propre
-            ET.register_namespace('hr', 'http://ns.hr-xml.org/2004-08-02')
             
             # Statistiques
             stats = {
@@ -233,7 +232,7 @@ class XMLEnricher:
                 'details': []
             }
             
-            # 3. Enrichir chaque contrat
+            # 2. Enrichir chaque contrat
             for idx, contract_info in enumerate(contracts):
                 order_id = contract_info['order_id']
                 assignment_id = contract_info['assignment_id']
@@ -256,7 +255,7 @@ class XMLEnricher:
                 }
                 
                 if commande:
-                    # Enrichir ce contrat
+                    # Enrichir ce contrat avec données JSON
                     modifications = self._enrich_contract(context, commande, order_id)
                     
                     stats['enrichis'] += 1
@@ -283,16 +282,21 @@ class XMLEnricher:
                 
                 stats['details'].append(detail)
             
-            # 4. Sauvegarder le XML enrichi
+            # 3. Sauvegarder le XML enrichi
             if stats['enrichis'] > 0 or stats['fallback_used'] > 0:
-                # Sauvegarde avec préservation des namespaces
-                tree.write(output_path, encoding=encoding, xml_declaration=True, method='xml')
+                # Écriture avec lxml : préserve encodage et namespaces
+                tree.write(
+                    output_path,
+                    encoding=encoding,
+                    pretty_print=True,
+                    xml_declaration=True
+                )
                 
                 message = f"✅ XML enrichi avec succès!\n\n"
                 message += f"📊 Statistiques:\n"
                 message += f"  • Total contrats: {stats['total']}\n"
-                message += f"  • Enrichis (avec données): {stats['enrichis']}\n"
-                message += f"  • Non trouvés: {stats['non_trouves']}\n"
+                message += f"  • Enrichis (avec données JSON): {stats['enrichis']}\n"
+                message += f"  • Non trouvés dans JSON: {stats['non_trouves']}\n"
                 message += f"  • Fallback classification utilisé: {stats['fallback_used']}"
                 
                 print(f"\n{message}")
@@ -300,14 +304,18 @@ class XMLEnricher:
             else:
                 return False, "Aucune modification effectuée", stats
                 
-        except ET.ParseError as e:
-            return False, f"Erreur de parsing XML: {e}", {'total': 0, 'enrichis': 0, 'non_trouves': 0, 'details': []}
+        except etree.ParseError as e:
+            return False, f"Erreur de parsing XML: {e}", {
+                'total': 0, 'enrichis': 0, 'non_trouves': 0, 'fallback_used': 0, 'details': []
+            }
         except Exception as e:
             import traceback
             traceback.print_exc()
-            return False, f"Erreur inattendue: {e}", {'total': 0, 'enrichis': 0, 'non_trouves': 0, 'details': []}
+            return False, f"Erreur inattendue: {e}", {
+                'total': 0, 'enrichis': 0, 'non_trouves': 0, 'fallback_used': 0, 'details': []
+            }
     
-    def _enrich_contract(self, context: ET.Element, commande: dict, order_id: str) -> Dict:
+    def _enrich_contract(self, context: etree.Element, commande: dict, order_id: str) -> Dict:
         """
         Enrichit un contrat avec les données de la commande
         
@@ -316,7 +324,7 @@ class XMLEnricher:
         2. PositionCharacteristics/PositionStatus/Code (statut)
         
         Args:
-            context: Element XML du contexte du contrat
+            context: Element lxml du contexte du contrat
             commande: Données de la commande depuis JSON
             order_id: Numéro de commande (pour debug)
             
@@ -334,52 +342,31 @@ class XMLEnricher:
         classification, classif_note, fallback_used = self._get_classification(context, commande)
         
         if classification:
-            # Chercher PositionCoefficient avec namespace
-            pos_coeff = context.find('.//hr:PositionCharacteristics/hr:PositionCoefficient', self.NS)
+            xpath_coeff = ".//*[local-name()='PositionCharacteristics']/*[local-name()='PositionCoefficient']"
+            success = self._upsert_text(context, xpath_coeff, classification, 'PositionCoefficient')
             
-            if pos_coeff is None:
-                # Fallback sans namespace
-                for elem in context.iter():
-                    if 'positioncoefficient' in elem.tag.lower():
-                        pos_coeff = elem
-                        break
-            
-            if pos_coeff is not None:
-                old_value = pos_coeff.text or ""
-                pos_coeff.text = classification
+            if success:
                 result['classification'] = classification
                 result['fallback_used'] = fallback_used
                 result['note'] = classif_note
-                print(f"   ✓ {order_id} - PositionCoefficient: '{old_value}' → '{classification}' ({classif_note})")
+                print(f"   ✓ {order_id} - PositionCoefficient → '{classification}' ({classif_note})")
         
         # 2. STATUT → PositionStatus/Code
         statut = commande.get('statut')
         if statut:
-            # Extraire le code (avant le tiret)
+            # Extraire le code (avant le tiret si présent)
             code_statut = statut.split('-')[0].strip() if '-' in statut else statut.strip()
             
-            # Chercher PositionStatus/Code avec namespace
-            pos_status_code = context.find('.//hr:PositionCharacteristics/hr:PositionStatus/hr:Code', self.NS)
+            xpath_status = ".//*[local-name()='PositionCharacteristics']/*[local-name()='PositionStatus']/*[local-name()='Code']"
+            success = self._upsert_text(context, xpath_status, code_statut, 'Code')
             
-            if pos_status_code is None:
-                # Fallback sans namespace
-                for elem in context.iter():
-                    tag_lower = elem.tag.lower()
-                    if 'positionstatus' in tag_lower:
-                        for child in elem:
-                            if child.tag.lower().endswith('code'):
-                                pos_status_code = child
-                                break
-            
-            if pos_status_code is not None:
-                old_value = pos_status_code.text or ""
-                pos_status_code.text = code_statut
+            if success:
                 result['statut_code'] = code_statut
-                print(f"   ✓ {order_id} - PositionStatus/Code: '{old_value}' → '{code_statut}'")
+                print(f"   ✓ {order_id} - PositionStatus/Code → '{code_statut}'")
         
         return result
     
-    def _get_classification(self, context: ET.Element, commande: dict) -> Tuple[Optional[str], str, bool]:
+    def _get_classification(self, context: etree.Element, commande: dict) -> Tuple[Optional[str], str, bool]:
         """
         Détermine la classification avec logique de fallback
         
@@ -388,7 +375,7 @@ class XMLEnricher:
         2. Fallback : Copier PositionLevel si regex [A-E]\d{1,2} match
         
         Args:
-            context: Contexte XML du contrat
+            context: Contexte lxml du contrat
             commande: Données de la commande
             
         Returns:
@@ -400,68 +387,119 @@ class XMLEnricher:
             return classif.strip(), "depuis JSON", False
         
         # Priorité 2 : Fallback PositionLevel
-        return self._apply_classification_fallback_internal(context)
+        return self._get_classification_from_level(context)
     
-    def _apply_classification_fallback(self, context: ET.Element, order_id: str) -> Optional[Dict]:
+    def _get_classification_from_level(self, context: etree.Element) -> Tuple[Optional[str], str, bool]:
+        """
+        Extrait la classification depuis PositionLevel (fallback)
+        
+        Args:
+            context: Contexte lxml du contrat
+            
+        Returns:
+            (classification, note, fallback_used)
+        """
+        xpath_level = ".//*[local-name()='PositionLevel']"
+        level_nodes = context.xpath(xpath_level)
+        
+        if level_nodes and level_nodes[0].text:
+            level_text = level_nodes[0].text.strip()
+            
+            # Vérifier si correspond à la regex [A-E]\d{1,2}
+            if self.CLASSIFICATION_REGEX.match(level_text):
+                return level_text, "copié depuis PositionLevel", True
+        
+        return None, "", False
+    
+    def _apply_classification_fallback(self, context: etree.Element, order_id: str) -> Optional[Dict]:
         """
         Applique le fallback classification pour un contrat sans correspondance JSON
         
         Args:
-            context: Contexte XML du contrat
+            context: Contexte lxml du contrat
             order_id: Numéro de commande (pour debug)
             
         Returns:
             Dictionnaire avec classification et note ou None
         """
-        classification, note, fallback_used = self._apply_classification_fallback_internal(context)
+        classification, note, fallback_used = self._get_classification_from_level(context)
         
         if classification and fallback_used:
-            # Appliquer la modification
-            pos_coeff = context.find('.//hr:PositionCharacteristics/hr:PositionCoefficient', self.NS)
+            xpath_coeff = ".//*[local-name()='PositionCharacteristics']/*[local-name()='PositionCoefficient']"
             
-            if pos_coeff is None:
-                for elem in context.iter():
-                    if 'positioncoefficient' in elem.tag.lower():
-                        pos_coeff = elem
-                        break
-            
-            if pos_coeff is not None:
-                old_value = pos_coeff.text or ""
-                if not old_value.strip():  # Seulement si vide
-                    pos_coeff.text = classification
-                    print(f"   ✓ {order_id} - PositionCoefficient: '{old_value}' → '{classification}' ({note})")
+            # Vérifier si PositionCoefficient existe et est vide
+            coeff_nodes = context.xpath(xpath_coeff)
+            if not coeff_nodes or not (coeff_nodes[0].text or '').strip():
+                # Appliquer le fallback
+                success = self._upsert_text(context, xpath_coeff, classification, 'PositionCoefficient')
+                
+                if success:
+                    print(f"   ✓ {order_id} - PositionCoefficient → '{classification}' ({note})")
                     return {'classification': classification, 'note': note}
         
         return None
     
-    def _apply_classification_fallback_internal(self, context: ET.Element) -> Tuple[Optional[str], str, bool]:
+    def _upsert_text(self, context: etree.Element, xpath: str, value: str, tag_name: str) -> bool:
         """
-        Logique interne du fallback classification
+        Insère ou met à jour le texte d'un élément via XPath namespace-agnostique
+        
+        Si l'élément n'existe pas, le crée dans la hiérarchie appropriée
+        en préservant le namespace du parent.
         
         Args:
-            context: Contexte XML du contrat
+            context: Element lxml parent
+            xpath: XPath avec local-name() pour trouver l'élément
+            value: Valeur à insérer
+            tag_name: Nom du tag pour création (sans namespace)
             
         Returns:
-            (classification, note, fallback_used)
+            True si succès, False sinon
         """
-        # Chercher PositionLevel avec namespace
-        position_level = context.find('.//hr:PositionLevel', self.NS)
-        
-        if position_level is None:
-            # Fallback sans namespace
-            for elem in context.iter():
-                if 'positionlevel' in elem.tag.lower():
-                    position_level = elem
-                    break
-        
-        if position_level is not None and position_level.text:
-            level_text = position_level.text.strip()
+        try:
+            nodes = context.xpath(xpath)
             
-            # Vérifier si correspond à la regex [A-E]\d{1,2}
-            if re.match(self.CLASSIFICATION_REGEX, level_text):
-                return level_text, "copié depuis PositionLevel", True
+            if nodes:
+                # Élément existe : mise à jour
+                nodes[0].text = value
+                return True
+            else:
+                # Élément n'existe pas : création
+                # Décomposer le XPath pour créer la hiérarchie
+                # Format attendu : .//*[local-name()='Parent']/*[local-name()='Child']
+                
+                # Extraire les noms de tags depuis le XPath
+                parts = re.findall(r"local-name\(\)='([^']+)'", xpath)
+                
+                if not parts:
+                    return False
+                
+                # Naviguer/créer la hiérarchie
+                current = context
+                for i, part_name in enumerate(parts):
+                    # Chercher si l'élément existe déjà
+                    child_xpath = f".//*[local-name()='{part_name}']"
+                    existing = current.xpath(child_xpath)
+                    
+                    if existing:
+                        current = existing[0]
+                    else:
+                        # Créer l'élément dans le namespace du parent
+                        ns = current.nsmap.get(None)
+                        if ns:
+                            new_tag = f"{{{ns}}}{part_name}"
+                        else:
+                            new_tag = part_name
+                        
+                        new_elem = etree.SubElement(current, new_tag)
+                        current = new_elem
+                
+                # Insérer la valeur dans le dernier élément créé
+                current.text = value
+                return True
         
-        return None, "", False
+        except Exception as e:
+            print(f"   ⚠️  Erreur upsert {tag_name}: {e}")
+            return False
     
     def get_commande_info(self, order_id: str) -> Optional[dict]:
         """
@@ -527,12 +565,14 @@ def main():
         # Afficher le récapitulatif détaillé
         if stats['details']:
             print(f"\n📋 Récapitulatif par contrat:")
-            print(f"{'OrderId':<12} {'AssignmentId':<15} {'Coefficient':<15} {'StatusCode':<12} {'Note'}")
-            print("-" * 90)
-            for detail in stats['details']:
-                print(f"{detail['OrderId']:<12} {detail['AssignmentId']:<15} "
+            print(f"{'OrderId':<12} {'AssignmentId':<20} {'Coefficient':<15} {'StatusCode':<12} {'Note'}")
+            print("-" * 100)
+            for detail in stats['details'][:20]:  # Limiter à 20 pour lisibilité
+                print(f"{detail['OrderId']:<12} {detail['AssignmentId']:<20} "
                       f"{detail['PositionCoefficient']:<15} {detail['PositionStatusCode']:<12} "
                       f"{detail['note']}")
+            if len(stats['details']) > 20:
+                print(f"... et {len(stats['details']) - 20} autres contrats")
     else:
         print(f"\n❌ Échec: {message}")
         sys.exit(1)
