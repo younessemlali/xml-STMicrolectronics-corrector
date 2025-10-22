@@ -2,7 +2,7 @@
 """
 Script d'enrichissement XML PIXID - STMicroelectronics
 Enrichit TOUS les contrats XML avec les données extraites des emails
-Version lxml : namespace-agnostique, parser robuste pour gros fichiers
+Version lxml avec upsert effectif : ÉCRIT réellement les modifications
 """
 
 import json
@@ -24,7 +24,14 @@ class XMLEnricher:
     ORDER_PATTERNS = [r'(RT\d{6})', r'(CR\d{6})', r'(CD\d{6})']
     
     # Regex pour classification (fallback)
-    CLASSIFICATION_REGEX = re.compile(r'^[A-E]\d{1,2}$')
+    CLASS_RE = re.compile(r'^[A-E]\d{1,2}$')
+    
+    # XPath namespace-agnostiques
+    XP_CTX = "//*[local-name()='ReferenceInformation'][*[local-name()='OrderId']/*[local-name()='IdValue']]/.."
+    XP_ORDER = ".//*[local-name()='ReferenceInformation']/*[local-name()='OrderId']/*[local-name()='IdValue']"
+    XP_COEFF = ".//*[local-name()='PositionCharacteristics']/*[local-name()='PositionCoefficient']"
+    XP_LEVEL = ".//*[local-name()='PositionCharacteristics']/*[local-name()='PositionLevel']"
+    XP_STATUS = ".//*[local-name()='PositionCharacteristics']/*[local-name()='PositionStatus']/*[local-name()='Code']"
     
     def __init__(self, json_path: str):
         """
@@ -55,48 +62,130 @@ class XMLEnricher:
         
         return commandes
     
+    def _parse_tree(self, xml_bytes: bytes) -> etree._ElementTree:
+        """
+        Parse le XML avec parser robuste
+        
+        Args:
+            xml_bytes: Contenu XML en bytes
+            
+        Returns:
+            arbre lxml
+        """
+        parser = etree.XMLParser(remove_blank_text=True, recover=True, huge_tree=True)
+        return etree.parse(BytesIO(xml_bytes), parser)
+    
+    def _xget(self, ctx: etree.Element, xpath: str) -> str:
+        """
+        Extrait le texte d'un élément via XPath
+        
+        Args:
+            ctx: Contexte lxml
+            xpath: XPath avec local-name()
+            
+        Returns:
+            Texte de l'élément ou chaîne vide
+        """
+        nodes = ctx.xpath(xpath)
+        return (nodes[0].text or '').strip() if nodes and nodes[0].text else ''
+    
+    def _xupsert(self, ctx: etree.Element, ln_path: str, value: str) -> bool:
+        """
+        Upsert : crée ou met à jour un élément via XPath local-name()
+        
+        CRITIQUE : Cette fonction ÉCRIT réellement dans l'arbre XML.
+        Si la balise n'existe pas, elle la crée dans la bonne hiérarchie
+        en préservant le namespace du parent.
+        
+        Args:
+            ctx: Contexte lxml parent
+            ln_path: XPath avec local-name(), ex: ".//*[local-name()='PositionCoefficient']"
+            value: Valeur à écrire
+            
+        Returns:
+            True si succès
+        """
+        try:
+            # Extraire les noms de tags depuis le XPath local-name()
+            # Ex: ".//*[local-name()='PositionCharacteristics']/*[local-name()='PositionCoefficient']"
+            # → ['PositionCharacteristics', 'PositionCoefficient']
+            parts = [seg.split("'")[1] for seg in ln_path.split("local-name()='")[1:]]
+            
+            if not parts:
+                return False
+            
+            # Naviguer/créer la hiérarchie
+            current = ctx
+            for name in parts:
+                # Chercher si l'élément existe déjà
+                found = current.xpath(f"./*[local-name()='{name}']")
+                
+                if found:
+                    current = found[0]
+                else:
+                    # Créer l'élément dans le namespace du parent
+                    ns = current.nsmap.get(None)
+                    tag = f"{{{ns}}}{name}" if ns else name
+                    current = etree.SubElement(current, tag)
+            
+            # Écrire la valeur
+            current.text = value
+            return True
+            
+        except Exception as e:
+            print(f"   ⚠️  Erreur xupsert: {e}")
+            return False
+    
+    def _extract_order_id_from_text(self, text: str) -> Optional[str]:
+        """
+        Extrait le numéro de commande d'un texte avec les patterns définis
+        
+        Args:
+            text: Texte contenant potentiellement un numéro de commande
+            
+        Returns:
+            Numéro de commande (RT/CR/CD + 6 chiffres) ou None
+        """
+        for pattern in self.ORDER_PATTERNS:
+            match = re.search(pattern, text)
+            if match:
+                return match.group(1)
+        return None
+    
     def find_all_order_ids_in_xml(self, xml_path: str) -> List[Dict]:
         """
         Recherche TOUS les contrats dans le fichier XML via ReferenceInformation
-        
-        Utilise XPath namespace-agnostique avec local-name() pour détecter :
-        - Tous les ReferenceInformation contenant OrderId/IdValue
-        - Ne requiert PAS AssignmentId (optionnel)
         
         Args:
             xml_path: Chemin vers le fichier XML
             
         Returns:
-            Liste de dictionnaires avec :
-            - 'order_id': Numéro de commande (RT/CR/CD + 6 chiffres)
-            - 'assignment_id': Numéro d'affectation (si présent)
-            - 'context': Element lxml du contexte parent
+            Liste de dictionnaires avec order_id, assignment_id, context
         """
         try:
-            # Parser robuste pour gros fichiers
-            parser = etree.XMLParser(
-                remove_blank_text=True,
-                recover=True,
-                huge_tree=True
-            )
+            # Lire le fichier en bytes
+            with open(xml_path, 'rb') as f:
+                xml_bytes = f.read()
             
-            tree = etree.parse(xml_path, parser)
-            
-            # XPath namespace-agnostique : trouve tous les contextes de contrat
-            # Un contrat = parent de ReferenceInformation ayant OrderId/IdValue
-            xpath_query = (
-                "//*[local-name()='ReferenceInformation']"
-                "[*[local-name()='OrderId']/*[local-name()='IdValue']]/.."
-            )
-            
-            contexts = tree.xpath(xpath_query)
+            tree = self._parse_tree(xml_bytes)
+            contexts = tree.xpath(self.XP_CTX)
             
             contracts_found = []
             
             for context in contexts:
-                contract = self._extract_contract_info(context)
-                if contract:
-                    contracts_found.append(contract)
+                order_id_text = self._xget(context, self.XP_ORDER)
+                order_id = self._extract_order_id_from_text(order_id_text)
+                
+                if order_id:
+                    # Extraire AssignmentId (optionnel)
+                    assign_xpath = ".//*[local-name()='ReferenceInformation']/*[local-name()='AssignmentId']/*[local-name()='IdValue']"
+                    assign_id = self._xget(context, assign_xpath) or "N/A"
+                    
+                    contracts_found.append({
+                        'order_id': order_id,
+                        'assignment_id': assign_id,
+                        'context': context
+                    })
             
             # Logs détaillés
             print(f"✅ {len(contracts_found)} contrat(s) détecté(s) dans le XML")
@@ -121,74 +210,11 @@ class XMLEnricher:
             traceback.print_exc()
             return []
     
-    def _extract_contract_info(self, context: etree.Element) -> Optional[Dict]:
-        """
-        Extrait les informations d'un contrat depuis son contexte
-        
-        Args:
-            context: Element lxml du contexte (parent de ReferenceInformation)
-            
-        Returns:
-            Dictionnaire avec order_id, assignment_id, context ou None
-        """
-        try:
-            # Chercher ReferenceInformation dans le contexte
-            ref_info = context.xpath(".//*[local-name()='ReferenceInformation']")
-            
-            if not ref_info:
-                return None
-            
-            ref_info = ref_info[0]
-            
-            # Extraire OrderId/IdValue
-            order_id_nodes = ref_info.xpath("*[local-name()='OrderId']/*[local-name()='IdValue']")
-            
-            if not order_id_nodes or not order_id_nodes[0].text:
-                return None
-            
-            order_id_text = order_id_nodes[0].text.strip()
-            
-            # Extraire le numéro de commande avec patterns
-            order_id = self._extract_order_id_from_text(order_id_text)
-            
-            if not order_id:
-                return None
-            
-            # Extraire AssignmentId/IdValue (optionnel)
-            assign_id = "N/A"
-            assign_id_nodes = ref_info.xpath("*[local-name()='AssignmentId']/*[local-name()='IdValue']")
-            if assign_id_nodes and assign_id_nodes[0].text:
-                assign_id = assign_id_nodes[0].text.strip()
-            
-            return {
-                'order_id': order_id,
-                'assignment_id': assign_id,
-                'context': context
-            }
-        
-        except Exception as e:
-            # Silent fail pour continuer l'extraction
-            return None
-    
-    def _extract_order_id_from_text(self, text: str) -> Optional[str]:
-        """
-        Extrait le numéro de commande d'un texte avec les patterns définis
-        
-        Args:
-            text: Texte contenant potentiellement un numéro de commande
-            
-        Returns:
-            Numéro de commande (RT/CR/CD + 6 chiffres) ou None
-        """
-        for pattern in self.ORDER_PATTERNS:
-            match = re.search(pattern, text)
-            if match:
-                return match.group(1)
-        return None
-    
     def enrich_xml(self, xml_path: str, output_path: str, progress_callback=None) -> Tuple[bool, str, Dict]:
         """
         Enrichit TOUS les contrats du fichier XML avec les données PIXID
+        
+        ÉCRIT EFFECTIVEMENT les modifications dans le fichier XML de sortie.
         
         Args:
             xml_path: Chemin vers le fichier XML source
@@ -199,307 +225,179 @@ class XMLEnricher:
             (succès: bool, message: str, stats: dict)
         """
         try:
-            # Parser robuste
-            parser = etree.XMLParser(
-                remove_blank_text=True,
-                recover=True,
-                huge_tree=True
-            )
+            # Lire le fichier en bytes
+            with open(xml_path, 'rb') as f:
+                xml_bytes = f.read()
             
-            tree = etree.parse(xml_path, parser)
+            # Parser
+            tree = self._parse_tree(xml_bytes)
             
             # Récupérer l'encodage original
             encoding = tree.docinfo.encoding or 'iso-8859-1'
+            print(f"📄 Encodage détecté: {encoding}")
             
-            # 1. Trouver tous les contrats
-            contracts = self.find_all_order_ids_in_xml(xml_path)
+            # Trouver tous les contextes de contrats
+            contexts = tree.xpath(self.XP_CTX)
             
-            if not contracts:
+            if not contexts:
                 return False, "Aucun contrat détecté dans le XML", {
                     'total': 0,
                     'enrichis': 0,
                     'non_trouves': 0,
-                    'fallback_used': 0,
+                    'upd_coeff': 0,
+                    'upd_status': 0,
                     'details': []
                 }
             
+            print(f"✅ {len(contexts)} contrat(s) détecté(s)")
+            
+            # Compteurs de modifications RÉELLES
+            upd_coeff = 0
+            upd_status = 0
+            order_ids_modified = []
+            
             # Statistiques
             stats = {
-                'total': len(contracts),
+                'total': len(contexts),
                 'enrichis': 0,
                 'non_trouves': 0,
-                'fallback_used': 0,
+                'upd_coeff': 0,
+                'upd_status': 0,
                 'details': []
             }
             
-            # 2. Enrichir chaque contrat
-            for idx, contract_info in enumerate(contracts):
-                order_id = contract_info['order_id']
-                assignment_id = contract_info['assignment_id']
-                context = contract_info['context']
-                
+            # Enrichir chaque contrat
+            for idx, ctx in enumerate(contexts):
                 # Callback progression
                 if progress_callback:
-                    progress_callback(idx + 1, len(contracts))
+                    progress_callback(idx + 1, len(contexts))
                 
-                # Récupérer les données de la commande
-                commande = self.commandes_data.get(order_id)
+                # Extraire OrderId
+                order_id_text = self._xget(ctx, self.XP_ORDER)
+                order_id = self._extract_order_id_from_text(order_id_text)
+                
+                if not order_id:
+                    continue
+                
+                # Récupérer la commande
+                cmd = self.commandes_data.get(order_id)
                 
                 detail = {
                     'OrderId': order_id,
-                    'AssignmentId': assignment_id,
                     'PositionCoefficient': 'N/A',
                     'PositionStatusCode': 'N/A',
                     'matched': False,
                     'note': ''
                 }
                 
-                if commande:
-                    # Enrichir ce contrat avec données JSON
-                    modifications = self._enrich_contract(context, commande, order_id)
+                modified = False
+                
+                # 1) CLASSIFICATION → PositionCoefficient
+                coeff = self._xget(ctx, self.XP_COEFF)
+                level = self._xget(ctx, self.XP_LEVEL)
+                
+                if cmd and (cmd.get('classification_interimaire') or '').strip():
+                    # Commande trouvée avec classification
+                    classif_value = cmd['classification_interimaire'].strip()
+                    success = self._xupsert(ctx, self.XP_COEFF, classif_value)
                     
+                    if success:
+                        upd_coeff += 1
+                        modified = True
+                        detail['PositionCoefficient'] = classif_value
+                        detail['note'] = 'depuis JSON'
+                        print(f"   ✓ {order_id} - PositionCoefficient → '{classif_value}' (depuis JSON)")
+                
+                elif not cmd and not coeff and self.CLASS_RE.match(level or ''):
+                    # Pas de commande mais fallback possible
+                    success = self._xupsert(ctx, self.XP_COEFF, level)
+                    
+                    if success:
+                        upd_coeff += 1
+                        modified = True
+                        detail['PositionCoefficient'] = level
+                        detail['note'] = 'copié depuis PositionLevel'
+                        print(f"   ✓ {order_id} - PositionCoefficient → '{level}' (depuis PositionLevel)")
+                
+                # 2) STATUT → PositionStatus/Code
+                if cmd and (cmd.get('statut') or '').strip():
+                    statut_value = cmd['statut'].strip()
+                    # Extraire le code (avant le tiret si présent)
+                    code_statut = statut_value.split('-')[0].strip() if '-' in statut_value else statut_value
+                    
+                    success = self._xupsert(ctx, self.XP_STATUS, code_statut)
+                    
+                    if success:
+                        upd_status += 1
+                        modified = True
+                        detail['PositionStatusCode'] = code_statut
+                        print(f"   ✓ {order_id} - PositionStatus/Code → '{code_statut}'")
+                
+                # Mettre à jour stats
+                if cmd:
                     stats['enrichis'] += 1
                     detail['matched'] = True
-                    detail['PositionCoefficient'] = modifications.get('classification', 'N/A')
-                    detail['PositionStatusCode'] = modifications.get('statut_code', 'N/A')
-                    detail['note'] = modifications.get('note', '')
-                    
-                    if modifications.get('fallback_used', False):
-                        stats['fallback_used'] += 1
                 else:
-                    # Pas de correspondance : appliquer fallback seulement
-                    fallback_result = self._apply_classification_fallback(context, order_id)
-                    
                     stats['non_trouves'] += 1
-                    detail['matched'] = False
-                    
-                    if fallback_result:
-                        detail['PositionCoefficient'] = fallback_result['classification']
-                        detail['note'] = fallback_result['note']
-                        stats['fallback_used'] += 1
-                    else:
-                        detail['note'] = 'Aucune donnée disponible'
+                
+                if modified:
+                    order_ids_modified.append(order_id)
                 
                 stats['details'].append(detail)
             
-            # 3. Sauvegarder le XML enrichi
-            if stats['enrichis'] > 0 or stats['fallback_used'] > 0:
-                # Écriture avec lxml : préserve encodage et namespaces
-                tree.write(
-                    output_path,
-                    encoding=encoding,
-                    pretty_print=True,
-                    xml_declaration=True
-                )
-                
-                message = f"✅ XML enrichi avec succès!\n\n"
-                message += f"📊 Statistiques:\n"
-                message += f"  • Total contrats: {stats['total']}\n"
-                message += f"  • Enrichis (avec données JSON): {stats['enrichis']}\n"
-                message += f"  • Non trouvés dans JSON: {stats['non_trouves']}\n"
-                message += f"  • Fallback classification utilisé: {stats['fallback_used']}"
-                
-                print(f"\n{message}")
-                return True, message, stats
-            else:
-                return False, "Aucune modification effectuée", stats
+            # Mettre à jour les compteurs
+            stats['upd_coeff'] = upd_coeff
+            stats['upd_status'] = upd_status
+            
+            # CRITIQUE : Sauvegarder le XML avec les modifications
+            print(f"\n💾 Sauvegarde du XML enrichi...")
+            
+            tree.write(
+                output_path,
+                encoding=encoding,
+                pretty_print=True,
+                xml_declaration=True
+            )
+            
+            print(f"✅ Fichier sauvegardé: {output_path}")
+            
+            # Logs finaux
+            print(f"\n📊 MODIFICATIONS EFFECTIVES:")
+            print(f"   • Contrats détectés: {stats['total']}")
+            print(f"   • PositionCoefficient MAJ: {upd_coeff}")
+            print(f"   • PositionStatus/Code MAJ: {upd_status}")
+            
+            if order_ids_modified:
+                sample = order_ids_modified[:10]
+                print(f"   • OrderIds modifiés: {', '.join(sample)}")
+                if len(order_ids_modified) > 10:
+                    print(f"     ... et {len(order_ids_modified) - 10} autres")
+            
+            if upd_coeff == 0 and upd_status == 0:
+                print(f"\n⚠️  WARNING: Aucune modification écrite alors que {stats['enrichis']} commandes existent!")
+                print(f"   Vérifiez que les données 'classification_interimaire' et 'statut' ne sont pas vides.")
+            
+            # Message final
+            message = f"✅ XML enrichi avec succès!\n\n"
+            message += f"📊 Statistiques:\n"
+            message += f"  • Total contrats: {stats['total']}\n"
+            message += f"  • Enrichis (avec données JSON): {stats['enrichis']}\n"
+            message += f"  • Non trouvés dans JSON: {stats['non_trouves']}\n"
+            message += f"  • PositionCoefficient MAJ: {upd_coeff}\n"
+            message += f"  • PositionStatus/Code MAJ: {upd_status}"
+            
+            return True, message, stats
                 
         except etree.ParseError as e:
             return False, f"Erreur de parsing XML: {e}", {
-                'total': 0, 'enrichis': 0, 'non_trouves': 0, 'fallback_used': 0, 'details': []
+                'total': 0, 'enrichis': 0, 'non_trouves': 0, 'upd_coeff': 0, 'upd_status': 0, 'details': []
             }
         except Exception as e:
             import traceback
             traceback.print_exc()
             return False, f"Erreur inattendue: {e}", {
-                'total': 0, 'enrichis': 0, 'non_trouves': 0, 'fallback_used': 0, 'details': []
+                'total': 0, 'enrichis': 0, 'non_trouves': 0, 'upd_coeff': 0, 'upd_status': 0, 'details': []
             }
-    
-    def _enrich_contract(self, context: etree.Element, commande: dict, order_id: str) -> Dict:
-        """
-        Enrichit un contrat avec les données de la commande
-        
-        Modifie UNIQUEMENT les 2 balises autorisées :
-        1. PositionCharacteristics/PositionCoefficient (classification)
-        2. PositionCharacteristics/PositionStatus/Code (statut)
-        
-        Args:
-            context: Element lxml du contexte du contrat
-            commande: Données de la commande depuis JSON
-            order_id: Numéro de commande (pour debug)
-            
-        Returns:
-            Dictionnaire avec les modifications effectuées
-        """
-        result = {
-            'classification': 'N/A',
-            'statut_code': 'N/A',
-            'note': '',
-            'fallback_used': False
-        }
-        
-        # 1. CLASSIFICATION → PositionCoefficient
-        classification, classif_note, fallback_used = self._get_classification(context, commande)
-        
-        if classification:
-            xpath_coeff = ".//*[local-name()='PositionCharacteristics']/*[local-name()='PositionCoefficient']"
-            success = self._upsert_text(context, xpath_coeff, classification, 'PositionCoefficient')
-            
-            if success:
-                result['classification'] = classification
-                result['fallback_used'] = fallback_used
-                result['note'] = classif_note
-                print(f"   ✓ {order_id} - PositionCoefficient → '{classification}' ({classif_note})")
-        
-        # 2. STATUT → PositionStatus/Code
-        statut = commande.get('statut')
-        if statut:
-            # Extraire le code (avant le tiret si présent)
-            code_statut = statut.split('-')[0].strip() if '-' in statut else statut.strip()
-            
-            xpath_status = ".//*[local-name()='PositionCharacteristics']/*[local-name()='PositionStatus']/*[local-name()='Code']"
-            success = self._upsert_text(context, xpath_status, code_statut, 'Code')
-            
-            if success:
-                result['statut_code'] = code_statut
-                print(f"   ✓ {order_id} - PositionStatus/Code → '{code_statut}'")
-        
-        return result
-    
-    def _get_classification(self, context: etree.Element, commande: dict) -> Tuple[Optional[str], str, bool]:
-        """
-        Détermine la classification avec logique de fallback
-        
-        Règles :
-        1. Priorité : classification_interimaire du JSON
-        2. Fallback : Copier PositionLevel si regex [A-E]\d{1,2} match
-        
-        Args:
-            context: Contexte lxml du contrat
-            commande: Données de la commande
-            
-        Returns:
-            (classification, note, fallback_used)
-        """
-        # Priorité 1 : classification_interimaire du JSON
-        classif = commande.get('classification_interimaire')
-        if classif and classif.strip():
-            return classif.strip(), "depuis JSON", False
-        
-        # Priorité 2 : Fallback PositionLevel
-        return self._get_classification_from_level(context)
-    
-    def _get_classification_from_level(self, context: etree.Element) -> Tuple[Optional[str], str, bool]:
-        """
-        Extrait la classification depuis PositionLevel (fallback)
-        
-        Args:
-            context: Contexte lxml du contrat
-            
-        Returns:
-            (classification, note, fallback_used)
-        """
-        xpath_level = ".//*[local-name()='PositionLevel']"
-        level_nodes = context.xpath(xpath_level)
-        
-        if level_nodes and level_nodes[0].text:
-            level_text = level_nodes[0].text.strip()
-            
-            # Vérifier si correspond à la regex [A-E]\d{1,2}
-            if self.CLASSIFICATION_REGEX.match(level_text):
-                return level_text, "copié depuis PositionLevel", True
-        
-        return None, "", False
-    
-    def _apply_classification_fallback(self, context: etree.Element, order_id: str) -> Optional[Dict]:
-        """
-        Applique le fallback classification pour un contrat sans correspondance JSON
-        
-        Args:
-            context: Contexte lxml du contrat
-            order_id: Numéro de commande (pour debug)
-            
-        Returns:
-            Dictionnaire avec classification et note ou None
-        """
-        classification, note, fallback_used = self._get_classification_from_level(context)
-        
-        if classification and fallback_used:
-            xpath_coeff = ".//*[local-name()='PositionCharacteristics']/*[local-name()='PositionCoefficient']"
-            
-            # Vérifier si PositionCoefficient existe et est vide
-            coeff_nodes = context.xpath(xpath_coeff)
-            if not coeff_nodes or not (coeff_nodes[0].text or '').strip():
-                # Appliquer le fallback
-                success = self._upsert_text(context, xpath_coeff, classification, 'PositionCoefficient')
-                
-                if success:
-                    print(f"   ✓ {order_id} - PositionCoefficient → '{classification}' ({note})")
-                    return {'classification': classification, 'note': note}
-        
-        return None
-    
-    def _upsert_text(self, context: etree.Element, xpath: str, value: str, tag_name: str) -> bool:
-        """
-        Insère ou met à jour le texte d'un élément via XPath namespace-agnostique
-        
-        Si l'élément n'existe pas, le crée dans la hiérarchie appropriée
-        en préservant le namespace du parent.
-        
-        Args:
-            context: Element lxml parent
-            xpath: XPath avec local-name() pour trouver l'élément
-            value: Valeur à insérer
-            tag_name: Nom du tag pour création (sans namespace)
-            
-        Returns:
-            True si succès, False sinon
-        """
-        try:
-            nodes = context.xpath(xpath)
-            
-            if nodes:
-                # Élément existe : mise à jour
-                nodes[0].text = value
-                return True
-            else:
-                # Élément n'existe pas : création
-                # Décomposer le XPath pour créer la hiérarchie
-                # Format attendu : .//*[local-name()='Parent']/*[local-name()='Child']
-                
-                # Extraire les noms de tags depuis le XPath
-                parts = re.findall(r"local-name\(\)='([^']+)'", xpath)
-                
-                if not parts:
-                    return False
-                
-                # Naviguer/créer la hiérarchie
-                current = context
-                for i, part_name in enumerate(parts):
-                    # Chercher si l'élément existe déjà
-                    child_xpath = f".//*[local-name()='{part_name}']"
-                    existing = current.xpath(child_xpath)
-                    
-                    if existing:
-                        current = existing[0]
-                    else:
-                        # Créer l'élément dans le namespace du parent
-                        ns = current.nsmap.get(None)
-                        if ns:
-                            new_tag = f"{{{ns}}}{part_name}"
-                        else:
-                            new_tag = part_name
-                        
-                        new_elem = etree.SubElement(current, new_tag)
-                        current = new_elem
-                
-                # Insérer la valeur dans le dernier élément créé
-                current.text = value
-                return True
-        
-        except Exception as e:
-            print(f"   ⚠️  Erreur upsert {tag_name}: {e}")
-            return False
     
     def get_commande_info(self, order_id: str) -> Optional[dict]:
         """
@@ -560,16 +458,20 @@ def main():
     
     if success:
         print(f"\n✅ Fichier enrichi sauvegardé: {output_path}")
-        print(f"📊 {stats['enrichis']} contrat(s) enrichi(s) sur {stats['total']}")
+        print(f"\n📋 Récapitulatif:")
+        print(f"   • Total contrats: {stats['total']}")
+        print(f"   • PositionCoefficient MAJ: {stats['upd_coeff']}")
+        print(f"   • PositionStatus/Code MAJ: {stats['upd_status']}")
         
-        # Afficher le récapitulatif détaillé
+        # Afficher détails (limité)
         if stats['details']:
-            print(f"\n📋 Récapitulatif par contrat:")
-            print(f"{'OrderId':<12} {'AssignmentId':<20} {'Coefficient':<15} {'StatusCode':<12} {'Note'}")
-            print("-" * 100)
-            for detail in stats['details'][:20]:  # Limiter à 20 pour lisibilité
-                print(f"{detail['OrderId']:<12} {detail['AssignmentId']:<20} "
-                      f"{detail['PositionCoefficient']:<15} {detail['PositionStatusCode']:<12} "
+            print(f"\n📄 Détails par contrat (premiers 20):")
+            print(f"{'OrderId':<12} {'Coefficient':<15} {'StatusCode':<12} {'Note'}")
+            print("-" * 70)
+            for detail in stats['details'][:20]:
+                print(f"{detail['OrderId']:<12} "
+                      f"{detail['PositionCoefficient']:<15} "
+                      f"{detail['PositionStatusCode']:<12} "
                       f"{detail['note']}")
             if len(stats['details']) > 20:
                 print(f"... et {len(stats['details']) - 20} autres contrats")
