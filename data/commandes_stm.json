@@ -7730,12 +7730,93 @@
       "classification_interimaire": "A2",
       "personne_absente": "Solange SERNA",
       "date_extraction": "2025-10-22T21:45:53Z"
+    },
+    {
+      "numero_commande": "RT001419",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FABIENNE DOZOL",
+      "date_extraction": "2025-10-22T22:44:50Z"
+    },
+    {
+      "numero_commande": "RT001431",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NADINE ORDAS",
+      "date_extraction": "2025-10-22T22:44:51Z"
+    },
+    {
+      "numero_commande": "RT001426",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "STEPHANIE FERRARA",
+      "date_extraction": "2025-10-22T22:44:52Z"
+    },
+    {
+      "numero_commande": "RT001422",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ERIC CORDEL",
+      "date_extraction": "2025-10-22T22:44:53Z"
+    },
+    {
+      "numero_commande": "RT000496",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ERIC RODAT",
+      "date_extraction": "2025-10-22T22:45:29Z"
+    },
+    {
+      "numero_commande": "RT000474",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Chantal MAYANS",
+      "date_extraction": "2025-10-22T22:45:30Z"
+    },
+    {
+      "numero_commande": "RT000454",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MIGUEL SAEZ",
+      "date_extraction": "2025-10-22T22:45:31Z"
+    },
+    {
+      "numero_commande": "RT000499",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "EMILIEN MIGNEMI",
+      "date_extraction": "2025-10-22T22:45:32Z"
+    },
+    {
+      "numero_commande": "RT000483",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "RADMILA DUCANOVIC",
+      "date_extraction": "2025-10-22T22:45:33Z"
     }
   ],
-  "lastUpdate": "2025-10-22T21:45:55.234Z",
+  "lastUpdate": "2025-10-22T22:45:35.628Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 859,
+    "totalCommandes": 868,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
