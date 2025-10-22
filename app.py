@@ -76,24 +76,17 @@ def _norm_key(k) -> str:
 def load_commandes(text: str, key_field: str = "numero_commande") -> dict:
     """
     Accepte texte JSON/CSV. Retourne dict { ORDERID -> row } avec clé normalisée.
-    Gère le format spécial avec clé "COMMANDES" contenant une string JSON.
+    Gère le format avec clé "commandes" contenant un tableau.
     """
     stripped = (text or "").lstrip()
     if stripped.startswith("{") or stripped.startswith("["):
         data = json.loads(text)
         
-        # CAS SPÉCIAL : Format avec clé "COMMANDES" contenant les données
-        if isinstance(data, dict) and "COMMANDES" in data:
-            commandes_str = data["COMMANDES"]
-            # Si c'est une string, la parser
-            if isinstance(commandes_str, str):
-                # Remplacer les simple quotes par des double quotes pour JSON valide
-                commandes_str = commandes_str.replace("'", '"')
-                commandes_data = json.loads(commandes_str)
-            else:
-                commandes_data = commandes_str
+        # CAS SPÉCIAL : Format avec clé "commandes" (minuscule) contenant les données
+        if isinstance(data, dict) and "commandes" in data:
+            commandes_data = data["commandes"]
             
-            # Maintenant traiter les commandes
+            # Traiter les commandes
             if isinstance(commandes_data, list):
                 out = {}
                 for row in commandes_data:
@@ -221,8 +214,17 @@ def process_all(xml_bytes: bytes, commandes: dict) -> tuple[bytes, list[dict], d
             xupsert(ctx, XP_COEFF, level)
 
         # 2) Status Code + 3) Description
-        code = (row.get("statut") or "").strip() if row else ""
-        desc = (row.get("statut_description") or "").strip() if row else ""
+        statut_complet = (row.get("statut") or "").strip() if row else ""
+        
+        # Extraire le code et la description du statut (format: "OP - Opérateur")
+        if " - " in statut_complet:
+            code, desc = statut_complet.split(" - ", 1)
+            code = code.strip()
+            desc = desc.strip()
+        else:
+            code = statut_complet
+            desc = (row.get("statut_description") or "").strip() if row else ""
+        
         if code:
             # Code : MAJ tous les noeuds existants; sinon en créer un
             nodes_code = ctx.xpath(XP_STATUS_CODE)
