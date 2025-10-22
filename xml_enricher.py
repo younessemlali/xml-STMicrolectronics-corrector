@@ -2,7 +2,7 @@
 """
 Script d'enrichissement XML PIXID - STMicroelectronics
 Enrichit TOUS les contrats XML avec les données extraites des emails
-Version améliorée : traite plusieurs contrats par fichier
+Version conforme HR-XML/SIDES : détection via ReferenceInformation
 """
 
 import json
@@ -14,6 +14,15 @@ from typing import Dict, Optional, Tuple, List
 
 class XMLEnricher:
     """Classe pour enrichir les fichiers XML avec les données PIXID"""
+    
+    # Namespace HR-XML obligatoire
+    NS = {'hr': 'http://ns.hr-xml.org/2004-08-02'}
+    
+    # Patterns pour numéros de commande
+    ORDER_PATTERNS = [r'(CR\d{6})', r'(CD\d{6})', r'(RT\d{6})']
+    
+    # Regex pour classification (fallback)
+    CLASSIFICATION_REGEX = r'^[A-E]\d{1,2}$'
     
     def __init__(self, json_path: str):
         """
@@ -46,69 +55,133 @@ class XMLEnricher:
     
     def find_all_order_ids_in_xml(self, xml_path: str) -> List[Dict]:
         """
-        Recherche TOUS les numéros de commande dans le fichier XML
+        Recherche TOUS les contrats dans le fichier XML via ReferenceInformation
+        
+        Détecte les contextes de contrat selon le standard HR-XML/SIDES :
+        - Cherche tous les ReferenceInformation
+        - Vérifie présence de OrderId/IdValue ET AssignmentId/IdValue
+        - Retourne le contexte parent complet de chaque contrat
         
         Args:
             xml_path: Chemin vers le fichier XML
             
         Returns:
-            Liste de dictionnaires {order_id, element} pour chaque Order trouvé
+            Liste de dictionnaires avec :
+            - 'order_id': Numéro de commande
+            - 'assignment_id': Numéro d'affectation
+            - 'context': Element XML du contexte parent
         """
         try:
             tree = ET.parse(xml_path)
             root = tree.getroot()
             
-            orders_found = []
+            contracts_found = []
             
-            # Chercher tous les éléments Order (avec ou sans namespace)
-            for order_elem in root.iter():
-                tag_lower = order_elem.tag.lower()
-                if 'order' in tag_lower and tag_lower.endswith('order'):
-                    # Chercher OrderId dans cet Order
-                    order_id = self._extract_order_id_from_element(order_elem)
-                    if order_id:
-                        orders_found.append({
-                            'order_id': order_id,
-                            'element': order_elem
-                        })
+            # Stratégie 1 : Avec namespace HR-XML
+            ref_infos_with_ns = root.findall('.//hr:ReferenceInformation', self.NS)
             
-            print(f"🔍 {len(orders_found)} contrat(s) détecté(s) dans le XML")
-            return orders_found
+            if ref_infos_with_ns:
+                print(f"🔍 Détection avec namespace HR-XML...")
+                for ref_info in ref_infos_with_ns:
+                    contract = self._extract_contract_from_ref_info(ref_info, use_namespace=True)
+                    if contract:
+                        contracts_found.append(contract)
+            
+            # Stratégie 2 : Sans namespace (fallback)
+            if not contracts_found:
+                print(f"🔍 Détection sans namespace (fallback)...")
+                for ref_info in root.iter():
+                    tag_lower = ref_info.tag.lower()
+                    if 'referenceinformation' in tag_lower:
+                        contract = self._extract_contract_from_ref_info(ref_info, use_namespace=False)
+                        if contract:
+                            contracts_found.append(contract)
+            
+            print(f"✅ {len(contracts_found)} contrat(s) détecté(s) dans le XML")
+            
+            # Afficher les OrderId détectés
+            if contracts_found:
+                order_ids = [c['order_id'] for c in contracts_found]
+                print(f"   OrderIds: {', '.join(order_ids)}")
+            
+            return contracts_found
             
         except Exception as e:
             print(f"❌ Erreur lors de la lecture du XML: {e}")
+            import traceback
+            traceback.print_exc()
             return []
     
-    def _extract_order_id_from_element(self, order_elem: ET.Element) -> Optional[str]:
+    def _extract_contract_from_ref_info(self, ref_info: ET.Element, use_namespace: bool) -> Optional[Dict]:
         """
-        Extrait l'OrderId d'un élément Order
+        Extrait les informations d'un contrat depuis un ReferenceInformation
         
         Args:
-            order_elem: Element XML représentant un Order
+            ref_info: Element ReferenceInformation
+            use_namespace: Utiliser le namespace HR-XML ou non
             
         Returns:
-            OrderId trouvé ou None
+            Dictionnaire avec order_id, assignment_id, context ou None
         """
-        # Patterns de recherche pour OrderId
-        patterns = [r'(CR\d{6})', r'(CD\d{6})', r'(RT\d{6})']
+        try:
+            if use_namespace:
+                # Avec namespace
+                order_id_elem = ref_info.find('hr:OrderId/hr:IdValue', self.NS)
+                assign_id_elem = ref_info.find('hr:AssignmentId/hr:IdValue', self.NS)
+            else:
+                # Sans namespace (chercher par nom de tag)
+                order_id_elem = None
+                assign_id_elem = None
+                
+                for child in ref_info.iter():
+                    tag_lower = child.tag.lower()
+                    if 'idvalue' in tag_lower:
+                        # Vérifier le parent
+                        parent_tag = child.getparent().tag.lower() if hasattr(child, 'getparent') else ''
+                        if 'orderid' in parent_tag:
+                            order_id_elem = child
+                        elif 'assignmentid' in parent_tag:
+                            assign_id_elem = child
+            
+            # Vérifier que les deux éléments existent
+            if order_id_elem is not None and assign_id_elem is not None:
+                order_id_text = order_id_elem.text
+                assign_id_text = assign_id_elem.text
+                
+                if order_id_text and assign_id_text:
+                    # Extraire le numéro de commande avec regex
+                    order_id = self._extract_order_id_from_text(order_id_text)
+                    
+                    if order_id:
+                        # Remonter au contexte parent du contrat
+                        context = ref_info.getparent() if hasattr(ref_info, 'getparent') else ref_info
+                        
+                        return {
+                            'order_id': order_id,
+                            'assignment_id': assign_id_text.strip(),
+                            'context': context
+                        }
         
-        # Stratégie 1: Chercher dans OrderId/IdValue
-        for child in order_elem.iter():
-            tag_lower = child.tag.lower()
-            if 'orderid' in tag_lower or 'idvalue' in tag_lower:
-                if child.text:
-                    for pattern in patterns:
-                        match = re.search(pattern, child.text)
-                        if match:
-                            return match.group(1)
+        except Exception as e:
+            # Silent fail pour continuer l'extraction des autres contrats
+            pass
         
-        # Stratégie 2: Chercher dans tout le texte de l'Order
-        order_text = ET.tostring(order_elem, encoding='unicode')
-        for pattern in patterns:
-            matches = re.findall(pattern, order_text)
-            if matches:
-                return matches[0]
+        return None
+    
+    def _extract_order_id_from_text(self, text: str) -> Optional[str]:
+        """
+        Extrait le numéro de commande d'un texte avec les patterns définis
         
+        Args:
+            text: Texte contenant potentiellement un numéro de commande
+            
+        Returns:
+            Numéro de commande ou None
+        """
+        for pattern in self.ORDER_PATTERNS:
+            match = re.search(pattern, text)
+            if match:
+                return match.group(1)
         return None
     
     def enrich_xml(self, xml_path: str, output_path: str, progress_callback=None) -> Tuple[bool, str, Dict]:
@@ -133,140 +206,262 @@ class XMLEnricher:
                     if match:
                         encoding = match.group(1)
             
-            # 1. Trouver tous les Orders
-            orders = self.find_all_order_ids_in_xml(xml_path)
+            # 1. Trouver tous les contrats via ReferenceInformation
+            contracts = self.find_all_order_ids_in_xml(xml_path)
             
-            if not orders:
-                return False, "Aucun numéro de commande trouvé dans le XML", {
+            if not contracts:
+                return False, "Aucun contrat détecté dans le XML", {
                     'total': 0,
                     'enrichis': 0,
                     'non_trouves': 0,
                     'details': []
                 }
             
-            # 2. Parser le XML
+            # 2. Parser le XML pour modification
             tree = ET.parse(xml_path)
             root = tree.getroot()
             
+            # Enregistrer le namespace pour sauvegarde propre
+            ET.register_namespace('hr', 'http://ns.hr-xml.org/2004-08-02')
+            
             # Statistiques
             stats = {
-                'total': len(orders),
+                'total': len(contracts),
                 'enrichis': 0,
                 'non_trouves': 0,
+                'fallback_used': 0,
                 'details': []
             }
             
-            # 3. Enrichir chaque Order
-            for idx, order_info in enumerate(orders):
-                order_id = order_info['order_id']
-                order_elem = order_info['element']
+            # 3. Enrichir chaque contrat
+            for idx, contract_info in enumerate(contracts):
+                order_id = contract_info['order_id']
+                assignment_id = contract_info['assignment_id']
+                context = contract_info['context']
                 
                 # Callback progression
                 if progress_callback:
-                    progress_callback(idx + 1, len(orders))
+                    progress_callback(idx + 1, len(contracts))
                 
                 # Récupérer les données de la commande
                 commande = self.commandes_data.get(order_id)
                 
+                detail = {
+                    'OrderId': order_id,
+                    'AssignmentId': assignment_id,
+                    'PositionCoefficient': 'N/A',
+                    'PositionStatusCode': 'N/A',
+                    'matched': False,
+                    'note': ''
+                }
+                
                 if commande:
-                    # Enrichir cet Order
-                    modifications = self._enrich_order_element(order_elem, commande)
+                    # Enrichir ce contrat
+                    modifications = self._enrich_contract(context, commande, order_id)
                     
                     stats['enrichis'] += 1
-                    stats['details'].append({
-                        'order_id': order_id,
-                        'statut': 'enrichi',
-                        'code_statut': commande.get('statut', 'N/A'),
-                        'classification': commande.get('classification_interimaire', 'N/A'),
-                        'modifications': len(modifications)
-                    })
+                    detail['matched'] = True
+                    detail['PositionCoefficient'] = modifications.get('classification', 'N/A')
+                    detail['PositionStatusCode'] = modifications.get('statut_code', 'N/A')
+                    detail['note'] = modifications.get('note', '')
+                    
+                    if modifications.get('fallback_used', False):
+                        stats['fallback_used'] += 1
                 else:
+                    # Pas de correspondance : appliquer fallback seulement
+                    fallback_result = self._apply_classification_fallback(context, order_id)
+                    
                     stats['non_trouves'] += 1
-                    stats['details'].append({
-                        'order_id': order_id,
-                        'statut': 'non_trouve',
-                        'code_statut': 'N/A',
-                        'classification': 'N/A',
-                        'modifications': 0
-                    })
+                    detail['matched'] = False
+                    
+                    if fallback_result:
+                        detail['PositionCoefficient'] = fallback_result['classification']
+                        detail['note'] = fallback_result['note']
+                        stats['fallback_used'] += 1
+                    else:
+                        detail['note'] = 'Aucune donnée disponible'
+                
+                stats['details'].append(detail)
             
-            # 4. Sauvegarder le XML enrichi SANS namespaces
-            if stats['enrichis'] > 0:
-                # Convertir en string et supprimer tous les ns0:
-                xml_string = ET.tostring(root, encoding='unicode')
-                xml_string = xml_string.replace('ns0:', '')
-                xml_string = xml_string.replace(':ns0', '')
-                
-                # Ajouter la déclaration XML
-                xml_declaration = f'<?xml version="1.0" encoding="{encoding}"?>\n'
-                final_xml = xml_declaration + xml_string
-                
-                # Écrire le fichier
-                with open(output_path, 'w', encoding=encoding) as f:
-                    f.write(final_xml)
+            # 4. Sauvegarder le XML enrichi
+            if stats['enrichis'] > 0 or stats['fallback_used'] > 0:
+                # Sauvegarde avec préservation des namespaces
+                tree.write(output_path, encoding=encoding, xml_declaration=True, method='xml')
                 
                 message = f"✅ XML enrichi avec succès!\n\n"
                 message += f"📊 Statistiques:\n"
                 message += f"  • Total contrats: {stats['total']}\n"
-                message += f"  • Enrichis: {stats['enrichis']}\n"
-                message += f"  • Non trouvés: {stats['non_trouves']}"
+                message += f"  • Enrichis (avec données): {stats['enrichis']}\n"
+                message += f"  • Non trouvés: {stats['non_trouves']}\n"
+                message += f"  • Fallback classification utilisé: {stats['fallback_used']}"
                 
                 print(f"\n{message}")
                 return True, message, stats
             else:
-                return False, "Aucune commande trouvée dans la base de données", stats
+                return False, "Aucune modification effectuée", stats
                 
         except ET.ParseError as e:
             return False, f"Erreur de parsing XML: {e}", {'total': 0, 'enrichis': 0, 'non_trouves': 0, 'details': []}
         except Exception as e:
+            import traceback
+            traceback.print_exc()
             return False, f"Erreur inattendue: {e}", {'total': 0, 'enrichis': 0, 'non_trouves': 0, 'details': []}
     
-    def _enrich_order_element(self, order_elem: ET.Element, commande: dict) -> List[str]:
+    def _enrich_contract(self, context: ET.Element, commande: dict, order_id: str) -> Dict:
         """
-        Enrichit un élément Order spécifique avec les données
+        Enrichit un contrat avec les données de la commande
+        
+        Modifie UNIQUEMENT les 2 balises autorisées :
+        1. PositionCharacteristics/PositionCoefficient (classification)
+        2. PositionCharacteristics/PositionStatus/Code (statut)
         
         Args:
-            order_elem: Element XML de l'Order
+            context: Element XML du contexte du contrat
+            commande: Données de la commande depuis JSON
+            order_id: Numéro de commande (pour debug)
+            
+        Returns:
+            Dictionnaire avec les modifications effectuées
+        """
+        result = {
+            'classification': 'N/A',
+            'statut_code': 'N/A',
+            'note': '',
+            'fallback_used': False
+        }
+        
+        # 1. CLASSIFICATION → PositionCoefficient
+        classification, classif_note, fallback_used = self._get_classification(context, commande)
+        
+        if classification:
+            # Chercher PositionCoefficient avec namespace
+            pos_coeff = context.find('.//hr:PositionCharacteristics/hr:PositionCoefficient', self.NS)
+            
+            if pos_coeff is None:
+                # Fallback sans namespace
+                for elem in context.iter():
+                    if 'positioncoefficient' in elem.tag.lower():
+                        pos_coeff = elem
+                        break
+            
+            if pos_coeff is not None:
+                old_value = pos_coeff.text or ""
+                pos_coeff.text = classification
+                result['classification'] = classification
+                result['fallback_used'] = fallback_used
+                result['note'] = classif_note
+                print(f"   ✓ {order_id} - PositionCoefficient: '{old_value}' → '{classification}' ({classif_note})")
+        
+        # 2. STATUT → PositionStatus/Code
+        statut = commande.get('statut')
+        if statut:
+            # Extraire le code (avant le tiret)
+            code_statut = statut.split('-')[0].strip() if '-' in statut else statut.strip()
+            
+            # Chercher PositionStatus/Code avec namespace
+            pos_status_code = context.find('.//hr:PositionCharacteristics/hr:PositionStatus/hr:Code', self.NS)
+            
+            if pos_status_code is None:
+                # Fallback sans namespace
+                for elem in context.iter():
+                    tag_lower = elem.tag.lower()
+                    if 'positionstatus' in tag_lower:
+                        for child in elem:
+                            if child.tag.lower().endswith('code'):
+                                pos_status_code = child
+                                break
+            
+            if pos_status_code is not None:
+                old_value = pos_status_code.text or ""
+                pos_status_code.text = code_statut
+                result['statut_code'] = code_statut
+                print(f"   ✓ {order_id} - PositionStatus/Code: '{old_value}' → '{code_statut}'")
+        
+        return result
+    
+    def _get_classification(self, context: ET.Element, commande: dict) -> Tuple[Optional[str], str, bool]:
+        """
+        Détermine la classification avec logique de fallback
+        
+        Règles :
+        1. Priorité : classification_interimaire du JSON
+        2. Fallback : Copier PositionLevel si regex [A-E]\d{1,2} match
+        
+        Args:
+            context: Contexte XML du contrat
             commande: Données de la commande
             
         Returns:
-            Liste des modifications effectuées
+            (classification, note, fallback_used)
         """
-        modifications = []
-        statut = commande.get('statut')
-        classification = commande.get('classification_interimaire')
+        # Priorité 1 : classification_interimaire du JSON
+        classif = commande.get('classification_interimaire')
+        if classif and classif.strip():
+            return classif.strip(), "depuis JSON", False
         
-        # 1. Enrichir le statut (Code dans PositionStatus)
-        if statut:
-            code_statut = statut.split('-')[0].strip() if '-' in statut else statut.strip()
+        # Priorité 2 : Fallback PositionLevel
+        return self._apply_classification_fallback_internal(context)
+    
+    def _apply_classification_fallback(self, context: ET.Element, order_id: str) -> Optional[Dict]:
+        """
+        Applique le fallback classification pour un contrat sans correspondance JSON
+        
+        Args:
+            context: Contexte XML du contrat
+            order_id: Numéro de commande (pour debug)
             
-            for position_status in order_elem.iter():
-                tag_lower = position_status.tag.lower()
-                if 'positionstatus' in tag_lower:
-                    # Chercher Code
-                    for child in position_status:
-                        child_tag_lower = child.tag.lower()
-                        if 'code' in child_tag_lower and child_tag_lower.endswith('code'):
-                            old_value = child.text or ""
-                            child.text = code_statut
-                            modifications.append(f"Code: '{old_value}' → '{code_statut}'")
-                        elif 'description' in child_tag_lower:
-                            child.text = statut
-                            modifications.append(f"Description: → '{statut}'")
+        Returns:
+            Dictionnaire avec classification et note ou None
+        """
+        classification, note, fallback_used = self._apply_classification_fallback_internal(context)
         
-        # 2. Enrichir la classification (PositionCoefficient)
-        if classification:
-            for position_chars in order_elem.iter():
-                tag_lower = position_chars.tag.lower()
-                if 'positioncharacteristics' in tag_lower:
-                    for child in position_chars:
-                        child_tag_lower = child.tag.lower()
-                        if 'positioncoefficient' in child_tag_lower:
-                            old_value = child.text or ""
-                            child.text = classification
-                            modifications.append(f"PositionCoefficient: '{old_value}' → '{classification}'")
+        if classification and fallback_used:
+            # Appliquer la modification
+            pos_coeff = context.find('.//hr:PositionCharacteristics/hr:PositionCoefficient', self.NS)
+            
+            if pos_coeff is None:
+                for elem in context.iter():
+                    if 'positioncoefficient' in elem.tag.lower():
+                        pos_coeff = elem
+                        break
+            
+            if pos_coeff is not None:
+                old_value = pos_coeff.text or ""
+                if not old_value.strip():  # Seulement si vide
+                    pos_coeff.text = classification
+                    print(f"   ✓ {order_id} - PositionCoefficient: '{old_value}' → '{classification}' ({note})")
+                    return {'classification': classification, 'note': note}
         
-        return modifications
+        return None
+    
+    def _apply_classification_fallback_internal(self, context: ET.Element) -> Tuple[Optional[str], str, bool]:
+        """
+        Logique interne du fallback classification
+        
+        Args:
+            context: Contexte XML du contrat
+            
+        Returns:
+            (classification, note, fallback_used)
+        """
+        # Chercher PositionLevel avec namespace
+        position_level = context.find('.//hr:PositionLevel', self.NS)
+        
+        if position_level is None:
+            # Fallback sans namespace
+            for elem in context.iter():
+                if 'positionlevel' in elem.tag.lower():
+                    position_level = elem
+                    break
+        
+        if position_level is not None and position_level.text:
+            level_text = position_level.text.strip()
+            
+            # Vérifier si correspond à la regex [A-E]\d{1,2}
+            if re.match(self.CLASSIFICATION_REGEX, level_text):
+                return level_text, "copié depuis PositionLevel", True
+        
+        return None, "", False
     
     def get_commande_info(self, order_id: str) -> Optional[dict]:
         """
@@ -328,6 +523,16 @@ def main():
     if success:
         print(f"\n✅ Fichier enrichi sauvegardé: {output_path}")
         print(f"📊 {stats['enrichis']} contrat(s) enrichi(s) sur {stats['total']}")
+        
+        # Afficher le récapitulatif détaillé
+        if stats['details']:
+            print(f"\n📋 Récapitulatif par contrat:")
+            print(f"{'OrderId':<12} {'AssignmentId':<15} {'Coefficient':<15} {'StatusCode':<12} {'Note'}")
+            print("-" * 90)
+            for detail in stats['details']:
+                print(f"{detail['OrderId']:<12} {detail['AssignmentId']:<15} "
+                      f"{detail['PositionCoefficient']:<15} {detail['PositionStatusCode']:<12} "
+                      f"{detail['note']}")
     else:
         print(f"\n❌ Échec: {message}")
         sys.exit(1)
