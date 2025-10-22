@@ -2,5 +2,5 @@ streamlit
 pandas
 plotly
 requests
-lxml==5.2.2
+lxml
 
