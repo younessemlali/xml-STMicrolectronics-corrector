@@ -5948,12 +5948,147 @@
       "classification_interimaire": "A2",
       "personne_absente": "CATHERINE BOSSU Qualification personne remplac?e: Agent qualifie - Production Justification : Mme BOSSU CATHERINE, EN MALADIE, OP?RATRICE DE PRODUCTION, NON CADRE, REMPLACEMENT PARTIEL ET PAR GLISSEME...",
       "date_extraction": "2025-10-22T04:45:34Z"
+    },
+    {
+      "numero_commande": "RT000674",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SAMUEL RABOUIN Qualification personne remplac?e: Agent qualifie - Production Justification : Remplacement partiel et par glissement de Samuel RABOUIN, en mission, sur un poste d'op?rateur de productio...",
+      "date_extraction": "2025-10-22T05:45:19Z"
+    },
+    {
+      "numero_commande": "RT000724",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "VAC - Int?rims vacances",
+      "classification_interimaire": "A2",
+      "personne_absente": "Nathan VIARD Qualification personne remplac?e: Conducteur - Maintenance Justification : Mme Gaelle GAZELLE remplace partiellement et par glissement, Nathan VIARD, operateur de production en cong? sans...",
+      "date_extraction": "2025-10-22T05:45:21Z"
+    },
+    {
+      "numero_commande": "RT000707",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "RADMILA DUCANOVIC Qualification personne remplac?e: Agent qualifie - Production Justification : Mme DUCANOVIC RADMILA, EN MALADIE, OP?RATRICE DE PRODUCTION, NON CADRE, REMPLACEMENT PARTIEL ET PAR GLIS...",
+      "date_extraction": "2025-10-22T05:45:22Z"
+    },
+    {
+      "numero_commande": "RT000716",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAETITIA COBALTO Qualification personne remplac?e: Agent qualifie - Production Justification : Mme Camille SOREL remplace partiellement et par glissement, Laetitia COBALTO, op?rateur de production, en...",
+      "date_extraction": "2025-10-22T05:45:23Z"
+    },
+    {
+      "numero_commande": "RT000718",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ADRIEN CAVAGLIA Qualification personne remplac?e: Agent qualifie - Production Justification : M. Eddy BRUN remplace partiellement et par glissement, Adrien CAVAGLIA, op?rateur de production, en maladi...",
+      "date_extraction": "2025-10-22T05:45:24Z"
+    },
+    {
+      "numero_commande": "RT000722",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FABIENNE HUGUES Qualification personne remplac?e: Agent qualifie - Production Justification : M. Remi VAN WYNENDAELE VIVIER remplace partiellement et par glissement, Fabienne HUGUES, op?rateur de prod...",
+      "date_extraction": "2025-10-22T05:45:25Z"
+    },
+    {
+      "numero_commande": "RT000708",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JEAN GUILLAUME MILLET Qualification personne remplac?e: Agent qualifie - Production Justification : M MILLET Jean Guillaume, EN INVALIDITE, OP?RATEUR DE PRODUCTION, NON CADRE, REMPLACEMENT PARTIEL ET ...",
+      "date_extraction": "2025-10-22T05:45:27Z"
+    },
+    {
+      "numero_commande": "RT000677",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CHRISTOPHE WOJCIK Qualification personne remplac?e: Agent qualifie - Production Justification : Remplacement partiel et par glissement de Christophe WOJCIK, en absence maladie, sur un poste d'op?rateu...",
+      "date_extraction": "2025-10-22T05:45:28Z"
+    },
+    {
+      "numero_commande": "RT000704",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ABDEL-HAKIM KOURTICHE Qualification personne remplac?e: Agent qualifie - Production Justification : M. Amine AIDOUD remplace partiellement et par glissement, Abdel-Hakim KOURTICHE, op?rateur de produc...",
+      "date_extraction": "2025-10-22T05:45:29Z"
+    },
+    {
+      "numero_commande": "RT000693",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "EMPLOI ETE EMPLOI ETE EMPLOI ETE EMPLOI ETE Qualification personne remplac?e: Agent qualifie - Production Justification : Remplacement partiel et par glissement de Catherine MOURE, en absence maladie,...",
+      "date_extraction": "2025-10-22T05:45:31Z"
+    },
+    {
+      "numero_commande": "RT000699",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Claudine ARMANI",
+      "date_extraction": "2025-10-22T05:45:31Z"
+    },
+    {
+      "numero_commande": "RT000686",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "KARINE ROURE Qualification personne remplac?e: Agent qualifie - Production Justification : Mme ROURE KARINE, EN MALADIE, OP?RATRICE DE PRODUCTION, NON CADRE, REMPLACEMENT PARTIEL ET PAR GLISSEMENT Fac...",
+      "date_extraction": "2025-10-22T05:45:32Z"
+    },
+    {
+      "numero_commande": "RT000679",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "TOM GEORGE Qualification personne remplac?e: Agent qualifie - Production Justification : Remplacement partiel et par glissement de Miguel SAEZ, en absence maladie, sur un poste d'op?rateur de producti...",
+      "date_extraction": "2025-10-22T05:45:34Z"
+    },
+    {
+      "numero_commande": "RT000684",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CHANTAL MAYANS Qualification personne remplac?e: Agent qualifie - Production Justification : Remplacement partiel et par glissement de Chantal MAYANS, en absence maladie, sur un poste d'op?ratrice de ...",
+      "date_extraction": "2025-10-22T05:45:34Z"
+    },
+    {
+      "numero_commande": "RT000690",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Sabine MAZZIOTTA Qualification personne remplac?e: Conducteur - Production Justification : Remplacement partiel et par glissement de Sabine MAZZIOTTA, en cong?s, sur un poste d'op?rateur de production...",
+      "date_extraction": "2025-10-22T05:45:35Z"
     }
   ],
-  "lastUpdate": "2025-10-22T04:45:35.610Z",
+  "lastUpdate": "2025-10-22T05:45:37.271Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 661,
+    "totalCommandes": 676,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
