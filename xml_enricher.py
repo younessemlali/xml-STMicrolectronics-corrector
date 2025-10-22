@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Script d'enrichissement XML PIXID - STMicroelectronics
-Version CORRIGÉE : parse une seule fois et garde le même tree
+Version ROBUSTE : parse une fois, garde le tree, le réutilise
 """
 
 import json
@@ -31,6 +31,12 @@ class XMLEnricher:
     
     def __init__(self, json_path: str):
         self.commandes_data = self._load_commandes(json_path)
+        
+        # GARDE LE TREE EN MÉMOIRE
+        self._current_tree = None
+        self._current_xml_path = None
+        self._current_encoding = None
+        
         print(f"✅ {len(self.commandes_data)} commandes chargées")
     
     def _load_commandes(self, json_path: str) -> Dict[str, dict]:
@@ -47,12 +53,26 @@ class XMLEnricher:
         parser = etree.XMLParser(remove_blank_text=True, recover=True, huge_tree=True)
         return etree.parse(BytesIO(xml_bytes), parser)
     
+    def _ensure_tree_loaded(self, xml_path: str):
+        """
+        CRITIQUE : Charge le tree UNE SEULE FOIS et le garde en mémoire
+        """
+        if self._current_tree is None or self._current_xml_path != xml_path:
+            print(f"📄 Chargement du XML...")
+            with open(xml_path, 'rb') as f:
+                xml_bytes = f.read()
+            
+            self._current_tree = self._parse_tree(xml_bytes)
+            self._current_xml_path = xml_path
+            self._current_encoding = self._current_tree.docinfo.encoding or 'iso-8859-1'
+            print(f"   Encodage: {self._current_encoding}")
+    
     def _xget(self, ctx: etree.Element, xpath: str) -> str:
         nodes = ctx.xpath(xpath)
         return (nodes[0].text or '').strip() if nodes and nodes[0].text else ''
     
     def _xupsert(self, ctx: etree.Element, ln_path: str, value: str) -> bool:
-        """Upsert avec logs"""
+        """Upsert : crée ou modifie"""
         try:
             parts = [seg.split("'")[1] for seg in ln_path.split("local-name()='")[1:]]
             
@@ -74,7 +94,7 @@ class XMLEnricher:
             return True
             
         except Exception as e:
-            print(f"      ❌ Erreur xupsert: {e}")
+            print(f"   ❌ Erreur xupsert: {e}")
             return False
     
     def _extract_order_id_from_text(self, text: str) -> Optional[str]:
@@ -85,39 +105,68 @@ class XMLEnricher:
         return None
     
     def find_all_order_ids_in_xml(self, xml_path: str) -> List[Dict]:
-        """NE PLUS UTILISER - Obsolète"""
-        # Cette méthode est gardée pour compatibilité mais ne doit plus être utilisée
-        # Utiliser enrich_xml() directement
-        return []
+        """
+        Trouve tous les contrats et GARDE le tree en mémoire
+        """
+        try:
+            # CHARGE LE TREE (ou réutilise si déjà chargé)
+            self._ensure_tree_loaded(xml_path)
+            
+            # UTILISE LE TREE EN MÉMOIRE
+            contexts = self._current_tree.xpath(self.XP_CTX)
+            
+            contracts_found = []
+            
+            for context in contexts:
+                order_id_text = self._xget(context, self.XP_ORDER)
+                order_id = self._extract_order_id_from_text(order_id_text)
+                
+                if order_id:
+                    assign_xpath = ".//*[local-name()='ReferenceInformation']/*[local-name()='AssignmentId']/*[local-name()='IdValue']"
+                    assign_id = self._xget(context, assign_xpath) or "N/A"
+                    
+                    contracts_found.append({
+                        'order_id': order_id,
+                        'assignment_id': assign_id,
+                        'context': context  # GARDE LA RÉFÉRENCE au context dans LE TREE
+                    })
+            
+            print(f"✅ {len(contracts_found)} contrat(s) détecté(s)")
+            
+            if contracts_found:
+                sample_size = min(10, len(contracts_found))
+                sample_ids = [c['order_id'] for c in contracts_found[:sample_size]]
+                print(f"   Exemple: {', '.join(sample_ids)}")
+                if len(contracts_found) > sample_size:
+                    print(f"   ... +{len(contracts_found) - sample_size} autres")
+            
+            return contracts_found
+            
+        except Exception as e:
+            print(f"❌ Erreur: {e}")
+            import traceback
+            traceback.print_exc()
+            return []
     
     def enrich_xml(self, xml_path: str, output_path: str, progress_callback=None) -> Tuple[bool, str, Dict]:
         """
-        PARSE UNE SEULE FOIS et enrichit directement
+        Enrichit en RÉUTILISANT le tree déjà chargé
         """
         try:
-            # 1. LIRE LE FICHIER UNE SEULE FOIS
-            print(f"📄 Lecture du fichier XML...")
-            with open(xml_path, 'rb') as f:
-                xml_bytes = f.read()
+            # RÉUTILISE LE TREE déjà chargé par find_all_order_ids_in_xml()
+            # OU le charge si pas encore fait
+            self._ensure_tree_loaded(xml_path)
             
-            # 2. PARSER UNE SEULE FOIS
-            print(f"🔍 Parsing XML...")
-            tree = self._parse_tree(xml_bytes)
-            encoding = tree.docinfo.encoding or 'iso-8859-1'
-            print(f"   Encodage: {encoding}")
-            
-            # 3. TROUVER TOUS LES CONTEXTES (sur CE tree)
-            print(f"🔍 Recherche des contrats...")
-            contexts = tree.xpath(self.XP_CTX)
+            # UTILISE LE TREE EN MÉMOIRE
+            contexts = self._current_tree.xpath(self.XP_CTX)
             
             if not contexts:
                 return False, "Aucun contrat détecté", {
                     'total': 0, 'enrichis': 0, 'upd_coeff': 0, 'upd_status': 0, 'details': []
                 }
             
-            print(f"✅ {len(contexts)} contrat(s) détecté(s)")
+            print(f"\n🔧 Enrichissement de {len(contexts)} contrats...")
             
-            # 4. COMPTEURS
             upd_coeff = 0
             upd_status = 0
             order_ids_modified = []
@@ -131,21 +180,17 @@ class XMLEnricher:
                 'details': []
             }
             
-            # 5. ENRICHIR CHAQUE CONTEXTE (sur CE tree)
-            print(f"\n🔧 Enrichissement en cours...")
-            
+            # ENRICHIR CHAQUE CONTEXTE (dans LE MÊME TREE)
             for idx, ctx in enumerate(contexts):
                 if progress_callback:
                     progress_callback(idx + 1, len(contexts))
                 
-                # Extraire OrderId
                 order_id_text = self._xget(ctx, self.XP_ORDER)
                 order_id = self._extract_order_id_from_text(order_id_text)
                 
                 if not order_id:
                     continue
                 
-                # Récupérer commande
                 cmd = self.commandes_data.get(order_id)
                 
                 # Logs détaillés pour les 3 premiers
@@ -153,7 +198,7 @@ class XMLEnricher:
                 
                 if verbose:
                     print(f"\n🔍 {order_id}")
-                    print(f"   Commande: {'✅' if cmd else '❌'}")
+                    print(f"   Commande JSON: {'✅ OUI' if cmd else '❌ NON'}")
                     if cmd:
                         print(f"   classification: '{cmd.get('classification_interimaire')}'")
                         print(f"   statut: '{cmd.get('statut')}'")
@@ -168,12 +213,12 @@ class XMLEnricher:
                 
                 modified = False
                 
-                # A) CLASSIFICATION → PositionCoefficient
+                # A) CLASSIFICATION
                 if cmd and (cmd.get('classification_interimaire') or '').strip():
                     classif_value = cmd['classification_interimaire'].strip()
                     
                     if verbose:
-                        print(f"   🔧 Écriture PositionCoefficient: '{classif_value}'")
+                        print(f"   🔧 PositionCoefficient ← '{classif_value}'")
                     
                     success = self._xupsert(ctx, self.XP_COEFF, classif_value)
                     
@@ -185,18 +230,17 @@ class XMLEnricher:
                         
                         if verbose:
                             print(f"      ✅ ÉCRIT")
-                        else:
-                            if idx < 10:  # 10 premiers
-                                print(f"   ✓ {order_id} - PositionCoefficient → '{classif_value}'")
+                        elif idx < 10:
+                            print(f"   ✓ {order_id} - Coeff → '{classif_value}'")
                 
                 else:
-                    # Fallback PositionLevel
+                    # Fallback
                     coeff = self._xget(ctx, self.XP_COEFF)
                     level = self._xget(ctx, self.XP_LEVEL)
                     
                     if not cmd and not coeff and self.CLASS_RE.match(level or ''):
                         if verbose:
-                            print(f"   🔧 Fallback PositionLevel: '{level}'")
+                            print(f"   🔧 Fallback Level ← '{level}'")
                         
                         success = self._xupsert(ctx, self.XP_COEFF, level)
                         
@@ -209,13 +253,13 @@ class XMLEnricher:
                             if verbose:
                                 print(f"      ✅ ÉCRIT")
                 
-                # B) STATUT → PositionStatus/Code
+                # B) STATUT
                 if cmd and (cmd.get('statut') or '').strip():
                     statut_value = cmd['statut'].strip()
                     code_statut = statut_value.split('-')[0].strip() if '-' in statut_value else statut_value
                     
                     if verbose:
-                        print(f"   🔧 Écriture PositionStatus/Code: '{code_statut}'")
+                        print(f"   🔧 PositionStatus/Code ← '{code_statut}'")
                     
                     success = self._xupsert(ctx, self.XP_STATUS, code_statut)
                     
@@ -226,11 +270,9 @@ class XMLEnricher:
                         
                         if verbose:
                             print(f"      ✅ ÉCRIT")
-                        else:
-                            if idx < 10:
-                                print(f"   ✓ {order_id} - PositionStatus/Code → '{code_statut}'")
+                        elif idx < 10:
+                            print(f"   ✓ {order_id} - Status → '{code_statut}'")
                 
-                # Stats
                 if cmd:
                     stats['enrichis'] += 1
                     detail['matched'] = True
@@ -245,22 +287,21 @@ class XMLEnricher:
             stats['upd_coeff'] = upd_coeff
             stats['upd_status'] = upd_status
             
-            # 6. SAUVEGARDER LE TREE MODIFIÉ
-            print(f"\n💾 Sauvegarde XML...")
+            # SAUVEGARDER LE TREE MODIFIÉ
+            print(f"\n💾 Sauvegarde...")
             
-            tree.write(
+            self._current_tree.write(
                 output_path,
-                encoding=encoding,
+                encoding=self._current_encoding,
                 pretty_print=True,
                 xml_declaration=True
             )
             
             print(f"✅ Sauvegardé: {output_path}")
             
-            # 7. RÉSULTAT
             print(f"\n📊 RÉSULTAT:")
-            print(f"   • Total contrats: {stats['total']}")
-            print(f"   • Avec données JSON: {stats['enrichis']}")
+            print(f"   • Total: {stats['total']}")
+            print(f"   • Avec JSON: {stats['enrichis']}")
             print(f"   • PositionCoefficient MAJ: {upd_coeff}")
             print(f"   • PositionStatus/Code MAJ: {upd_status}")
             
@@ -268,11 +309,10 @@ class XMLEnricher:
                 sample = order_ids_modified[:10]
                 print(f"   • Modifiés: {', '.join(sample)}")
                 if len(order_ids_modified) > 10:
-                    print(f"     +{len(order_ids_modified) - 10} autres")
+                    print(f"     +{len(order_ids_modified) - 10}")
             
             if upd_coeff == 0 and upd_status == 0:
-                print(f"\n⚠️  AUCUNE MODIFICATION ÉCRITE!")
-                print(f"   Regardez les logs détaillés ci-dessus")
+                print(f"\n⚠️  AUCUNE MODIFICATION!")
             
             message = f"✅ XML enrichi!\n\n"
             message += f"📊 Statistiques:\n"
@@ -320,11 +360,17 @@ def main():
     output_path = sys.argv[3] if len(sys.argv) > 3 else "output_enrichi.xml"
     
     enricher = XMLEnricher(json_path)
+    
+    # Appeler find_all d'abord (comme dans Streamlit)
+    contracts = enricher.find_all_order_ids_in_xml(xml_path)
+    print(f"\n📋 {len(contracts)} contrats détectés")
+    
+    # Puis enrichir (réutilise le même tree)
     success, message, stats = enricher.enrich_xml(xml_path, output_path)
     
     if success:
         print(f"\n✅ Fichier: {output_path}")
-        print(f"📊 Modif: {stats['upd_coeff']} coeff | {stats['upd_status']} statut")
+        print(f"📊 {stats['upd_coeff']} coeff | {stats['upd_status']} statut")
     else:
         print(f"\n❌ {message}")
         sys.exit(1)
