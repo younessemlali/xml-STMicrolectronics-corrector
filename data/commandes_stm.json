@@ -7217,12 +7217,102 @@
       "classification_interimaire": "A2",
       "personne_absente": "EMPLOI ETE EMPLOI ETE EMPLOI ETE EMPLOI ETE",
       "date_extraction": "2025-10-22T15:45:39Z"
+    },
+    {
+      "numero_commande": "RT000565",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FABIEN JOVENE",
+      "date_extraction": "2025-10-22T16:45:38Z"
+    },
+    {
+      "numero_commande": "RT000549",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CECILIO LOPEZ",
+      "date_extraction": "2025-10-22T16:45:40Z"
+    },
+    {
+      "numero_commande": "RT000552",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CHRISTOPHE LAMBERT",
+      "date_extraction": "2025-10-22T16:45:41Z"
+    },
+    {
+      "numero_commande": "RT000559",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FREDERIC HARET",
+      "date_extraction": "2025-10-22T16:45:42Z"
+    },
+    {
+      "numero_commande": "RT000561",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Marina RIBELLINO",
+      "date_extraction": "2025-10-22T16:45:43Z"
+    },
+    {
+      "numero_commande": "RT000537",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "IC - Ing?nieurs et cadres",
+      "classification_interimaire": null,
+      "personne_absente": null,
+      "date_extraction": "2025-10-22T16:45:44Z"
+    },
+    {
+      "numero_commande": "RT000538",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "IC - Ing?nieurs et cadres",
+      "classification_interimaire": null,
+      "personne_absente": null,
+      "date_extraction": "2025-10-22T16:45:45Z"
+    },
+    {
+      "numero_commande": "RT000536",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Geoffrey DJEBORI",
+      "date_extraction": "2025-10-22T16:45:46Z"
+    },
+    {
+      "numero_commande": "RT000533",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Daniel FALCONE",
+      "date_extraction": "2025-10-22T16:45:47Z"
+    },
+    {
+      "numero_commande": "RT000531",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAURE SCHAUMANN",
+      "date_extraction": "2025-10-22T16:45:48Z"
     }
   ],
-  "lastUpdate": "2025-10-22T15:45:41.542Z",
+  "lastUpdate": "2025-10-22T16:45:50.419Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 802,
+    "totalCommandes": 812,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
