@@ -74,7 +74,8 @@ class XMLEnricher:
     def _xupsert(self, ctx: etree.Element, ln_path: str, value: str) -> bool:
         """Upsert : crée ou modifie"""
         try:
-            parts = [seg.split("'")[1] for seg in ln_path.split("local-name()='")[1:]]
+            # Extraire les noms de tags avec regex propre
+            parts = re.findall(r"local-name\(\)='([^']+)'", ln_path)
             
             if not parts:
                 return False
