@@ -289,6 +289,41 @@ with colB:
         f"**Source** : `{GITHUB_OWNER}/{GITHUB_REPO}` — **Branche** : `{GITHUB_REF}` — **Fichier** : `{GITHUB_PATH}`"
     )
 
+# Afficher les commandes chargées
+if commandes_dict:
+    st.subheader(f"📋 Commandes disponibles ({len(commandes_dict)})")
+    
+    # Convertir en DataFrame pour affichage
+    commandes_list = []
+    for order_id, data in commandes_dict.items():
+        row = {"numero_commande": order_id}
+        row.update(data)
+        commandes_list.append(row)
+    
+    if commandes_list:
+        df_commandes = pd.DataFrame(commandes_list)
+        
+        # Afficher avec possibilité de recherche
+        search = st.text_input("🔍 Rechercher une commande", "")
+        if search:
+            mask = df_commandes.astype(str).apply(lambda x: x.str.contains(search, case=False, na=False)).any(axis=1)
+            df_filtered = df_commandes[mask]
+            st.write(f"**{len(df_filtered)}** commande(s) trouvée(s)")
+            st.dataframe(df_filtered, use_container_width=True, height=300)
+        else:
+            st.dataframe(df_commandes, use_container_width=True, height=300)
+        
+        # Bouton pour télécharger les commandes en CSV
+        csv = df_commandes.to_csv(index=False).encode("utf-8")
+        st.download_button(
+            "⬇️ Télécharger les commandes (CSV)",
+            data=csv,
+            file_name="commandes_chargees.csv",
+            mime="text/csv",
+        )
+else:
+    st.warning("⚠️ Aucune commande chargée. Vérifiez la synchronisation GitHub.")
+
 st.divider()
 
 # =========================
@@ -302,6 +337,8 @@ if go:
         st.warning("Aucune commande disponible (la synchro GitHub a échoué).")
         st.stop()
 
+    st.info(f"🔄 Traitement en cours avec {len(commandes_dict)} commandes disponibles...")
+    
     xml_bytes = xml_file.read()
     try:
         fixed_bytes, recaps, log = process_all(xml_bytes, commandes_dict)
@@ -311,7 +348,8 @@ if go:
 
     # Résumé
     n = log.get("contracts_detected", 0)
-    st.success(f"{n} contrats détectés.")
+    matched = sum(1 for r in recaps if r.get("matched"))
+    st.success(f"✅ {n} contrats détectés | {matched} appariés avec les commandes | {n - matched} non appariés")
     st.write(
         f"**MAJ Coefficient**: {log.get('coef_updates',0)}  |  "
         f"**MAJ Statut Code**: {log.get('status_code_updates',0)}  |  "
