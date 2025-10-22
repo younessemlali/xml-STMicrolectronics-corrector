@@ -221,9 +221,12 @@ def process_all(xml_bytes: bytes, commandes: dict) -> tuple[bytes, list[dict], d
             code, desc = statut_complet.split(" - ", 1)
             code = code.strip()
             desc = desc.strip()
+            # Corriger les problèmes d'encodage courants
+            desc = desc.replace("?", "é").replace("?", "è").replace("?", "à")
         else:
             code = statut_complet
             desc = (row.get("statut_description") or "").strip() if row else ""
+            desc = desc.replace("?", "é").replace("?", "è").replace("?", "à")
         
         if code:
             # Code : MAJ tous les noeuds existants; sinon en créer un
