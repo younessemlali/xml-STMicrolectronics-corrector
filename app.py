@@ -296,8 +296,13 @@ if commandes_dict:
     # Convertir en DataFrame pour affichage
     commandes_list = []
     for order_id, data in commandes_dict.items():
-        row = {"numero_commande": order_id}
-        row.update(data)
+        # Gérer les différents formats de données
+        if isinstance(data, dict):
+            row = {"numero_commande": order_id}
+            row.update(data)
+        else:
+            # Si data est une string ou autre, on la met dans une colonne "data"
+            row = {"numero_commande": order_id, "data": str(data)}
         commandes_list.append(row)
     
     if commandes_list:
