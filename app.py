@@ -1,140 +1,90 @@
 # -*- coding: utf-8 -*-
 import io
-import re
 import requests
 import pandas as pd
 import streamlit as st
-from urllib.parse import urlparse
 
-# ⚙️ coeur métier (assurez-vous d'avoir le xml_enricher.py fourni)
+# Cœur métier (3 balises) — garde le xml_enricher.py fourni
 from xml_enricher import process_all, load_commandes
 
-# -------------------------- UI setup --------------------------
-st.set_page_config(page_title="PIXID XML Corrector — 3 balises", layout="wide")
-st.title("🔧 PIXID XML Corrector")
-st.caption("Met à jour exactement 3 balises / contrat : PositionCoefficient, PositionStatus/Code, PositionStatus/Description")
+# =========================
+# 🔧 CONFIG (modifie ici)
+# =========================
+GITHUB_OWNER = "younessemlali"
+GITHUB_REPO  = "xml-STMicrolectronics-corrector"
+GITHUB_REF   = "main"
+# Chemin du fichier commandes (JSON ou CSV) dans ton repo public :
+GITHUB_PATH  = "samples/commandes_stm.json"
+# Délai de rafraîchissement des commandes (cache) en secondes :
+CACHE_TTL_S  = 120
 
-st.markdown("""
-**Mode d'emploi :**
-1. Chargez votre **XML multi-contrats** (même >10 Mo).
-2. Choisissez la **source des commandes** : Upload ou GitHub (public/privé).
-3. Cliquez **Corriger le XML** → Téléchargez le XML corrigé et le CSV récap.
-""")
+# =========================
+# UI
+# =========================
+st.set_page_config(page_title="PIXID XML Corrector — Sync GitHub", layout="wide")
+st.title("🔧 PIXID XML Corrector — Sync GitHub → Commandes")
+st.caption("Corrige 3 balises / contrat : PositionCoefficient • PositionStatus/Code • PositionStatus/Description")
 
-# -------------------------- Helpers GitHub --------------------------
-@st.cache_data(ttl=300)
-def fetch_github_text(url_or_path: str, ref: str = "main", token: str | None = None) -> str:
-    """
-    Récupère un fichier texte (JSON/CSV) sur GitHub.
-    - Forme 1: 'owner/repo:path/vers/fichier.ext'
-    - Forme 2: URL 'https://github.com/.../blob/...'
-    - Forme 3: URL 'https://raw.githubusercontent.com/...'
-    Retourne le contenu texte.
-    """
-    s = (url_or_path or "").strip()
-    if not s:
-        raise ValueError("Chemin/URL GitHub manquant.")
+st.markdown(
+    "Les **commandes** sont chargées **automatiquement** depuis : "
+    f"`{GITHUB_OWNER}/{GITHUB_REPO}@{GITHUB_REF}:{GITHUB_PATH}`\n\n"
+    "Tu n'as qu'à déposer le **XML** ci-dessous."
+)
 
-    # 1) Forme "owner/repo:path"
-    m = re.match(r"^([^/\s]+)/([^:\s]+):(.+)$", s)
-    if m:
-        owner, repo, path = m.group(1), m.group(2), m.group(3).lstrip("/")
-        if token:
-            api_url = f"https://api.github.com/repos/{owner}/{repo}/contents/{path}?ref={ref}"
-            headers = {"Accept": "application/vnd.github.v3.raw", "Authorization": f"Bearer {token}"}
-            r = requests.get(api_url, headers=headers, timeout=30)
-            r.raise_for_status()
-            return r.text
-        else:
-            raw = f"https://raw.githubusercontent.com/{owner}/{repo}/{ref}/{path}"
-            r = requests.get(raw, timeout=30)
-            r.raise_for_status()
-            return r.text
+# =========================
+# GitHub helper
+# =========================
+def _raw_url(owner: str, repo: str, ref: str, path: str) -> str:
+    return f"https://raw.githubusercontent.com/{owner}/{repo}/{ref}/{path.lstrip('/')}"
 
-    # 2/3) URL complète
-    u = urlparse(s)
-    if "raw.githubusercontent.com" in u.netloc:
-        r = requests.get(s, timeout=30)
-        r.raise_for_status()
-        return r.text
+@st.cache_data(ttl=CACHE_TTL_S)
+def fetch_commandes_text(owner: str, repo: str, ref: str, path: str) -> str:
+    url = _raw_url(owner, repo, ref, path)
+    r = requests.get(url, timeout=30)
+    r.raise_for_status()
+    return r.text
 
-    if "github.com" in u.netloc and "/blob/" in u.path:
-        # Convertir /blob/ -> /raw/ ou passer par l'API si token
-        parts = u.path.strip("/").split("/")
-        # /owner/repo/blob/ref/path/to/file
-        if len(parts) < 5:
-            raise ValueError("URL GitHub inattendue. Exemple: https://github.com/owner/repo/blob/main/path/file.json")
-        owner, repo, _blob, ref_part, *rest = parts
-        path = "/".join(rest)
-        if token:
-            api_url = f"https://api.github.com/repos/{owner}/{repo}/contents/{path}?ref={ref or ref_part}"
-            headers = {"Accept": "application/vnd.github.v3.raw", "Authorization": f"Bearer {token}"}
-            r = requests.get(api_url, headers=headers, timeout=30)
-            r.raise_for_status()
-            return r.text
-        else:
-            raw = f"https://raw.githubusercontent.com/{owner}/{repo}/{ref or ref_part}/{path}"
-            r = requests.get(raw, timeout=30)
-            r.raise_for_status()
-            return r.text
-
-    raise ValueError(
-        "Format GitHub non reconnu.\n"
-        "- Ex: owner/repo:path/vers/fichier.json\n"
-        "- ou URL https://github.com/.../blob/... \n"
-        "- ou URL https://raw.githubusercontent.com/..."
-    )
-
-# -------------------------- Inputs --------------------------
-xml_file = st.file_uploader("📄 Fichier XML", type=["xml"])
-
-st.subheader("🧾 Commandes (JSON/CSV)")
-source = st.radio("Source des commandes", ["Upload", "GitHub"], horizontal=True)
-
-commandes_dict = None
+# Charger automatiquement les commandes depuis GitHub (public, sans token)
 cmd_error = None
-
-if source == "Upload":
-    cmd_file = st.file_uploader("Choisir un fichier commandes", type=["json", "csv"])
-    if cmd_file is not None:
-        try:
-            # load_commandes accepte un buffer texte (UploadedFile)
-            commandes_dict = load_commandes(cmd_file)
-            st.success(f"{len(commandes_dict)} commandes chargées (upload).")
-        except Exception as e:
-            cmd_error = f"Erreur chargement commandes (upload) : {e}"
-else:
-    gh_input = st.text_input(
-        "Chemin GitHub (ex: younessemlali/xml-STMicrolectronics-corrector:samples/commandes_stm.json "
-        "ou URL https://github.com/.../blob/main/... )"
-    )
-    ref = st.text_input("Branche / tag (si applicable)", value="main")
-    use_token = st.checkbox("Dépôt privé (utiliser st.secrets['GITHUB_TOKEN'])", value=False)
-
-    if st.button("🔗 Charger depuis GitHub"):
-        try:
-            token = st.secrets.get("GITHUB_TOKEN") if use_token else None
-            text = fetch_github_text(gh_input, ref=ref, token=token)
-            commandes_dict = load_commandes(io.StringIO(text))  # parse JSON/CSV depuis texte
-            st.success(f"{len(commandes_dict)} commandes chargées (GitHub).")
-        except Exception as e:
-            cmd_error = f"Erreur chargement depuis GitHub : {e}"
-
-if cmd_error:
+commandes_dict = None
+try:
+    text = fetch_commandes_text(GITHUB_OWNER, GITHUB_REPO, GITHUB_REF, GITHUB_PATH)
+    commandes_dict = load_commandes(io.StringIO(text))  # auto JSON/CSV
+    st.success(f"{len(commandes_dict)} commandes chargées depuis GitHub (auto-sync).")
+except Exception as e:
+    cmd_error = f"Erreur de synchronisation GitHub : {e}"
     st.error(cmd_error)
+
+# Bouton pour forcer un rechargement (purge cache)
+colA, colB = st.columns([1, 4])
+if colA.button("🔄 Recharger depuis GitHub"):
+    fetch_commandes_text.clear()  # purge cache
+    st.experimental_rerun()
+
+with colB:
+    st.write(
+        f"**Source** : `{GITHUB_OWNER}/{GITHUB_REPO}` — **Branche** : `{GITHUB_REF}` — **Fichier** : `{GITHUB_PATH}`"
+        f" — **Cache TTL** : {CACHE_TTL_S}s"
+    )
 
 st.divider()
 
-# -------------------------- Action --------------------------
-go = st.button("🚀 Corriger le XML", type="primary", disabled=not xml_file)
+# =========================
+# XML input
+# =========================
+xml_file = st.file_uploader("📄 Dépose ton fichier XML (multi-contrats, gros volumes OK)", type=["xml"])
+
+# =========================
+# Corriger
+# =========================
+go = st.button("🚀 Corriger le XML", type="primary", disabled=not xml_file or not commandes_dict)
 
 if go:
     if not commandes_dict:
-        st.warning("Aucune commande chargée (via Upload ou GitHub).")
+        st.warning("Aucune commande disponible (la synchro GitHub a échoué).")
         st.stop()
 
     xml_bytes = xml_file.read()
-
     try:
         fixed_bytes, recaps, log = process_all(xml_bytes, commandes_dict)
     except Exception as e:
@@ -157,7 +107,7 @@ if go:
     if log.get("warning"):
         st.warning(log["warning"])
 
-    # Tableau récap
+    # Récap
     if recaps:
         df = pd.DataFrame(recaps)
         st.dataframe(df, use_container_width=True)
@@ -168,7 +118,7 @@ if go:
             mime="text/csv",
         )
 
-    # XML corrigé
+    # XML corrigé (encodage d'origine préservé par xml_enricher)
     st.download_button(
         "⬇️ XML corrigé",
         data=fixed_bytes,
@@ -176,4 +126,4 @@ if go:
         mime="application/xml",
     )
 
-st.caption("Détection namespace-agnostique • Upsert si balise absente • Encodage d'origine préservé • 3 champs mis à jour par contrat.")
+st.caption("Synchro GitHub publique → commandes (auto). Dépose juste le XML. Détection namespace-agnostique. 3 champs mis à jour par contrat.")
