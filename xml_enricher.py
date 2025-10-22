@@ -1,381 +1,258 @@
-#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
-Script d'enrichissement XML PIXID - STMicroelectronics
-Version ROBUSTE : parse une fois, garde le tree, le réutilise
+xml_enricher.py — Enrichisseur PIXID HR-XML/SIDES (multi-contrats)
+Met à jour exactement 3 balises par contrat:
+  1) PositionCharacteristics/PositionCoefficient
+  2) PositionCharacteristics/PositionStatus/Code
+  3) PositionCharacteristics/PositionStatus/Description
+
+- Détection namespace-agnostique (XPath local-name())
+- Parser robuste lxml (recover=True, huge_tree=True)
+- Upsert: crée la balise si absente (dans le bon namespace)
+- Fallback: si pas de commande & Coefficient vide & Level ~ ^[A-E]\\d{1,2}$ => Level -> Coefficient
+- Encodage préservé (réécrit avec tree.docinfo.encoding)
+- Normalisation des clés de jointure (strip + upper, supprime espaces)
+- Mise à jour de TOUS les <Code>/<Description> sous PositionStatus; création si aucun nœud présent.
 """
 
-import json
-import re
-from pathlib import Path
-from typing import Dict, Optional, Tuple, List
+from lxml import etree
 from io import BytesIO
+import re, json, csv
+from typing import Dict, Any, List, Tuple, Optional
 
-try:
-    from lxml import etree
-except ImportError:
-    raise ImportError("Le module lxml est requis. Installez-le avec: pip install lxml")
+# --------- XPaths (namespace-agnostiques) ---------
+XP_CTX    = "//*[local-name()='ReferenceInformation'][*[local-name()='OrderId']/*[local-name()='IdValue']]/.."
+XP_ORDER  = ".//*[local-name()='ReferenceInformation']/*[local-name()='OrderId']/*[local-name()='IdValue']"
+XP_ASSIGN = ".//*[local-name()='ReferenceInformation']/*[local-name()='AssignmentId']/*[local-name()='IdValue']"
 
+XP_LEVEL  = ".//*[local-name()='PositionCharacteristics']/*[local-name()='PositionLevel']"
+XP_COEFF  = ".//*[local-name()='PositionCharacteristics']/*[local-name()='PositionCoefficient']"
 
-class XMLEnricher:
-    """Classe pour enrichir les fichiers XML avec les données PIXID"""
-    
-    ORDER_PATTERNS = [r'(RT\d{6})', r'(CR\d{6})', r'(CD\d{6})']
-    CLASS_RE = re.compile(r'^[A-E]\d{1,2}$')
-    
-    # XPath namespace-agnostiques
-    XP_CTX = "//*[local-name()='ReferenceInformation'][*[local-name()='OrderId']/*[local-name()='IdValue']]/.."
-    XP_ORDER = ".//*[local-name()='ReferenceInformation']/*[local-name()='OrderId']/*[local-name()='IdValue']"
-    XP_COEFF = ".//*[local-name()='PositionCoefficient']"
-    XP_LEVEL = ".//*[local-name()='PositionLevel']"
-    XP_STATUS = ".//*[local-name()='PositionStatus']/*[local-name()='Code']"
-    
-    def __init__(self, json_path: str):
-        self.commandes_data = self._load_commandes(json_path)
-        
-        # GARDE LE TREE EN MÉMOIRE
-        self._current_tree = None
-        self._current_xml_path = None
-        self._current_encoding = None
-        
-        print(f"✅ {len(self.commandes_data)} commandes chargées")
-    
-    def _load_commandes(self, json_path: str) -> Dict[str, dict]:
-        with open(json_path, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-        commandes = {}
-        for cmd in data.get('commandes', []):
-            num = cmd.get('numero_commande')
-            if num:
-                commandes[num] = cmd
-        return commandes
-    
-    def _parse_tree(self, xml_bytes: bytes) -> etree._ElementTree:
-        parser = etree.XMLParser(remove_blank_text=True, recover=True, huge_tree=True)
-        return etree.parse(BytesIO(xml_bytes), parser)
-    
-    def _ensure_tree_loaded(self, xml_path: str):
-        """
-        CRITIQUE : Charge le tree UNE SEULE FOIS et le garde en mémoire
-        """
-        if self._current_tree is None or self._current_xml_path != xml_path:
-            print(f"📄 Chargement du XML...")
-            with open(xml_path, 'rb') as f:
-                xml_bytes = f.read()
-            
-            self._current_tree = self._parse_tree(xml_bytes)
-            self._current_xml_path = xml_path
-            self._current_encoding = self._current_tree.docinfo.encoding or 'iso-8859-1'
-            print(f"   Encodage: {self._current_encoding}")
-    
-    def _xget(self, ctx: etree.Element, xpath: str) -> str:
-        nodes = ctx.xpath(xpath)
-        return (nodes[0].text or '').strip() if nodes and nodes[0].text else ''
-    
-    def _xupsert(self, ctx: etree.Element, ln_path: str, value: str) -> bool:
-        """Upsert : crée ou modifie"""
-        try:
-            # Extraire les noms de tags avec regex propre
-            parts = re.findall(r"local-name\(\)='([^']+)'", ln_path)
-            
-            if not parts:
-                return False
-            
-            current = ctx
-            for name in parts:
-                found = current.xpath(f"./*[local-name()='{name}']")
-                
-                if found:
-                    current = found[0]
-                else:
-                    ns = current.nsmap.get(None)
-                    tag = f"{{{ns}}}{name}" if ns else name
-                    current = etree.SubElement(current, tag)
-            
-            current.text = value
-            return True
-            
-        except Exception as e:
-            print(f"   ❌ Erreur xupsert: {e}")
-            return False
-    
-    def _extract_order_id_from_text(self, text: str) -> Optional[str]:
-        for pattern in self.ORDER_PATTERNS:
-            match = re.search(pattern, text)
-            if match:
-                return match.group(1)
-        return None
-    
-    def find_all_order_ids_in_xml(self, xml_path: str) -> List[Dict]:
-        """
-        Trouve tous les contrats et GARDE le tree en mémoire
-        """
-        try:
-            # CHARGE LE TREE (ou réutilise si déjà chargé)
-            self._ensure_tree_loaded(xml_path)
-            
-            # UTILISE LE TREE EN MÉMOIRE
-            contexts = self._current_tree.xpath(self.XP_CTX)
-            
-            contracts_found = []
-            
-            for context in contexts:
-                order_id_text = self._xget(context, self.XP_ORDER)
-                order_id = self._extract_order_id_from_text(order_id_text)
-                
-                if order_id:
-                    assign_xpath = ".//*[local-name()='ReferenceInformation']/*[local-name()='AssignmentId']/*[local-name()='IdValue']"
-                    assign_id = self._xget(context, assign_xpath) or "N/A"
-                    
-                    contracts_found.append({
-                        'order_id': order_id,
-                        'assignment_id': assign_id,
-                        'context': context  # GARDE LA RÉFÉRENCE au context dans LE TREE
-                    })
-            
-            print(f"✅ {len(contracts_found)} contrat(s) détecté(s)")
-            
-            if contracts_found:
-                sample_size = min(10, len(contracts_found))
-                sample_ids = [c['order_id'] for c in contracts_found[:sample_size]]
-                print(f"   Exemple: {', '.join(sample_ids)}")
-                if len(contracts_found) > sample_size:
-                    print(f"   ... +{len(contracts_found) - sample_size} autres")
-            
-            return contracts_found
-            
-        except Exception as e:
-            print(f"❌ Erreur: {e}")
-            import traceback
-            traceback.print_exc()
-            return []
-    
-    def enrich_xml(self, xml_path: str, output_path: str, progress_callback=None) -> Tuple[bool, str, Dict]:
-        """
-        Enrichit en RÉUTILISANT le tree déjà chargé
-        """
-        try:
-            # RÉUTILISE LE TREE déjà chargé par find_all_order_ids_in_xml()
-            # OU le charge si pas encore fait
-            self._ensure_tree_loaded(xml_path)
-            
-            # UTILISE LE TREE EN MÉMOIRE
-            contexts = self._current_tree.xpath(self.XP_CTX)
-            
-            if not contexts:
-                return False, "Aucun contrat détecté", {
-                    'total': 0, 'enrichis': 0, 'upd_coeff': 0, 'upd_status': 0, 'details': []
-                }
-            
-            print(f"\n🔧 Enrichissement de {len(contexts)} contrats...")
-            
-            upd_coeff = 0
-            upd_status = 0
-            order_ids_modified = []
-            
-            stats = {
-                'total': len(contexts),
-                'enrichis': 0,
-                'non_trouves': 0,
-                'upd_coeff': 0,
-                'upd_status': 0,
-                'details': []
-            }
-            
-            # ENRICHIR CHAQUE CONTEXTE (dans LE MÊME TREE)
-            for idx, ctx in enumerate(contexts):
-                if progress_callback:
-                    progress_callback(idx + 1, len(contexts))
-                
-                order_id_text = self._xget(ctx, self.XP_ORDER)
-                order_id = self._extract_order_id_from_text(order_id_text)
-                
-                if not order_id:
-                    continue
-                
-                cmd = self.commandes_data.get(order_id)
-                
-                # Logs détaillés pour les 3 premiers
-                verbose = (idx < 3)
-                
-                if verbose:
-                    print(f"\n🔍 {order_id}")
-                    print(f"   Commande JSON: {'✅ OUI' if cmd else '❌ NON'}")
-                    if cmd:
-                        print(f"   classification: '{cmd.get('classification_interimaire')}'")
-                        print(f"   statut: '{cmd.get('statut')}'")
-                
-                detail = {
-                    'OrderId': order_id,
-                    'PositionCoefficient': 'N/A',
-                    'PositionStatusCode': 'N/A',
-                    'matched': False,
-                    'note': ''
-                }
-                
-                modified = False
-                
-                # A) CLASSIFICATION
-                if cmd and (cmd.get('classification_interimaire') or '').strip():
-                    classif_value = cmd['classification_interimaire'].strip()
-                    
-                    if verbose:
-                        print(f"   🔧 PositionCoefficient ← '{classif_value}'")
-                    
-                    success = self._xupsert(ctx, self.XP_COEFF, classif_value)
-                    
-                    if success:
-                        upd_coeff += 1
-                        modified = True
-                        detail['PositionCoefficient'] = classif_value
-                        detail['note'] = 'depuis JSON'
-                        
-                        if verbose:
-                            print(f"      ✅ ÉCRIT")
-                        elif idx < 10:
-                            print(f"   ✓ {order_id} - Coeff → '{classif_value}'")
-                
-                else:
-                    # Fallback
-                    coeff = self._xget(ctx, self.XP_COEFF)
-                    level = self._xget(ctx, self.XP_LEVEL)
-                    
-                    if not cmd and not coeff and self.CLASS_RE.match(level or ''):
-                        if verbose:
-                            print(f"   🔧 Fallback Level ← '{level}'")
-                        
-                        success = self._xupsert(ctx, self.XP_COEFF, level)
-                        
-                        if success:
-                            upd_coeff += 1
-                            modified = True
-                            detail['PositionCoefficient'] = level
-                            detail['note'] = 'copié depuis PositionLevel'
-                            
-                            if verbose:
-                                print(f"      ✅ ÉCRIT")
-                
-                # B) STATUT
-                if cmd and (cmd.get('statut') or '').strip():
-                    statut_value = cmd['statut'].strip()
-                    code_statut = statut_value.split('-')[0].strip() if '-' in statut_value else statut_value
-                    
-                    if verbose:
-                        print(f"   🔧 PositionStatus/Code ← '{code_statut}'")
-                    
-                    success = self._xupsert(ctx, self.XP_STATUS, code_statut)
-                    
-                    if success:
-                        upd_status += 1
-                        modified = True
-                        detail['PositionStatusCode'] = code_statut
-                        
-                        if verbose:
-                            print(f"      ✅ ÉCRIT")
-                        elif idx < 10:
-                            print(f"   ✓ {order_id} - Status → '{code_statut}'")
-                
-                if cmd:
-                    stats['enrichis'] += 1
-                    detail['matched'] = True
-                else:
-                    stats['non_trouves'] += 1
-                
-                if modified:
-                    order_ids_modified.append(order_id)
-                
-                stats['details'].append(detail)
-            
-            stats['upd_coeff'] = upd_coeff
-            stats['upd_status'] = upd_status
-            
-            # SAUVEGARDER LE TREE MODIFIÉ
-            print(f"\n💾 Sauvegarde...")
-            
-            self._current_tree.write(
-                output_path,
-                encoding=self._current_encoding,
-                pretty_print=True,
-                xml_declaration=True
-            )
-            
-            print(f"✅ Sauvegardé: {output_path}")
-            
-            print(f"\n📊 RÉSULTAT:")
-            print(f"   • Total: {stats['total']}")
-            print(f"   • Avec JSON: {stats['enrichis']}")
-            print(f"   • PositionCoefficient MAJ: {upd_coeff}")
-            print(f"   • PositionStatus/Code MAJ: {upd_status}")
-            
-            if order_ids_modified:
-                sample = order_ids_modified[:10]
-                print(f"   • Modifiés: {', '.join(sample)}")
-                if len(order_ids_modified) > 10:
-                    print(f"     +{len(order_ids_modified) - 10}")
-            
-            if upd_coeff == 0 and upd_status == 0:
-                print(f"\n⚠️  AUCUNE MODIFICATION!")
-            
-            message = f"✅ XML enrichi!\n\n"
-            message += f"📊 Statistiques:\n"
-            message += f"  • Total: {stats['total']}\n"
-            message += f"  • Enrichis: {stats['enrichis']}\n"
-            message += f"  • PositionCoefficient MAJ: {upd_coeff}\n"
-            message += f"  • PositionStatus/Code MAJ: {upd_status}"
-            
-            return True, message, stats
-                
-        except Exception as e:
-            print(f"❌ ERREUR: {e}")
-            import traceback
-            traceback.print_exc()
-            return False, f"Erreur: {e}", {
-                'total': 0, 'enrichis': 0, 'upd_coeff': 0, 'upd_status': 0, 'details': []
-            }
-    
-    def get_commande_info(self, order_id: str) -> Optional[dict]:
-        return self.commandes_data.get(order_id)
-    
-    def search_commandes(self, query: str) -> list:
-        query_lower = query.lower()
-        results = []
-        for num, data in self.commandes_data.items():
-            if (query_lower in num.lower() or
-                query_lower in str(data.get('code_agence', '')).lower() or
-                query_lower in str(data.get('code_unite', '')).lower()):
-                results.append({
-                    'numero_commande': num,
-                    **data
-                })
-        return results
+XP_STATUS          = ".//*[local-name()='PositionCharacteristics']/*[local-name()='PositionStatus']"
+XP_STATUS_CODE     = ".//*[local-name()='PositionCharacteristics']/*[local-name()='PositionStatus']/*[local-name()='Code']"
+XP_STATUS_DESC     = ".//*[local-name()='PositionCharacteristics']/*[local-name()='PositionStatus']/*[local-name()='Description']"
+XP_STATUS_CODE_ALL = XP_STATUS_CODE
+XP_STATUS_DESC_ALL = XP_STATUS_DESC
 
+CLASS_RE = re.compile(r"^[A-E]\\d{1,2}$")
 
-def main():
-    import sys
-    
-    if len(sys.argv) < 3:
-        print("Usage: python xml_enricher.py <commandes.json> <fichier.xml> [output.xml]")
-        sys.exit(1)
-    
-    json_path = sys.argv[1]
-    xml_path = sys.argv[2]
-    output_path = sys.argv[3] if len(sys.argv) > 3 else "output_enrichi.xml"
-    
-    enricher = XMLEnricher(json_path)
-    
-    # Appeler find_all d'abord (comme dans Streamlit)
-    contracts = enricher.find_all_order_ids_in_xml(xml_path)
-    print(f"\n📋 {len(contracts)} contrats détectés")
-    
-    # Puis enrichir (réutilise le même tree)
-    success, message, stats = enricher.enrich_xml(xml_path, output_path)
-    
-    if success:
-        print(f"\n✅ Fichier: {output_path}")
-        print(f"📊 {stats['upd_coeff']} coeff | {stats['upd_status']} statut")
+# --------- Mapping code -> libellé (complétez si besoin) ---------
+STATUS_LABEL_MAP = {
+    "OP": "Opérateur",
+    "6A": "Ouvriers",
+    # Ajoutez ici d'autres couples si vous en avez (ex: "EM": "Employés")
+}
+
+# --------- Parsing / Writing ---------
+def _parse(xml_bytes: bytes) -> etree._ElementTree:
+    parser = etree.XMLParser(remove_blank_text=True, recover=True, huge_tree=True)
+    return etree.parse(BytesIO(xml_bytes), parser)
+
+def _tobytes(tree: etree._ElementTree) -> bytes:
+    enc = tree.docinfo.encoding or "UTF-8"
+    return etree.tostring(tree, encoding=enc, pretty_print=True, xml_declaration=True)
+
+# --------- Helpers XPath / Upsert ---------
+def _xget(ctx: etree._Element, xp: str) -> str:
+    try:
+        n = ctx.xpath(xp)
+    except Exception:
+        return ""
+    return (n[0].text or "").strip() if n and n[0].text is not None else ""
+
+def _find_default_ns(el: etree._Element) -> Optional[str]:
+    cur = el
+    while cur is not None:
+        ns = cur.nsmap.get(None)
+        if ns:
+            return ns
+        cur = cur.getparent()
+    return None
+
+def _xupsert(ctx: etree._Element, ln_path: str, value: str) -> None:
+    """
+    ln_path = XPath avec local-name(), ex: XP_COEFF ou XP_STATUS_DESC
+    Crée proprement la hiérarchie si manquante (dans le bon namespace), puis pose le texte.
+    """
+    parts: List[str] = []
+    tmp = ln_path
+    while True:
+        i = tmp.find("local-name()='")
+        if i == -1: break
+        j = i + len("local-name()='")
+        k = tmp.find("'", j)
+        if k == -1: break
+        parts.append(tmp[j:k])
+        tmp = tmp[k+1:]
+    if not parts:
+        nodes = ctx.xpath(ln_path)
+        if nodes:
+            nodes[0].text = value
+        return
+    cur = ctx
+    for name in parts:
+        found = cur.xpath(f"./*[local-name()='{name}']")
+        if found:
+            cur = found[0]
+        else:
+            ns = _find_default_ns(cur)
+            tag = f"{{{ns}}}{name}" if ns else name
+            cur = etree.SubElement(cur, tag)
+    cur.text = value
+
+# --------- Commandes (chargement + normalisation) ---------
+def _norm_key(k: Any) -> str:
+    if k is None: return ""
+    return "".join(str(k).strip().upper().split())
+
+def load_commandes(path_or_buf, key_field: str = "numero_commande") -> Dict[str, Dict[str, Any]]:
+    """
+    Accepte : chemin str vers .json/.csv, ou buffer texte déjà lu.
+    Retourne : dict normalisé { ORDERID -> row }
+    """
+    def dict_from_json_obj(data):
+        if isinstance(data, dict):
+            return { _norm_key(k): v for k, v in data.items() }
+        elif isinstance(data, list):
+            out = {}
+            for row in data:
+                key = _norm_key(row.get(key_field))
+                if key: out[key] = row
+            return out
+        else:
+            raise ValueError("JSON inattendu (dict ou list attendu).")
+
+    if isinstance(path_or_buf, str):
+        p = path_or_buf.lower()
+        if p.endswith(".json"):
+            with open(path_or_buf, "r", encoding="utf-8") as f:
+                return dict_from_json_obj(json.load(f))
+        elif p.endswith(".csv"):
+            out = {}
+            with open(path_or_buf, "r", encoding="utf-8", newline="") as f:
+                sample = f.read(2048); f.seek(0)
+                try: dialect = csv.Sniffer().sniff(sample)
+                except Exception: dialect = csv.excel
+                reader = csv.DictReader(f, dialect=dialect)
+                if key_field not in reader.fieldnames:
+                    raise ValueError(f"Colonne '{key_field}' absente du CSV.")
+                for row in reader:
+                    key = _norm_key(row.get(key_field))
+                    if key: out[key] = {k:(v.strip() if isinstance(v,str) else v) for k,v in row.items()}
+            return out
+        else:
+            raise ValueError("Extension non supportée (utilisez .json ou .csv).")
     else:
-        print(f"\n❌ {message}")
-        sys.exit(1)
+        # buffer texte JSON ou CSV (détecter)
+        text = path_or_buf.read()
+        if not isinstance(text, str):
+            text = text.decode("utf-8", errors="ignore")
+        stripped = text.lstrip()
+        if stripped.startswith("{") or stripped.startswith("["):
+            return dict_from_json_obj(json.loads(text))
+        else:
+            out = {}
+            reader = csv.DictReader(text.splitlines())
+            if key_field not in reader.fieldnames:
+                raise ValueError(f"Colonne '{key_field}' absente du CSV.")
+            for row in reader:
+                key = _norm_key(row.get(key_field))
+                if key: out[key] = {k:(v.strip() if isinstance(v,str) else v) for k,v in row.items()}
+            return out
 
+# --------- Cœur : 3 champs uniquement ---------
+def process_all(xml_bytes: bytes,
+                commandes: Dict[str, Dict[str, Any]],
+                classification_regex: str = r"^[A-E]\\d{1,2}$"
+               ) -> Tuple[bytes, List[Dict[str, Any]], Dict[str, Any]]:
+    """
+    Retourne: (xml_corrige_bytes, recaps_par_contrat, log_global)
+    """
+    tree = _parse(xml_bytes)
+    contexts = tree.xpath(XP_CTX)
+    recaps: List[Dict[str, Any]] = []
+    upd_coeff = upd_code = upd_desc = 0
+    modified_ids: List[str] = []
+    unmatched_sample: List[str] = []
 
-if __name__ == "__main__":
-    main()
+    class_re = re.compile(classification_regex)
+
+    for ctx in contexts:
+        order  = _xget(ctx, XP_ORDER)
+        assign = _xget(ctx, XP_ASSIGN)
+        key    = _norm_key(order)
+        row    = commandes.get(key)
+
+        before_c   = _xget(ctx, XP_COEFF)
+        before_code= _xget(ctx, XP_STATUS_CODE)
+        before_desc= _xget(ctx, XP_STATUS_DESC)
+        level      = _xget(ctx, XP_LEVEL)
+
+        # 1) Coefficient
+        if row and (row.get("classification_interimaire") or "").strip():
+            _xupsert(ctx, XP_COEFF, row["classification_interimaire"].strip())
+        elif (not row) and (not before_c) and class_re.match(level or ""):
+            _xupsert(ctx, XP_COEFF, level)
+
+        # 2) Statut Code + 3) Description
+        code = (row.get("statut") or "").strip() if row else ""
+        desc = (row.get("statut_description") or "").strip() if row else ""
+        final_desc = ""
+        if code:
+            # mettre à jour tous les <Code> existants; sinon en créer un
+            nodes_code = ctx.xpath(XP_STATUS_CODE_ALL)
+            if nodes_code:
+                for n in nodes_code: n.text = code
+            else:
+                _xupsert(ctx, XP_STATUS_CODE, code)
+            # description
+            final_desc = desc or STATUS_LABEL_MAP.get(code, desc)
+            if final_desc:
+                nodes_desc = ctx.xpath(XP_STATUS_DESC_ALL)
+                if nodes_desc:
+                    for n in nodes_desc: n.text = final_desc
+                else:
+                    _xupsert(ctx, XP_STATUS_DESC, final_desc)
+
+        after_c    = _xget(ctx, XP_COEFF)
+        after_code = _xget(ctx, XP_STATUS_CODE)
+        after_desc = _xget(ctx, XP_STATUS_DESC)
+
+        changed = False
+        if after_c != before_c:
+            upd_coeff += 1; changed = True
+        if after_code != before_code:
+            upd_code  += 1; changed = True
+        if after_desc != before_desc:
+            upd_desc  += 1; changed = True
+
+        if changed:
+            modified_ids.append(order)
+        elif not row and len(unmatched_sample) < 10:
+            unmatched_sample.append(order)
+
+        note = ""
+        if (not row) and (not before_c) and (after_c == level) and class_re.match(level or ""):
+            note = "coefficient copié depuis PositionLevel"
+
+        recaps.append({
+            "OrderId": order, "AssignmentId": assign,
+            "PositionCoefficient": after_c,
+            "PositionStatusCode": after_code,
+            "PositionStatusDescription": after_desc,
+            "matched": bool(row), "note": note
+        })
+
+    out_bytes = _tobytes(tree)
+    log = {
+        "contracts_detected": len(contexts),
+        "coef_updates": upd_coeff,
+        "status_code_updates": upd_code,
+        "status_desc_updates": upd_desc,
+        "modified_ids_sample": modified_ids[:10],
+        "unmatched_sample": unmatched_sample
+    }
+    if commandes and upd_coeff == 0 and upd_code == 0 and upd_desc == 0:
+        log["warning"] = "Commandes chargées mais 0 mise à jour — vérifier la normalisation des clés et le mapping."
+
+    return out_bytes, recaps, log
