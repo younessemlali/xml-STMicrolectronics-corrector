@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 """
 Single-file Streamlit app — PIXID XML Corrector (GitHub auto-sync) ⛭
@@ -265,7 +264,17 @@ cmd_error = None
 try:
     text = fetch_commandes_text(GITHUB_OWNER, GITHUB_REPO, GITHUB_REF, GITHUB_PATH)
     commandes_dict = load_commandes(text)
-    st.success(f"{len(commandes_dict)} commandes chargées depuis GitHub (auto-sync).")
+    st.success(f"✅ {len(commandes_dict)} commandes chargées depuis GitHub (auto-sync).")
+except requests.exceptions.HTTPError as e:
+    if e.response.status_code == 404:
+        cmd_error = (
+            f"⚠️ Fichier non trouvé : `{GITHUB_PATH}`\n\n"
+            f"Vérifiez que le fichier existe bien dans votre repo à cet emplacement.\n"
+            f"URL testée : {_raw_url(GITHUB_OWNER, GITHUB_REPO, GITHUB_REF, GITHUB_PATH)}"
+        )
+    else:
+        cmd_error = f"Erreur HTTP {e.response.status_code} : {e}"
+    st.error(cmd_error)
 except Exception as e:
     cmd_error = f"Erreur de synchronisation GitHub : {e}"
     st.error(cmd_error)
@@ -274,7 +283,7 @@ except Exception as e:
 colA, colB = st.columns([1, 4])
 if colA.button("🔄 Recharger les commandes (GitHub)"):
     fetch_commandes_text.clear()
-    st.experimental_rerun()
+    st.rerun()
 with colB:
     st.write(
         f"**Source** : `{GITHUB_OWNER}/{GITHUB_REPO}` — **Branche** : `{GITHUB_REF}` — **Fichier** : `{GITHUB_PATH}`"
