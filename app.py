@@ -29,7 +29,7 @@ GITHUB_OWNER = "younessemlali"
 GITHUB_REPO  = "xml-STMicrolectronics-corrector"
 GITHUB_REF   = "main"
 # Fichier commandes dans le repo public (JSON ou CSV) :
-GITHUB_PATH  = "samples/commandes_stm.json"
+GITHUB_PATH  = "data/commandes_stm.json"
 # Durée du cache des commandes (en secondes)
 CACHE_TTL_S  = 120
 
