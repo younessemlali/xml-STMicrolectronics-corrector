@@ -76,10 +76,34 @@ def _norm_key(k) -> str:
 def load_commandes(text: str, key_field: str = "numero_commande") -> dict:
     """
     Accepte texte JSON/CSV. Retourne dict { ORDERID -> row } avec clé normalisée.
+    Gère le format spécial avec clé "COMMANDES" contenant une string JSON.
     """
     stripped = (text or "").lstrip()
     if stripped.startswith("{") or stripped.startswith("["):
         data = json.loads(text)
+        
+        # CAS SPÉCIAL : Format avec clé "COMMANDES" contenant les données
+        if isinstance(data, dict) and "COMMANDES" in data:
+            commandes_str = data["COMMANDES"]
+            # Si c'est une string, la parser
+            if isinstance(commandes_str, str):
+                # Remplacer les simple quotes par des double quotes pour JSON valide
+                commandes_str = commandes_str.replace("'", '"')
+                commandes_data = json.loads(commandes_str)
+            else:
+                commandes_data = commandes_str
+            
+            # Maintenant traiter les commandes
+            if isinstance(commandes_data, list):
+                out = {}
+                for row in commandes_data:
+                    key = _norm_key(row.get(key_field))
+                    if key: out[key] = row
+                return out
+            elif isinstance(commandes_data, dict):
+                return { _norm_key(k): v for k, v in commandes_data.items() }
+        
+        # Format normal
         if isinstance(data, dict):
             return { _norm_key(k): v for k, v in data.items() }
         elif isinstance(data, list):
@@ -90,6 +114,7 @@ def load_commandes(text: str, key_field: str = "numero_commande") -> dict:
             return out
         else:
             raise ValueError("JSON inattendu (dict ou liste attendu).")
+    
     # CSV fallback
     out = {}
     reader = csv.DictReader(text.splitlines())
