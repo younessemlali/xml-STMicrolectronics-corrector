@@ -8594,12 +8594,75 @@
       "classification_interimaire": "A2",
       "personne_absente": "Geoffrey DJEBORI",
       "date_extraction": "2025-10-23T08:46:04Z"
+    },
+    {
+      "numero_commande": "RT000341",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SOLANGE SERNA",
+      "date_extraction": "2025-10-23T09:45:35Z"
+    },
+    {
+      "numero_commande": "RT000362",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SIMONE COLLURA",
+      "date_extraction": "2025-10-23T09:45:36Z"
+    },
+    {
+      "numero_commande": "RT000376",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NATHALIE BONNARD",
+      "date_extraction": "2025-10-23T09:45:37Z"
+    },
+    {
+      "numero_commande": "RT000336",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "KARIM MOUAZ",
+      "date_extraction": "2025-10-23T09:45:39Z"
+    },
+    {
+      "numero_commande": "RT000346",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "DYLAN CASILE",
+      "date_extraction": "2025-10-23T09:45:40Z"
+    },
+    {
+      "numero_commande": "RT000366",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ANNE CATHERINE SANTOS",
+      "date_extraction": "2025-10-23T09:45:41Z"
+    },
+    {
+      "numero_commande": "RT000354",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "OLIVIER PELLEGRINO",
+      "date_extraction": "2025-10-23T09:45:42Z"
     }
   ],
-  "lastUpdate": "2025-10-23T08:46:07.610Z",
+  "lastUpdate": "2025-10-23T09:45:45.411Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 955,
+    "totalCommandes": 962,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
