@@ -8522,12 +8522,84 @@
       "classification_interimaire": "A2",
       "personne_absente": "GEOFFREY DJEBORI",
       "date_extraction": "2025-10-23T07:46:04Z"
+    },
+    {
+      "numero_commande": "RT001429",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "DAVID PELLOUX",
+      "date_extraction": "2025-10-23T08:45:13Z"
+    },
+    {
+      "numero_commande": "RT000358",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "PATRICK CIBRARI",
+      "date_extraction": "2025-10-23T08:45:57Z"
+    },
+    {
+      "numero_commande": "RT000357",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NICOLAS CHAISSAC",
+      "date_extraction": "2025-10-23T08:45:59Z"
+    },
+    {
+      "numero_commande": "RT000337",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Daniel FALCONE",
+      "date_extraction": "2025-10-23T08:46:00Z"
+    },
+    {
+      "numero_commande": "RT000351",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "STEPHANE LASSUS GONTIER",
+      "date_extraction": "2025-10-23T08:46:01Z"
+    },
+    {
+      "numero_commande": "RT000351",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "STEPHANE LASSUS GONTIER",
+      "date_extraction": "2025-10-23T08:46:02Z"
+    },
+    {
+      "numero_commande": "RT000359",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FABRICE RIVERO",
+      "date_extraction": "2025-10-23T08:46:03Z"
+    },
+    {
+      "numero_commande": "RT000350",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Geoffrey DJEBORI",
+      "date_extraction": "2025-10-23T08:46:04Z"
     }
   ],
-  "lastUpdate": "2025-10-23T07:46:06.457Z",
+  "lastUpdate": "2025-10-23T08:46:07.610Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 947,
+    "totalCommandes": 955,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
