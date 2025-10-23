@@ -8054,12 +8054,93 @@
       "classification_interimaire": "A2",
       "personne_absente": "Yoan THEVENOUX",
       "date_extraction": "2025-10-23T01:45:39Z"
+    },
+    {
+      "numero_commande": "RT001428",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FREDERIC CANDYLAKI",
+      "date_extraction": "2025-10-23T02:44:55Z"
+    },
+    {
+      "numero_commande": "RT000426",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Audrey JEAN",
+      "date_extraction": "2025-10-23T02:45:39Z"
+    },
+    {
+      "numero_commande": "RT000431",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "6A - Ouvriers",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAURENCE ROSSI",
+      "date_extraction": "2025-10-23T02:45:40Z"
+    },
+    {
+      "numero_commande": "RT000424",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CHRISTOPHE DUTTO",
+      "date_extraction": "2025-10-23T02:45:41Z"
+    },
+    {
+      "numero_commande": "RT000430",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "6A - Ouvriers",
+      "classification_interimaire": "A2",
+      "personne_absente": "FLORIAN DUPRE",
+      "date_extraction": "2025-10-23T02:45:42Z"
+    },
+    {
+      "numero_commande": "RT000423",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "OLIVIER BROSSARD",
+      "date_extraction": "2025-10-23T02:45:43Z"
+    },
+    {
+      "numero_commande": "RT000432",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FREDERIC CANDYLAKI",
+      "date_extraction": "2025-10-23T02:45:44Z"
+    },
+    {
+      "numero_commande": "RT000429",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "6A - Ouvriers",
+      "classification_interimaire": "A2",
+      "personne_absente": "AUDREY SORIA ARELLANO",
+      "date_extraction": "2025-10-23T02:45:45Z"
+    },
+    {
+      "numero_commande": "RT000428",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "6A - Ouvriers",
+      "classification_interimaire": "A2",
+      "personne_absente": "ANGELIQUE PEREZ",
+      "date_extraction": "2025-10-23T02:45:46Z"
     }
   ],
-  "lastUpdate": "2025-10-23T01:45:41.222Z",
+  "lastUpdate": "2025-10-23T02:45:48.874Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 895,
+    "totalCommandes": 904,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
