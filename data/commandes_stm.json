@@ -8378,12 +8378,84 @@
       "classification_interimaire": "A2",
       "personne_absente": "MIGUEL SAEZ",
       "date_extraction": "2025-10-23T05:47:01Z"
+    },
+    {
+      "numero_commande": "RT000384",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CLAIRE PELLENQ",
+      "date_extraction": "2025-10-23T06:45:34Z"
+    },
+    {
+      "numero_commande": "RT000378",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "6A - Ouvriers",
+      "classification_interimaire": "A2",
+      "personne_absente": "ERIC GUADOURI",
+      "date_extraction": "2025-10-23T06:45:35Z"
+    },
+    {
+      "numero_commande": "RT000396",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FLORENCE CALARNOU",
+      "date_extraction": "2025-10-23T06:45:36Z"
+    },
+    {
+      "numero_commande": "RT000399",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CECILIO LOPEZ",
+      "date_extraction": "2025-10-23T06:45:37Z"
+    },
+    {
+      "numero_commande": "RT000380",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CHRISTOPHE LAMBERT",
+      "date_extraction": "2025-10-23T06:45:38Z"
+    },
+    {
+      "numero_commande": "RT000397",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "6A - Ouvriers",
+      "classification_interimaire": "A2",
+      "personne_absente": "DAVID KEN",
+      "date_extraction": "2025-10-23T06:45:39Z"
+    },
+    {
+      "numero_commande": "RT000404",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Fabienne HUGUES",
+      "date_extraction": "2025-10-23T06:45:41Z"
+    },
+    {
+      "numero_commande": "RT000375",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAURENCE CAMLAY",
+      "date_extraction": "2025-10-23T06:45:42Z"
     }
   ],
-  "lastUpdate": "2025-10-23T05:47:05.791Z",
+  "lastUpdate": "2025-10-23T06:45:46.124Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 931,
+    "totalCommandes": 939,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
