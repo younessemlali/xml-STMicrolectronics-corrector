@@ -8657,12 +8657,75 @@
       "classification_interimaire": "A2",
       "personne_absente": "OLIVIER PELLEGRINO",
       "date_extraction": "2025-10-23T09:45:42Z"
+    },
+    {
+      "numero_commande": "RT000371",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Marine GANDELIN",
+      "date_extraction": "2025-10-23T10:45:46Z"
+    },
+    {
+      "numero_commande": "RT000332",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ANNIE CLARIMON",
+      "date_extraction": "2025-10-23T10:45:48Z"
+    },
+    {
+      "numero_commande": "RT000333",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "RADMILA DUCANOVIC",
+      "date_extraction": "2025-10-23T10:45:49Z"
+    },
+    {
+      "numero_commande": "RT000331",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "WALID BEN MOHAMED",
+      "date_extraction": "2025-10-23T10:45:50Z"
+    },
+    {
+      "numero_commande": "RT000330",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ABDEL-HAKIM KOURTICHE",
+      "date_extraction": "2025-10-23T10:45:51Z"
+    },
+    {
+      "numero_commande": "RT000345",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ERIC RODAT",
+      "date_extraction": "2025-10-23T10:45:52Z"
+    },
+    {
+      "numero_commande": "RT000348",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "EMILIEN MIGNEMI",
+      "date_extraction": "2025-10-23T10:45:53Z"
     }
   ],
-  "lastUpdate": "2025-10-23T09:45:45.411Z",
+  "lastUpdate": "2025-10-23T10:45:55.738Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 962,
+    "totalCommandes": 969,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
