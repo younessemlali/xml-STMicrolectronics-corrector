@@ -7892,12 +7892,93 @@
       "classification_interimaire": "A2",
       "personne_absente": "KARINE ROURE",
       "date_extraction": "2025-10-22T23:47:18Z"
+    },
+    {
+      "numero_commande": "RT001418",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ERIC RIVET",
+      "date_extraction": "2025-10-23T00:44:46Z"
+    },
+    {
+      "numero_commande": "RT000442",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Ouvriers",
+      "classification_interimaire": "A2",
+      "personne_absente": "CLAIRE ESCARRAS",
+      "date_extraction": "2025-10-23T00:45:26Z"
+    },
+    {
+      "numero_commande": "RT000462",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CECILIO LOPEZ",
+      "date_extraction": "2025-10-23T00:45:27Z"
+    },
+    {
+      "numero_commande": "RT000453",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CLAIRE PELLENQ",
+      "date_extraction": "2025-10-23T00:45:28Z"
+    },
+    {
+      "numero_commande": "RT000457",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CHRISTOPHE LAMBERT",
+      "date_extraction": "2025-10-23T00:45:29Z"
+    },
+    {
+      "numero_commande": "RT000458",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SAMUEL RABOUIN",
+      "date_extraction": "2025-10-23T00:45:30Z"
+    },
+    {
+      "numero_commande": "RT000470",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SOPHIE BONNOT",
+      "date_extraction": "2025-10-23T00:45:31Z"
+    },
+    {
+      "numero_commande": "RT000441",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NICOLAS BOYER",
+      "date_extraction": "2025-10-23T00:45:32Z"
+    },
+    {
+      "numero_commande": "RT000450",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Gwendoline BRUNEL",
+      "date_extraction": "2025-10-23T00:45:33Z"
     }
   ],
-  "lastUpdate": "2025-10-22T23:47:20.838Z",
+  "lastUpdate": "2025-10-23T00:45:35.347Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 877,
+    "totalCommandes": 886,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
