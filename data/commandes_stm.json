@@ -8855,12 +8855,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "STEVE REMY",
       "date_extraction": "2025-10-23T21:45:31Z"
+    },
+    {
+      "numero_commande": "RT001454",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JEAN GUILLAUME MILLET",
+      "date_extraction": "2025-10-23T22:45:00Z"
     }
   ],
-  "lastUpdate": "2025-10-23T21:46:28.172Z",
+  "lastUpdate": "2025-10-23T22:45:53.216Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 984,
+    "totalCommandes": 985,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
