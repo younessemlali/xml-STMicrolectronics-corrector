@@ -8720,12 +8720,75 @@
       "classification_interimaire": "A2",
       "personne_absente": "EMILIEN MIGNEMI",
       "date_extraction": "2025-10-23T10:45:53Z"
+    },
+    {
+      "numero_commande": "RT000334",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JEAN GUILLAUME MILLET",
+      "date_extraction": "2025-10-23T11:45:48Z"
+    },
+    {
+      "numero_commande": "RT000338",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SYLVIE MARTIN",
+      "date_extraction": "2025-10-23T11:45:49Z"
+    },
+    {
+      "numero_commande": "RT000343",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAETITIA COBALTO",
+      "date_extraction": "2025-10-23T11:45:50Z"
+    },
+    {
+      "numero_commande": "RT000335",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Gregory COOPMAN",
+      "date_extraction": "2025-10-23T11:45:51Z"
+    },
+    {
+      "numero_commande": "RT000347",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ADRIEN CAVAGLIA",
+      "date_extraction": "2025-10-23T11:45:52Z"
+    },
+    {
+      "numero_commande": "RT000344",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAETITIA COBALTO",
+      "date_extraction": "2025-10-23T11:45:53Z"
+    },
+    {
+      "numero_commande": "RT000339",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "BEATRICE LEDUC",
+      "date_extraction": "2025-10-23T11:45:54Z"
     }
   ],
-  "lastUpdate": "2025-10-23T10:45:55.738Z",
+  "lastUpdate": "2025-10-23T11:45:57.584Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 969,
+    "totalCommandes": 976,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
