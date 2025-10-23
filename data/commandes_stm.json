@@ -8810,12 +8810,57 @@
       "classification_interimaire": "A2",
       "personne_absente": "GAETAN MICHEL",
       "date_extraction": "2025-10-23T19:44:54Z"
+    },
+    {
+      "numero_commande": "RT001445",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAETITIA COLBATO",
+      "date_extraction": "2025-10-23T21:45:26Z"
+    },
+    {
+      "numero_commande": "RT001451",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FABIENNE HUGUES",
+      "date_extraction": "2025-10-23T21:45:28Z"
+    },
+    {
+      "numero_commande": "RT001447",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ADRIEN CAVAGLIA",
+      "date_extraction": "2025-10-23T21:45:29Z"
+    },
+    {
+      "numero_commande": "RT001439",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "KARIM MOUAZ",
+      "date_extraction": "2025-10-23T21:45:30Z"
+    },
+    {
+      "numero_commande": "CR002108",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "STEVE REMY",
+      "date_extraction": "2025-10-23T21:45:31Z"
     }
   ],
-  "lastUpdate": "2025-10-23T19:45:45.305Z",
+  "lastUpdate": "2025-10-23T21:46:28.172Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 979,
+    "totalCommandes": 984,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
