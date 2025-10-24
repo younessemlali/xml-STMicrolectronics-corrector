@@ -9287,12 +9287,57 @@
       "classification_interimaire": "A2",
       "personne_absente": "NATHALIE BONNARD",
       "date_extraction": "2025-10-24T19:45:31Z"
+    },
+    {
+      "numero_commande": "RT001514",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Hubert CHANDES",
+      "date_extraction": "2025-10-24T20:44:49Z"
+    },
+    {
+      "numero_commande": "RT001477",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "4A - TAM : Techniciens / Agents de ma?trise",
+      "classification_interimaire": "D7",
+      "personne_absente": "SERGE MEYER",
+      "date_extraction": "2025-10-24T20:44:50Z"
+    },
+    {
+      "numero_commande": "RT001496",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FABRICE RIVERO",
+      "date_extraction": "2025-10-24T20:44:51Z"
+    },
+    {
+      "numero_commande": "RT001497",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JULIEN NICOLAS",
+      "date_extraction": "2025-10-24T20:44:52Z"
+    },
+    {
+      "numero_commande": "RT001509",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ADAM ESCALES",
+      "date_extraction": "2025-10-24T20:44:53Z"
     }
   ],
-  "lastUpdate": "2025-10-24T19:46:41.691Z",
+  "lastUpdate": "2025-10-24T20:45:41.179Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1032,
+    "totalCommandes": 1037,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
