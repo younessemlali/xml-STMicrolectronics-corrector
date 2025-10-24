@@ -9278,12 +9278,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "KARINE ROURE",
       "date_extraction": "2025-10-24T18:45:55Z"
+    },
+    {
+      "numero_commande": "RT001506",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NATHALIE BONNARD",
+      "date_extraction": "2025-10-24T19:45:31Z"
     }
   ],
-  "lastUpdate": "2025-10-24T18:46:50.438Z",
+  "lastUpdate": "2025-10-24T19:46:41.691Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1031,
+    "totalCommandes": 1032,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
