@@ -8936,12 +8936,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "RADMILA DUCANOVIC",
       "date_extraction": "2025-10-24T02:44:52Z"
+    },
+    {
+      "numero_commande": "RT001449",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SANDRINE MAUGER",
+      "date_extraction": "2025-10-24T03:44:55Z"
     }
   ],
-  "lastUpdate": "2025-10-24T02:45:39.308Z",
+  "lastUpdate": "2025-10-24T03:45:45.590Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 993,
+    "totalCommandes": 994,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
