@@ -8918,12 +8918,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "NATHAN VIARD",
       "date_extraction": "2025-10-24T01:45:17Z"
+    },
+    {
+      "numero_commande": "RT001441",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SYLVIE MARTIN",
+      "date_extraction": "2025-10-24T02:44:50Z"
+    },
+    {
+      "numero_commande": "RT001437",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "RADMILA DUCANOVIC",
+      "date_extraction": "2025-10-24T02:44:52Z"
     }
   ],
-  "lastUpdate": "2025-10-24T01:46:15.280Z",
+  "lastUpdate": "2025-10-24T02:45:39.308Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 991,
+    "totalCommandes": 993,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
