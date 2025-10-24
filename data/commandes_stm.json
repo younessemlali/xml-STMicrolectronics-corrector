@@ -9179,12 +9179,75 @@
       "classification_interimaire": "A2",
       "personne_absente": "LAURENT NICOLAS",
       "date_extraction": "2025-10-24T16:47:17Z"
+    },
+    {
+      "numero_commande": "RT001495",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JEAN-PHILIPPE MARTINS",
+      "date_extraction": "2025-10-24T17:44:51Z"
+    },
+    {
+      "numero_commande": "RT001493",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "GEOFFREY DJEBORI",
+      "date_extraction": "2025-10-24T17:44:52Z"
+    },
+    {
+      "numero_commande": "RT001513",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Sebastien ROGIER",
+      "date_extraction": "2025-10-24T17:44:53Z"
+    },
+    {
+      "numero_commande": "RT001502",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "4A - TAM : Techniciens / Agents de ma?trise",
+      "classification_interimaire": "D7",
+      "personne_absente": "ELODIE ROBERRINI-NEVEU",
+      "date_extraction": "2025-10-24T17:44:54Z"
+    },
+    {
+      "numero_commande": "RT001479",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "EDDY TENZA",
+      "date_extraction": "2025-10-24T17:44:55Z"
+    },
+    {
+      "numero_commande": "RT001480",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAETITIA MAHEUX",
+      "date_extraction": "2025-10-24T17:44:56Z"
+    },
+    {
+      "numero_commande": "RT001503",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "YANNICK TOSELLI",
+      "date_extraction": "2025-10-24T17:44:57Z"
     }
   ],
-  "lastUpdate": "2025-10-24T16:48:21.543Z",
+  "lastUpdate": "2025-10-24T17:45:42.391Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1020,
+    "totalCommandes": 1027,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
