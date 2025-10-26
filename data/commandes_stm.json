@@ -9413,12 +9413,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "LAURENCE CAMLAY",
       "date_extraction": "2025-10-25T07:44:54Z"
+    },
+    {
+      "numero_commande": "CR002066",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Mounir BENALI",
+      "date_extraction": "2025-10-26T18:44:51Z"
     }
   ],
-  "lastUpdate": "2025-10-25T07:45:44.479Z",
+  "lastUpdate": "2025-10-26T18:45:44.958Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1046,
+    "totalCommandes": 1047,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
