@@ -9422,12 +9422,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "Mounir BENALI",
       "date_extraction": "2025-10-26T18:44:51Z"
+    },
+    {
+      "numero_commande": "RT001519",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Ouvriers",
+      "classification_interimaire": "A2",
+      "personne_absente": "ENZO RICCI",
+      "date_extraction": "2025-10-27T09:44:56Z"
     }
   ],
-  "lastUpdate": "2025-10-26T18:45:44.958Z",
+  "lastUpdate": "2025-10-27T09:46:25.015Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1047,
+    "totalCommandes": 1048,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
