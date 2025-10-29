@@ -9449,12 +9449,48 @@
       "classification_interimaire": "A2",
       "personne_absente": "Anthony GONCALVES",
       "date_extraction": "2025-10-29T15:45:00Z"
+    },
+    {
+      "numero_commande": "RT001534",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Sonia BERNARD",
+      "date_extraction": "2025-10-29T16:44:53Z"
+    },
+    {
+      "numero_commande": "RT001537",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "PAMELA BONHOMME",
+      "date_extraction": "2025-10-29T16:44:54Z"
+    },
+    {
+      "numero_commande": "RT001537",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "PAMELA BONHOMME",
+      "date_extraction": "2025-10-29T16:44:55Z"
+    },
+    {
+      "numero_commande": "RT001526",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JEAN NOEL PILLOT",
+      "date_extraction": "2025-10-29T16:44:56Z"
     }
   ],
-  "lastUpdate": "2025-10-29T15:45:52.486Z",
+  "lastUpdate": "2025-10-29T16:45:46.637Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1050,
+    "totalCommandes": 1054,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
