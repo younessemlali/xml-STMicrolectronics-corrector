@@ -9548,12 +9548,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "MELANIE BRUNEL",
       "date_extraction": "2025-10-29T23:45:07Z"
+    },
+    {
+      "numero_commande": "CR002155",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LOIC LABBAYE",
+      "date_extraction": "2025-10-30T15:44:57Z"
     }
   ],
-  "lastUpdate": "2025-10-29T23:46:00.222Z",
+  "lastUpdate": "2025-10-30T15:45:55.472Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1061,
+    "totalCommandes": 1062,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
