@@ -9800,12 +9800,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "BERNARD DOAN",
       "date_extraction": "2025-10-31T10:44:54Z"
+    },
+    {
+      "numero_commande": "RT001600",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "ATAM - Technicien et agent de ma?trise",
+      "classification_interimaire": "C5",
+      "personne_absente": "MARIE-JEANNE FRECH",
+      "date_extraction": "2025-10-31T11:45:25Z"
     }
   ],
-  "lastUpdate": "2025-10-31T10:45:49.708Z",
+  "lastUpdate": "2025-10-31T11:46:26.837Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1089,
+    "totalCommandes": 1090,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
