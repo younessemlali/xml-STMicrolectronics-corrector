@@ -9611,12 +9611,57 @@
       "classification_interimaire": "A2",
       "personne_absente": "ALAIN GONZALEZ",
       "date_extraction": "2025-10-30T23:44:55Z"
+    },
+    {
+      "numero_commande": "RT001589",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CECILE SANCHEZ",
+      "date_extraction": "2025-10-31T01:44:50Z"
+    },
+    {
+      "numero_commande": "RT001583",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "AURELIEN BARLAND",
+      "date_extraction": "2025-10-31T01:44:51Z"
+    },
+    {
+      "numero_commande": "RT001580",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FABRICE RIVERO",
+      "date_extraction": "2025-10-31T01:44:53Z"
+    },
+    {
+      "numero_commande": "RT001592",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "YANNICK TOSELLI",
+      "date_extraction": "2025-10-31T01:44:54Z"
+    },
+    {
+      "numero_commande": "RT001578",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JEAN-PHILIPPE MARTINS",
+      "date_extraction": "2025-10-31T01:44:55Z"
     }
   ],
-  "lastUpdate": "2025-10-30T23:45:54.219Z",
+  "lastUpdate": "2025-10-31T01:45:46.921Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1068,
+    "totalCommandes": 1073,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
