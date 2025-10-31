@@ -9782,12 +9782,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "alexis potin",
       "date_extraction": "2025-10-31T06:44:55Z"
+    },
+    {
+      "numero_commande": "CD000300",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "PIERICK RUFRAY",
+      "date_extraction": "2025-10-31T08:44:56Z"
     }
   ],
-  "lastUpdate": "2025-10-31T06:45:52.378Z",
+  "lastUpdate": "2025-10-31T08:45:51.525Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1087,
+    "totalCommandes": 1088,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
