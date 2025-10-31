@@ -9935,12 +9935,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "BEATRICE RIZZO",
       "date_extraction": "2025-10-31T18:45:30Z"
+    },
+    {
+      "numero_commande": "RT001567",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "4A - TAM : Techniciens / Agents de ma?trise",
+      "classification_interimaire": "D7",
+      "personne_absente": "SERGE MEYER",
+      "date_extraction": "2025-10-31T20:45:30Z"
     }
   ],
-  "lastUpdate": "2025-10-31T18:46:21.546Z",
+  "lastUpdate": "2025-10-31T20:46:40.918Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1104,
+    "totalCommandes": 1105,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
