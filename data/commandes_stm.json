@@ -9692,12 +9692,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "JEREMY ZAGARRIGO",
       "date_extraction": "2025-10-31T02:45:02Z"
+    },
+    {
+      "numero_commande": "RT001584",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "THOMAS BARUCCI",
+      "date_extraction": "2025-10-31T03:44:54Z"
+    },
+    {
+      "numero_commande": "RT001586",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SEBASTIEN ROGIER",
+      "date_extraction": "2025-10-31T03:44:55Z"
     }
   ],
-  "lastUpdate": "2025-10-31T02:45:52.570Z",
+  "lastUpdate": "2025-10-31T03:45:48.539Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1077,
+    "totalCommandes": 1079,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
