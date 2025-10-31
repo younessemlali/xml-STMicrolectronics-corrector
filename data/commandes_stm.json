@@ -9908,12 +9908,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "CHANTAL MAYANS",
       "date_extraction": "2025-10-31T14:45:39Z"
+    },
+    {
+      "numero_commande": "RT001553",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CATHY HARRAULT",
+      "date_extraction": "2025-10-31T15:44:52Z"
     }
   ],
-  "lastUpdate": "2025-10-31T14:46:34.207Z",
+  "lastUpdate": "2025-10-31T15:45:39.840Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1101,
+    "totalCommandes": 1102,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
