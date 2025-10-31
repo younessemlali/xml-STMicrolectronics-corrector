@@ -9926,12 +9926,21 @@
       "classification_interimaire": "D7",
       "personne_absente": "DANIEL TARAN",
       "date_extraction": "2025-10-31T16:45:20Z"
+    },
+    {
+      "numero_commande": "RT001602",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "BEATRICE RIZZO",
+      "date_extraction": "2025-10-31T18:45:30Z"
     }
   ],
-  "lastUpdate": "2025-10-31T16:46:19.315Z",
+  "lastUpdate": "2025-10-31T18:46:21.546Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1103,
+    "totalCommandes": 1104,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
