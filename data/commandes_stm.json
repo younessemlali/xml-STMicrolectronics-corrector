@@ -9917,12 +9917,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "CATHY HARRAULT",
       "date_extraction": "2025-10-31T15:44:52Z"
+    },
+    {
+      "numero_commande": "RT001518",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "ATAM - Technicien et agent de ma?trise",
+      "classification_interimaire": "D7",
+      "personne_absente": "DANIEL TARAN",
+      "date_extraction": "2025-10-31T16:45:20Z"
     }
   ],
-  "lastUpdate": "2025-10-31T15:45:39.840Z",
+  "lastUpdate": "2025-10-31T16:46:19.315Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1102,
+    "totalCommandes": 1103,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
