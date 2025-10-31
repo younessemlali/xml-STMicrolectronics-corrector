@@ -9962,12 +9962,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "DAVID KEN",
       "date_extraction": "2025-10-31T21:45:39Z"
+    },
+    {
+      "numero_commande": "RT001560",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FREDERIC HARET",
+      "date_extraction": "2025-10-31T23:44:59Z"
     }
   ],
-  "lastUpdate": "2025-10-31T21:46:33.533Z",
+  "lastUpdate": "2025-10-31T23:45:47.817Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1107,
+    "totalCommandes": 1108,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
