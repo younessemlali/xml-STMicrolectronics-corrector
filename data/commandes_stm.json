@@ -9809,12 +9809,75 @@
       "classification_interimaire": "C5",
       "personne_absente": "MARIE-JEANNE FRECH",
       "date_extraction": "2025-10-31T11:45:25Z"
+    },
+    {
+      "numero_commande": "RT001569",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "EDDY TENZA",
+      "date_extraction": "2025-10-31T13:44:52Z"
+    },
+    {
+      "numero_commande": "RT001562",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FABRICE SERRA",
+      "date_extraction": "2025-10-31T13:44:53Z"
+    },
+    {
+      "numero_commande": "RT001559",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CHRISTOPHE LAMBERT",
+      "date_extraction": "2025-10-31T13:44:54Z"
+    },
+    {
+      "numero_commande": "RT001564",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "KARINE ROURE",
+      "date_extraction": "2025-10-31T13:44:55Z"
+    },
+    {
+      "numero_commande": "RT001556",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CLAIRE PELLENQ",
+      "date_extraction": "2025-10-31T13:44:56Z"
+    },
+    {
+      "numero_commande": "RT001561",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MIGUEL SAEZ",
+      "date_extraction": "2025-10-31T13:44:57Z"
+    },
+    {
+      "numero_commande": "RT001598",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "PATRICK CIBRARI",
+      "date_extraction": "2025-10-31T13:44:59Z"
     }
   ],
-  "lastUpdate": "2025-10-31T11:46:26.837Z",
+  "lastUpdate": "2025-10-31T13:45:44.329Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1090,
+    "totalCommandes": 1097,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
