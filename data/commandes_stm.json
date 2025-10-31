@@ -9710,12 +9710,57 @@
       "classification_interimaire": "A2",
       "personne_absente": "SEBASTIEN ROGIER",
       "date_extraction": "2025-10-31T03:44:55Z"
+    },
+    {
+      "numero_commande": "RT001585",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ANNE CATHERINE SANTOS",
+      "date_extraction": "2025-10-31T04:45:30Z"
+    },
+    {
+      "numero_commande": "RT001596",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NATHALIE BONNARD",
+      "date_extraction": "2025-10-31T04:45:31Z"
+    },
+    {
+      "numero_commande": "RT001576",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAETITIA SEMANNE",
+      "date_extraction": "2025-10-31T04:45:32Z"
+    },
+    {
+      "numero_commande": "RT001593",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JEROME HOURS",
+      "date_extraction": "2025-10-31T04:45:33Z"
+    },
+    {
+      "numero_commande": "RT001591",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "4A - TAM : Techniciens / Agents de ma?trise",
+      "classification_interimaire": "D7",
+      "personne_absente": "ELODIE ROBERRINI-NEVEU",
+      "date_extraction": "2025-10-31T04:45:35Z"
     }
   ],
-  "lastUpdate": "2025-10-31T03:45:48.539Z",
+  "lastUpdate": "2025-10-31T04:46:31.718Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1079,
+    "totalCommandes": 1084,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
