@@ -9971,12 +9971,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "FREDERIC HARET",
       "date_extraction": "2025-10-31T23:44:59Z"
+    },
+    {
+      "numero_commande": "CR002193",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Teresa OLIVEIRA DA SILVA",
+      "date_extraction": "2025-11-02T18:45:18Z"
     }
   ],
-  "lastUpdate": "2025-10-31T23:45:47.817Z",
+  "lastUpdate": "2025-11-02T18:46:20.164Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1108,
+    "totalCommandes": 1109,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
