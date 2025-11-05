@@ -10034,12 +10034,57 @@
       "classification_interimaire": "A2",
       "personne_absente": "Eric SAUTEREAU",
       "date_extraction": "2025-11-05T16:45:04Z"
+    },
+    {
+      "numero_commande": "RT001628",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FABRICE SERRA",
+      "date_extraction": "2025-11-05T18:45:21Z"
+    },
+    {
+      "numero_commande": "RT001631",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "KARINE ROURE",
+      "date_extraction": "2025-11-05T18:45:22Z"
+    },
+    {
+      "numero_commande": "RT001611",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JEAN MICHEL ROUX",
+      "date_extraction": "2025-11-05T18:45:23Z"
+    },
+    {
+      "numero_commande": "RT001613",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LUCAS LEFRANCOIS",
+      "date_extraction": "2025-11-05T18:45:24Z"
+    },
+    {
+      "numero_commande": "RT001635",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAETITIA MAHEUX",
+      "date_extraction": "2025-11-05T18:45:25Z"
     }
   ],
-  "lastUpdate": "2025-11-05T16:46:03.061Z",
+  "lastUpdate": "2025-11-05T18:46:30.860Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1115,
+    "totalCommandes": 1120,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
