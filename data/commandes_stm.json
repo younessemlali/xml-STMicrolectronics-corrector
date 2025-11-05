@@ -10016,12 +10016,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "Deborah NICOSIA",
       "date_extraction": "2025-11-03T20:47:52Z"
+    },
+    {
+      "numero_commande": "CR002225",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Sebastien ZELLER",
+      "date_extraction": "2025-11-05T12:44:53Z"
     }
   ],
-  "lastUpdate": "2025-11-03T20:49:19.452Z",
+  "lastUpdate": "2025-11-05T12:45:51.599Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1113,
+    "totalCommandes": 1114,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
