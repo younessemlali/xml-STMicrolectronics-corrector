@@ -10205,12 +10205,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "DAVID KEN",
       "date_extraction": "2025-11-06T13:45:03Z"
+    },
+    {
+      "numero_commande": "RT001642",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CIANTI Isabelle",
+      "date_extraction": "2025-11-06T18:44:59Z"
     }
   ],
-  "lastUpdate": "2025-11-06T13:45:51.936Z",
+  "lastUpdate": "2025-11-06T18:45:53.417Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1134,
+    "totalCommandes": 1135,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
