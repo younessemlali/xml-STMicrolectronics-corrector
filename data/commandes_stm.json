@@ -10169,12 +10169,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "Sabrina LEGUILLOU",
       "date_extraction": "2025-11-06T01:44:50Z"
+    },
+    {
+      "numero_commande": "RT001625",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CHRISTOPHE LAMBERT",
+      "date_extraction": "2025-11-06T08:44:52Z"
     }
   ],
-  "lastUpdate": "2025-11-06T01:45:40.601Z",
+  "lastUpdate": "2025-11-06T08:45:40.983Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1130,
+    "totalCommandes": 1131,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
