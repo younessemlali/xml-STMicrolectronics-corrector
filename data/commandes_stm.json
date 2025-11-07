@@ -10340,12 +10340,48 @@
       "classification_interimaire": "A2",
       "personne_absente": "Wildrid CANTON",
       "date_extraction": "2025-11-07T00:45:00Z"
+    },
+    {
+      "numero_commande": "RT001653",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JEAN-PHILIPPE MARTINS",
+      "date_extraction": "2025-11-07T01:45:58Z"
+    },
+    {
+      "numero_commande": "RT001673",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "PATRICK CIBRARI",
+      "date_extraction": "2025-11-07T01:45:59Z"
+    },
+    {
+      "numero_commande": "RT001623",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FLORENCE CALARNOU",
+      "date_extraction": "2025-11-07T01:46:00Z"
+    },
+    {
+      "numero_commande": "CR002246",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MARC RENCURET",
+      "date_extraction": "2025-11-07T01:46:01Z"
     }
   ],
-  "lastUpdate": "2025-11-07T00:45:58.508Z",
+  "lastUpdate": "2025-11-07T01:47:29.313Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1149,
+    "totalCommandes": 1153,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
