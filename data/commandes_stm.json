@@ -10556,12 +10556,21 @@
       "classification_interimaire": "B4",
       "personne_absente": "DANIEL POLITO",
       "date_extraction": "2025-11-07T10:44:53Z"
+    },
+    {
+      "numero_commande": "RT001663",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateurs",
+      "classification_interimaire": "A2",
+      "personne_absente": "Aurelien BARLAND",
+      "date_extraction": "2025-11-07T11:44:52Z"
     }
   ],
-  "lastUpdate": "2025-11-07T10:45:40.886Z",
+  "lastUpdate": "2025-11-07T11:45:47.650Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1173,
+    "totalCommandes": 1174,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
