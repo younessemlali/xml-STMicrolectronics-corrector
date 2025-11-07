@@ -10538,12 +10538,30 @@
       "classification_interimaire": "D7",
       "personne_absente": "DANIEL TARAN",
       "date_extraction": "2025-11-07T08:45:12Z"
+    },
+    {
+      "numero_commande": "RT001709",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MARC VAGLICA",
+      "date_extraction": "2025-11-07T10:44:52Z"
+    },
+    {
+      "numero_commande": "CD000326",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "B4",
+      "personne_absente": "DANIEL POLITO",
+      "date_extraction": "2025-11-07T10:44:53Z"
     }
   ],
-  "lastUpdate": "2025-11-07T08:46:05.559Z",
+  "lastUpdate": "2025-11-07T10:45:40.886Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1171,
+    "totalCommandes": 1173,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
