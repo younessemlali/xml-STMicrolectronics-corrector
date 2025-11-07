@@ -10493,12 +10493,57 @@
       "classification_interimaire": "A2",
       "personne_absente": "FABIENNE DOZOL",
       "date_extraction": "2025-11-07T07:46:06Z"
+    },
+    {
+      "numero_commande": "RT001658",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "AURELIEN BARLAND",
+      "date_extraction": "2025-11-07T08:45:07Z"
+    },
+    {
+      "numero_commande": "RT001672",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "PIERRE DOBRINA",
+      "date_extraction": "2025-11-07T08:45:08Z"
+    },
+    {
+      "numero_commande": "RT001660",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ANNE CATHERINE SANTOS",
+      "date_extraction": "2025-11-07T08:45:09Z"
+    },
+    {
+      "numero_commande": "RT001696",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NATHALIE FERRARA",
+      "date_extraction": "2025-11-07T08:45:11Z"
+    },
+    {
+      "numero_commande": "RT001708",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "ATAM - Technicien et agent de ma?trise",
+      "classification_interimaire": "D7",
+      "personne_absente": "DANIEL TARAN",
+      "date_extraction": "2025-11-07T08:45:12Z"
     }
   ],
-  "lastUpdate": "2025-11-07T07:47:12.670Z",
+  "lastUpdate": "2025-11-07T08:46:05.559Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1166,
+    "totalCommandes": 1171,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
