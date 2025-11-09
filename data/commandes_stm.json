@@ -10646,12 +10646,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "SOPHIE MORIN",
       "date_extraction": "2025-11-07T20:44:54Z"
+    },
+    {
+      "numero_commande": "CR002284",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Teresa OLIVEIRA DA SILVA",
+      "date_extraction": "2025-11-09T17:46:01Z"
     }
   ],
-  "lastUpdate": "2025-11-07T20:46:17.308Z",
+  "lastUpdate": "2025-11-09T17:47:02.804Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1183,
+    "totalCommandes": 1184,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
