@@ -10970,12 +10970,75 @@
       "classification_interimaire": "A2",
       "personne_absente": "ADAM ESCALES",
       "date_extraction": "2025-11-13T21:44:53Z"
+    },
+    {
+      "numero_commande": "RT001761",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CHANTAL MAYANS",
+      "date_extraction": "2025-11-13T22:45:08Z"
+    },
+    {
+      "numero_commande": "RT001736",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "4A - TAM : Techniciens / Agents de ma?trise",
+      "classification_interimaire": "D7",
+      "personne_absente": "ROBERRINI-NEVEU ELODIE",
+      "date_extraction": "2025-11-13T22:45:09Z"
+    },
+    {
+      "numero_commande": "RT001765",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CHRISTOPHE LAMBERT",
+      "date_extraction": "2025-11-13T22:45:10Z"
+    },
+    {
+      "numero_commande": "RT001723",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SEBASTIEN MOUTTE",
+      "date_extraction": "2025-11-13T22:45:12Z"
+    },
+    {
+      "numero_commande": "RT001738",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Nils THIBON",
+      "date_extraction": "2025-11-13T22:45:13Z"
+    },
+    {
+      "numero_commande": "RT001734",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Clement PALUSSIERE",
+      "date_extraction": "2025-11-13T22:45:14Z"
+    },
+    {
+      "numero_commande": "RT001768",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FABRICE SERRA",
+      "date_extraction": "2025-11-13T22:45:16Z"
     }
   ],
-  "lastUpdate": "2025-11-13T21:45:41.408Z",
+  "lastUpdate": "2025-11-13T22:46:15.479Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1219,
+    "totalCommandes": 1226,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
