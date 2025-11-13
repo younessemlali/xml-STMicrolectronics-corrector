@@ -10889,12 +10889,75 @@
       "classification_interimaire": "A2",
       "personne_absente": "JEAN CHRISTOPHE BEVILACQUA",
       "date_extraction": "2025-11-13T19:44:56Z"
+    },
+    {
+      "numero_commande": "RT001730",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Rachid BENAZZA",
+      "date_extraction": "2025-11-13T20:44:50Z"
+    },
+    {
+      "numero_commande": "RT001742",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "PIERRE DOBRINA",
+      "date_extraction": "2025-11-13T20:44:51Z"
+    },
+    {
+      "numero_commande": "RT001729",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateurs",
+      "classification_interimaire": "A2",
+      "personne_absente": "Lionel GHIANDAI",
+      "date_extraction": "2025-11-13T20:44:52Z"
+    },
+    {
+      "numero_commande": "RT001715",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ELODIE KEYICHIAN",
+      "date_extraction": "2025-11-13T20:44:53Z"
+    },
+    {
+      "numero_commande": "RT001721",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FABRICE RIVERO",
+      "date_extraction": "2025-11-13T20:44:54Z"
+    },
+    {
+      "numero_commande": "RT001740",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAURENCE CAMLAY",
+      "date_extraction": "2025-11-13T20:44:55Z"
+    },
+    {
+      "numero_commande": "RT001735",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NICOLAS CHAISSAC",
+      "date_extraction": "2025-11-13T20:44:56Z"
     }
   ],
-  "lastUpdate": "2025-11-13T19:45:46.294Z",
+  "lastUpdate": "2025-11-13T20:45:42.156Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1210,
+    "totalCommandes": 1217,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
