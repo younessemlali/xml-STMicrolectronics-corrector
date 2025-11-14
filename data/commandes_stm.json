@@ -11276,12 +11276,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "JEAN PHILIPPE MARTINS",
       "date_extraction": "2025-11-14T08:44:50Z"
+    },
+    {
+      "numero_commande": "RT001731",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SABRINA LEGUILLOU",
+      "date_extraction": "2025-11-14T18:47:50Z"
+    },
+    {
+      "numero_commande": "CD000332",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ZACHARIE LETT",
+      "date_extraction": "2025-11-14T18:47:52Z"
     }
   ],
-  "lastUpdate": "2025-11-14T08:45:43.435Z",
+  "lastUpdate": "2025-11-14T18:49:14.904Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1253,
+    "totalCommandes": 1255,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
