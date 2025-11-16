@@ -11456,12 +11456,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "Victor CIARAVINO",
       "date_extraction": "2025-11-16T04:45:47Z"
+    },
+    {
+      "numero_commande": "CR002346",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Francois DA SILVA PAISANA",
+      "date_extraction": "2025-11-16T15:45:32Z"
+    },
+    {
+      "numero_commande": "CR002345",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Louis PELLEGRIN",
+      "date_extraction": "2025-11-16T15:45:33Z"
     }
   ],
-  "lastUpdate": "2025-11-16T04:47:05.244Z",
+  "lastUpdate": "2025-11-16T15:46:34.337Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1273,
+    "totalCommandes": 1275,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
