@@ -11303,12 +11303,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "MORGANE HOUILLON",
       "date_extraction": "2025-11-14T21:44:54Z"
+    },
+    {
+      "numero_commande": "CR002360",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Teresa OLIVEIRA DA SILVA",
+      "date_extraction": "2025-11-16T01:44:47Z"
     }
   ],
-  "lastUpdate": "2025-11-14T21:45:47.005Z",
+  "lastUpdate": "2025-11-16T01:45:33.118Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1256,
+    "totalCommandes": 1257,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
