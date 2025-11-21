@@ -11573,12 +11573,21 @@
       "classification_interimaire": "A2",
       "personne_absente": null,
       "date_extraction": "2025-11-21T00:46:05Z"
+    },
+    {
+      "numero_commande": "RT001812",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - OP?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Christelle THIRIAT",
+      "date_extraction": "2025-11-21T04:45:31Z"
     }
   ],
-  "lastUpdate": "2025-11-21T00:47:14.001Z",
+  "lastUpdate": "2025-11-21T04:46:28.954Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1286,
+    "totalCommandes": 1287,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
