@@ -11546,12 +11546,39 @@
       "classification_interimaire": "A2",
       "personne_absente": "NELLY FOURNIER",
       "date_extraction": "2025-11-20T03:44:50Z"
+    },
+    {
+      "numero_commande": "CD000343",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ZACHARIE LETT",
+      "date_extraction": "2025-11-21T00:46:02Z"
+    },
+    {
+      "numero_commande": "CD000340",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MORGANE HOUILLON",
+      "date_extraction": "2025-11-21T00:46:03Z"
+    },
+    {
+      "numero_commande": "CD000339",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": null,
+      "date_extraction": "2025-11-21T00:46:05Z"
     }
   ],
-  "lastUpdate": "2025-11-20T03:45:35.963Z",
+  "lastUpdate": "2025-11-21T00:47:14.001Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1283,
+    "totalCommandes": 1286,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
