@@ -12194,12 +12194,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "WALID BEN MOHAMED",
       "date_extraction": "2025-11-21T21:45:01Z"
+    },
+    {
+      "numero_commande": "CR002448",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Teresa OLIVEIRA DA SILVA",
+      "date_extraction": "2025-11-23T21:45:04Z"
     }
   ],
-  "lastUpdate": "2025-11-21T21:45:34.948Z",
+  "lastUpdate": "2025-11-23T21:45:58.324Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1355,
+    "totalCommandes": 1356,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
