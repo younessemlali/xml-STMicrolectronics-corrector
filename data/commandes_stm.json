@@ -12338,12 +12338,30 @@
       "classification_interimaire": "D7",
       "personne_absente": "DANIEL TARAN",
       "date_extraction": "2025-11-25T15:45:23Z"
+    },
+    {
+      "numero_commande": "CR002457",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "C?line PRINCIPE",
+      "date_extraction": "2025-11-26T09:45:35Z"
+    },
+    {
+      "numero_commande": "CR002456",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Eric SAUTEREAU",
+      "date_extraction": "2025-11-26T09:45:36Z"
     }
   ],
-  "lastUpdate": "2025-11-25T15:46:05.595Z",
+  "lastUpdate": "2025-11-26T09:46:30.042Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1371,
+    "totalCommandes": 1373,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
