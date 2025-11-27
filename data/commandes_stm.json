@@ -12410,12 +12410,57 @@
       "classification_interimaire": "A2",
       "personne_absente": "MICHAEL CHIRA",
       "date_extraction": "2025-11-27T11:49:05Z"
+    },
+    {
+      "numero_commande": "RT001917",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Laura MALAVASI",
+      "date_extraction": "2025-11-27T13:45:06Z"
+    },
+    {
+      "numero_commande": "RT001908",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ISABELLE CIANTI",
+      "date_extraction": "2025-11-27T13:45:07Z"
+    },
+    {
+      "numero_commande": "RT001904",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "RAPHAEL BATAILLE",
+      "date_extraction": "2025-11-27T13:45:08Z"
+    },
+    {
+      "numero_commande": "RT001901",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SARA MARTINEZ HIGUERA",
+      "date_extraction": "2025-11-27T13:45:09Z"
+    },
+    {
+      "numero_commande": "RT001917",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Laura MALAVASI",
+      "date_extraction": "2025-11-27T13:45:11Z"
     }
   ],
-  "lastUpdate": "2025-11-27T11:50:55.381Z",
+  "lastUpdate": "2025-11-27T13:46:11.358Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1379,
+    "totalCommandes": 1384,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
