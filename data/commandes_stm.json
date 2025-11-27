@@ -12365,12 +12365,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "Jessie BUSNEL",
       "date_extraction": "2025-11-26T13:44:50Z"
+    },
+    {
+      "numero_commande": "CR002495",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NATHALIE FERRERE",
+      "date_extraction": "2025-11-27T03:45:27Z"
     }
   ],
-  "lastUpdate": "2025-11-26T13:45:36.616Z",
+  "lastUpdate": "2025-11-27T03:46:28.172Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1374,
+    "totalCommandes": 1375,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
