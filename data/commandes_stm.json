@@ -12374,12 +12374,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "NATHALIE FERRERE",
       "date_extraction": "2025-11-27T03:45:27Z"
+    },
+    {
+      "numero_commande": "CR002491",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Patrice Bernard",
+      "date_extraction": "2025-11-27T04:44:51Z"
     }
   ],
-  "lastUpdate": "2025-11-27T03:46:28.172Z",
+  "lastUpdate": "2025-11-27T04:45:45.581Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1375,
+    "totalCommandes": 1376,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
