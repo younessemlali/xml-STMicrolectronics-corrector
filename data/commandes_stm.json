@@ -12383,12 +12383,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "Patrice Bernard",
       "date_extraction": "2025-11-27T04:44:51Z"
+    },
+    {
+      "numero_commande": "RT001895",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MELANIE BRUNEL",
+      "date_extraction": "2025-11-27T10:45:59Z"
     }
   ],
-  "lastUpdate": "2025-11-27T04:45:45.581Z",
+  "lastUpdate": "2025-11-27T10:47:02.305Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1376,
+    "totalCommandes": 1377,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
