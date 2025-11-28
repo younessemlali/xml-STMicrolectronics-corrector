@@ -12725,12 +12725,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "YANNICK TOSELLI",
       "date_extraction": "2025-11-28T16:45:14Z"
+    },
+    {
+      "numero_commande": "RT001962",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "OLIVIER PELLEGRINO",
+      "date_extraction": "2025-11-28T17:44:48Z"
+    },
+    {
+      "numero_commande": "RT001979",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ADAM ESCALES",
+      "date_extraction": "2025-11-28T17:44:49Z"
     }
   ],
-  "lastUpdate": "2025-11-28T16:46:10.094Z",
+  "lastUpdate": "2025-11-28T17:45:40.411Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1414,
+    "totalCommandes": 1416,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
