@@ -12797,12 +12797,39 @@
       "classification_interimaire": "A2",
       "personne_absente": "PIERRE DOBRINA",
       "date_extraction": "2025-11-28T18:44:57Z"
+    },
+    {
+      "numero_commande": "RT001928",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "DAVID KEN",
+      "date_extraction": "2025-11-28T19:44:55Z"
+    },
+    {
+      "numero_commande": "RT001929",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CHANTAL MAYANS",
+      "date_extraction": "2025-11-28T19:44:56Z"
+    },
+    {
+      "numero_commande": "RT001966",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "THOMAS BARUCCI",
+      "date_extraction": "2025-11-28T19:44:57Z"
     }
   ],
-  "lastUpdate": "2025-11-28T18:45:45.925Z",
+  "lastUpdate": "2025-11-28T19:45:51.311Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1422,
+    "totalCommandes": 1425,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
