@@ -12608,12 +12608,57 @@
       "classification_interimaire": "A2",
       "personne_absente": "CECILIO LOPEZ",
       "date_extraction": "2025-11-28T08:44:56Z"
+    },
+    {
+      "numero_commande": "RT001933",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ERIC GUADOURI",
+      "date_extraction": "2025-11-28T09:45:04Z"
+    },
+    {
+      "numero_commande": "RT001949",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "EDDY TENZA",
+      "date_extraction": "2025-11-28T09:45:05Z"
+    },
+    {
+      "numero_commande": "RT001942",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NORA ZEMMAR",
+      "date_extraction": "2025-11-28T09:45:06Z"
+    },
+    {
+      "numero_commande": "RT001931",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FLORENCE CALARNOU",
+      "date_extraction": "2025-11-28T09:45:07Z"
+    },
+    {
+      "numero_commande": "RT001943",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "OCEANE DARRAS",
+      "date_extraction": "2025-11-28T09:45:08Z"
     }
   ],
-  "lastUpdate": "2025-11-28T08:45:45.657Z",
+  "lastUpdate": "2025-11-28T09:46:00.643Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1401,
+    "totalCommandes": 1406,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
