@@ -12698,12 +12698,39 @@
       "classification_interimaire": "D8",
       "personne_absente": "MARC TIPA",
       "date_extraction": "2025-11-28T15:45:06Z"
+    },
+    {
+      "numero_commande": "RT001954",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Ouvriers",
+      "classification_interimaire": "A2",
+      "personne_absente": "Arnaud MELLADO",
+      "date_extraction": "2025-11-28T16:45:12Z"
+    },
+    {
+      "numero_commande": "RT001971",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "4A - TAM : Techniciens / Agents de ma?trise",
+      "classification_interimaire": "D7",
+      "personne_absente": "ROBERRINI-NEVEU ELODIE",
+      "date_extraction": "2025-11-28T16:45:13Z"
+    },
+    {
+      "numero_commande": "RT001972",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "YANNICK TOSELLI",
+      "date_extraction": "2025-11-28T16:45:14Z"
     }
   ],
-  "lastUpdate": "2025-11-28T15:46:07.067Z",
+  "lastUpdate": "2025-11-28T16:46:10.094Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1411,
+    "totalCommandes": 1414,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
