@@ -12842,12 +12842,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "ELODIE KEYICHIAN",
       "date_extraction": "2025-11-28T20:44:53Z"
+    },
+    {
+      "numero_commande": "RT001935",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FREDERIC HARET",
+      "date_extraction": "2025-11-28T21:44:50Z"
     }
   ],
-  "lastUpdate": "2025-11-28T20:45:43.704Z",
+  "lastUpdate": "2025-11-28T21:45:40.625Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1427,
+    "totalCommandes": 1428,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
