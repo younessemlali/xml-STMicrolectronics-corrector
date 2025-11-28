@@ -12671,12 +12671,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "SABINE VLAEMINCK",
       "date_extraction": "2025-11-28T11:44:57Z"
+    },
+    {
+      "numero_commande": "RT001944",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SABINE VLAEMINCK",
+      "date_extraction": "2025-11-28T12:44:55Z"
     }
   ],
-  "lastUpdate": "2025-11-28T11:46:09.279Z",
+  "lastUpdate": "2025-11-28T12:45:46.165Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1408,
+    "totalCommandes": 1409,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
