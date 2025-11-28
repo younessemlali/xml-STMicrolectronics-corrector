@@ -12563,12 +12563,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "PAMELA BONHOMME",
       "date_extraction": "2025-11-27T23:45:22Z"
+    },
+    {
+      "numero_commande": "RT001922",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ETIENNE BAZE",
+      "date_extraction": "2025-11-28T00:45:07Z"
     }
   ],
-  "lastUpdate": "2025-11-27T23:46:18.256Z",
+  "lastUpdate": "2025-11-28T00:46:14.934Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1396,
+    "totalCommandes": 1397,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
