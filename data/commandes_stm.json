@@ -12905,12 +12905,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "MARIE-PIERRE SABATIER",
       "date_extraction": "2025-11-29T01:45:15Z"
+    },
+    {
+      "numero_commande": "RT001964",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NICOLAS JULIEN",
+      "date_extraction": "2025-11-29T03:45:48Z"
     }
   ],
-  "lastUpdate": "2025-11-29T01:46:09.789Z",
+  "lastUpdate": "2025-11-29T03:46:50.116Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1434,
+    "totalCommandes": 1435,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
