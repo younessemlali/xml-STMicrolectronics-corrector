@@ -12887,12 +12887,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "Eric MATTAROZZI",
       "date_extraction": "2025-11-29T00:44:51Z"
+    },
+    {
+      "numero_commande": "RT001959",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAETITIA LAPLACE",
+      "date_extraction": "2025-11-29T01:45:14Z"
+    },
+    {
+      "numero_commande": "RT001960",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MARIE-PIERRE SABATIER",
+      "date_extraction": "2025-11-29T01:45:15Z"
     }
   ],
-  "lastUpdate": "2025-11-29T00:45:40.749Z",
+  "lastUpdate": "2025-11-29T01:46:09.789Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1432,
+    "totalCommandes": 1434,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
