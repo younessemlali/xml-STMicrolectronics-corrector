@@ -12923,12 +12923,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "M?lanie PALOMAS",
       "date_extraction": "2025-11-30T20:47:17Z"
+    },
+    {
+      "numero_commande": "CD000365",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": null,
+      "date_extraction": "2025-11-30T21:45:02Z"
     }
   ],
-  "lastUpdate": "2025-11-30T20:48:34.021Z",
+  "lastUpdate": "2025-11-30T21:45:55.765Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1436,
+    "totalCommandes": 1437,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
