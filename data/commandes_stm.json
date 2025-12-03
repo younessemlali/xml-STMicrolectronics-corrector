@@ -13040,12 +13040,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "SYLVIE MARTIN",
       "date_extraction": "2025-12-03T11:45:01Z"
+    },
+    {
+      "numero_commande": "CR002573",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "C?line PRINCIPE",
+      "date_extraction": "2025-12-03T16:45:38Z"
     }
   ],
-  "lastUpdate": "2025-12-03T11:45:53.305Z",
+  "lastUpdate": "2025-12-03T16:46:46.504Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1449,
+    "totalCommandes": 1450,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
