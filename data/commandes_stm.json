@@ -13085,12 +13085,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "CATHERINE BOSSU",
       "date_extraction": "2025-12-04T08:44:51Z"
+    },
+    {
+      "numero_commande": "RT002006",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SABRINA LE GUILLOU",
+      "date_extraction": "2025-12-04T13:45:17Z"
     }
   ],
-  "lastUpdate": "2025-12-04T08:45:39.134Z",
+  "lastUpdate": "2025-12-04T13:46:24.692Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1454,
+    "totalCommandes": 1455,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
