@@ -13346,12 +13346,57 @@
       "classification_interimaire": "A2",
       "personne_absente": "NICOLAS CHAISSAC",
       "date_extraction": "2025-12-05T15:45:08Z"
+    },
+    {
+      "numero_commande": "RT002069",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Frederic ZIMMERMANN",
+      "date_extraction": "2025-12-05T16:45:48Z"
+    },
+    {
+      "numero_commande": "CR002593",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NICOLAS MALANDRINO",
+      "date_extraction": "2025-12-05T16:45:49Z"
+    },
+    {
+      "numero_commande": "CR002595",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ISABELLE FRANCE",
+      "date_extraction": "2025-12-05T16:45:51Z"
+    },
+    {
+      "numero_commande": "RT002054",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ANNE CATHERINE SANTOS",
+      "date_extraction": "2025-12-05T16:45:52Z"
+    },
+    {
+      "numero_commande": "RT002063",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAURENCE CAMLAY",
+      "date_extraction": "2025-12-05T16:45:53Z"
     }
   ],
-  "lastUpdate": "2025-12-05T15:45:59.765Z",
+  "lastUpdate": "2025-12-05T16:46:55.782Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1483,
+    "totalCommandes": 1488,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
