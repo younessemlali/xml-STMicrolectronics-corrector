@@ -13544,12 +13544,21 @@
       "classification_interimaire": "D7",
       "personne_absente": "ELODIE ROBERRINI-NEVEU",
       "date_extraction": "2025-12-05T20:44:57Z"
+    },
+    {
+      "numero_commande": "CD000370",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "VINCENT MASSE",
+      "date_extraction": "2025-12-05T21:46:38Z"
     }
   ],
-  "lastUpdate": "2025-12-05T20:45:50.969Z",
+  "lastUpdate": "2025-12-05T21:47:46.849Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1505,
+    "totalCommandes": 1506,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
