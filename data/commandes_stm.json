@@ -13391,12 +13391,75 @@
       "classification_interimaire": "A2",
       "personne_absente": "LAURENCE CAMLAY",
       "date_extraction": "2025-12-05T16:45:53Z"
+    },
+    {
+      "numero_commande": "RT002068",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAURA MALAVASI",
+      "date_extraction": "2025-12-05T17:44:50Z"
+    },
+    {
+      "numero_commande": "RT002055",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ERIC MATTAROZZI",
+      "date_extraction": "2025-12-05T17:44:51Z"
+    },
+    {
+      "numero_commande": "RT002066",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "PATRICK CIBRARI",
+      "date_extraction": "2025-12-05T17:44:52Z"
+    },
+    {
+      "numero_commande": "RT002067",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ADAM ESCALES",
+      "date_extraction": "2025-12-05T17:44:53Z"
+    },
+    {
+      "numero_commande": "RT002047",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MARIE-PIERRE SABATIER",
+      "date_extraction": "2025-12-05T17:44:55Z"
+    },
+    {
+      "numero_commande": "RT002049",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "OLIVIER PELLEGRINO",
+      "date_extraction": "2025-12-05T17:44:56Z"
+    },
+    {
+      "numero_commande": "CR002589",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NATHALIE FERRERE",
+      "date_extraction": "2025-12-05T17:44:57Z"
     }
   ],
-  "lastUpdate": "2025-12-05T16:46:55.782Z",
+  "lastUpdate": "2025-12-05T17:45:50.399Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1488,
+    "totalCommandes": 1495,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
