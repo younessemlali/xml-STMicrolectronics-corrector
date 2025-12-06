@@ -13571,12 +13571,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "Sophie MORIN",
       "date_extraction": "2025-12-05T23:44:56Z"
+    },
+    {
+      "numero_commande": "RT002073",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Nadine ORDAS",
+      "date_extraction": "2025-12-06T13:45:03Z"
     }
   ],
-  "lastUpdate": "2025-12-05T23:45:42.763Z",
+  "lastUpdate": "2025-12-06T13:46:00.926Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1508,
+    "totalCommandes": 1509,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
