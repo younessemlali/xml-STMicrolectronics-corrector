@@ -13616,12 +13616,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "PIERRE DELAFRAYE",
       "date_extraction": "2025-12-09T14:45:34Z"
+    },
+    {
+      "numero_commande": "RT002076",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Isabelle LASALVIA",
+      "date_extraction": "2025-12-09T19:45:20Z"
     }
   ],
-  "lastUpdate": "2025-12-09T14:46:40.699Z",
+  "lastUpdate": "2025-12-09T19:46:25.584Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1513,
+    "totalCommandes": 1514,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
