@@ -13652,12 +13652,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "Quentin DELAHAYE",
       "date_extraction": "2025-12-10T10:45:52Z"
+    },
+    {
+      "numero_commande": "RT002078",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Regis CASONI",
+      "date_extraction": "2025-12-10T16:44:59Z"
     }
   ],
-  "lastUpdate": "2025-12-10T10:46:50.512Z",
+  "lastUpdate": "2025-12-10T16:45:56.937Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1517,
+    "totalCommandes": 1518,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
