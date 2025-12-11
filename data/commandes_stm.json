@@ -13895,12 +13895,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "ANTHONY GONCALVES",
       "date_extraction": "2025-12-11T10:45:23Z"
+    },
+    {
+      "numero_commande": "CR002640",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Meriem CHIKHI",
+      "date_extraction": "2025-12-11T13:45:11Z"
     }
   ],
-  "lastUpdate": "2025-12-11T10:46:05.434Z",
+  "lastUpdate": "2025-12-11T13:46:13.170Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1544,
+    "totalCommandes": 1545,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
