@@ -13661,12 +13661,48 @@
       "classification_interimaire": "A2",
       "personne_absente": "Regis CASONI",
       "date_extraction": "2025-12-10T16:44:59Z"
+    },
+    {
+      "numero_commande": "CR002688",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MATHIEU GOSSIERIES",
+      "date_extraction": "2025-12-11T01:45:48Z"
+    },
+    {
+      "numero_commande": "CR002680",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NATHALIE FERRERE",
+      "date_extraction": "2025-12-11T01:45:49Z"
+    },
+    {
+      "numero_commande": "CR002678",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MOUNIR CHENAOUI",
+      "date_extraction": "2025-12-11T01:45:50Z"
+    },
+    {
+      "numero_commande": "CR002674",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FREDERIC MASSE",
+      "date_extraction": "2025-12-11T01:45:51Z"
     }
   ],
-  "lastUpdate": "2025-12-10T16:45:56.937Z",
+  "lastUpdate": "2025-12-11T01:46:56.543Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1518,
+    "totalCommandes": 1522,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
