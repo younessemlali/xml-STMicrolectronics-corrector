@@ -13715,12 +13715,192 @@
       "classification_interimaire": "A2",
       "personne_absente": "CLAIRE ESCARRAS",
       "date_extraction": "2025-12-11T08:44:53Z"
+    },
+    {
+      "numero_commande": "RT002102",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JADE LE METER",
+      "date_extraction": "2025-12-11T10:45:01Z"
+    },
+    {
+      "numero_commande": "RT002077",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "REGIS CASONI",
+      "date_extraction": "2025-12-11T10:45:02Z"
+    },
+    {
+      "numero_commande": "RT002101",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NICOLAS BOYER",
+      "date_extraction": "2025-12-11T10:45:03Z"
+    },
+    {
+      "numero_commande": "RT002098",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SYLVIE COLLIN",
+      "date_extraction": "2025-12-11T10:45:04Z"
+    },
+    {
+      "numero_commande": "RT002099",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAURYNE BOUNECER",
+      "date_extraction": "2025-12-11T10:45:06Z"
+    },
+    {
+      "numero_commande": "RT002095",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "PAMELA BONHOMME",
+      "date_extraction": "2025-12-11T10:45:07Z"
+    },
+    {
+      "numero_commande": "RT002096",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ISABELLE CIANTI",
+      "date_extraction": "2025-12-11T10:45:08Z"
+    },
+    {
+      "numero_commande": "RT002092",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "GUILLAUME ESPINOSA",
+      "date_extraction": "2025-12-11T10:45:09Z"
+    },
+    {
+      "numero_commande": "RT002100",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ANNIE BRES",
+      "date_extraction": "2025-12-11T10:45:10Z"
+    },
+    {
+      "numero_commande": "RT002097",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ANTHONY CIANTI",
+      "date_extraction": "2025-12-11T10:45:11Z"
+    },
+    {
+      "numero_commande": "RT002094",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "VIRGINIE JOUBERT",
+      "date_extraction": "2025-12-11T10:45:12Z"
+    },
+    {
+      "numero_commande": "RT002093",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "RAPHAEL BATAILLE",
+      "date_extraction": "2025-12-11T10:45:14Z"
+    },
+    {
+      "numero_commande": "RT002091",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FANNY LACROUX",
+      "date_extraction": "2025-12-11T10:45:15Z"
+    },
+    {
+      "numero_commande": "RT002090",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SARA MARTINEZ HIGUERA",
+      "date_extraction": "2025-12-11T10:45:16Z"
+    },
+    {
+      "numero_commande": "RT002089",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JULIEN TORRE",
+      "date_extraction": "2025-12-11T10:45:18Z"
+    },
+    {
+      "numero_commande": "RT002088",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "VAC - Int?rims vacances",
+      "classification_interimaire": "A2",
+      "personne_absente": "NATHALIE COVELLO",
+      "date_extraction": "2025-12-11T10:45:19Z"
+    },
+    {
+      "numero_commande": "RT002087",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "YANNICK MORVAN",
+      "date_extraction": "2025-12-11T10:45:20Z"
+    },
+    {
+      "numero_commande": "RT002086",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "GUILLAUME ESPINOSA",
+      "date_extraction": "2025-12-11T10:45:21Z"
+    },
+    {
+      "numero_commande": "RT002084",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MELANIE BRUNEL",
+      "date_extraction": "2025-12-11T10:45:22Z"
+    },
+    {
+      "numero_commande": "RT002085",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ANTHONY GONCALVES",
+      "date_extraction": "2025-12-11T10:45:23Z"
     }
   ],
-  "lastUpdate": "2025-12-11T08:45:40.185Z",
+  "lastUpdate": "2025-12-11T10:46:05.434Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1524,
+    "totalCommandes": 1544,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
