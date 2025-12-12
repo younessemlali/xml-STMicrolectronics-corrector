@@ -13940,12 +13940,39 @@
       "classification_interimaire": "A2",
       "personne_absente": "Eric CORDEL",
       "date_extraction": "2025-12-11T20:44:57Z"
+    },
+    {
+      "numero_commande": "RT002106",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SABRINA GHALEM",
+      "date_extraction": "2025-12-12T07:45:07Z"
+    },
+    {
+      "numero_commande": "RT002105",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FREDERIC NGYEN",
+      "date_extraction": "2025-12-12T07:45:08Z"
+    },
+    {
+      "numero_commande": "RT002104",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CHARLENE PAGE",
+      "date_extraction": "2025-12-12T07:45:08Z"
     }
   ],
-  "lastUpdate": "2025-12-11T20:45:50.713Z",
+  "lastUpdate": "2025-12-12T07:45:58.744Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1549,
+    "totalCommandes": 1552,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
