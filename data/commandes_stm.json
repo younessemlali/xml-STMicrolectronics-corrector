@@ -14588,12 +14588,21 @@
       "classification_interimaire": null,
       "personne_absente": "Laura Coisson",
       "date_extraction": "2025-12-15T16:45:09Z"
+    },
+    {
+      "numero_commande": "RT002191",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "IC - Ing?nieurs et cadres",
+      "classification_interimaire": null,
+      "personne_absente": null,
+      "date_extraction": "2025-12-16T09:45:06Z"
     }
   ],
-  "lastUpdate": "2025-12-15T16:46:03.597Z",
+  "lastUpdate": "2025-12-16T09:46:10.095Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1621,
+    "totalCommandes": 1622,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
