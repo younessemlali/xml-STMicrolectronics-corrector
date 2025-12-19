@@ -14777,12 +14777,129 @@
       "classification_interimaire": "A2",
       "personne_absente": "DAVID KEN",
       "date_extraction": "2025-12-19T08:45:13Z"
+    },
+    {
+      "numero_commande": "RT002208",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ODILE INFANTE",
+      "date_extraction": "2025-12-19T09:44:59Z"
+    },
+    {
+      "numero_commande": "RT002200",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CHARLENE PAGE",
+      "date_extraction": "2025-12-19T09:45:00Z"
+    },
+    {
+      "numero_commande": "RT002276",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAURENCE CAMLAY",
+      "date_extraction": "2025-12-19T09:45:01Z"
+    },
+    {
+      "numero_commande": "RT002277",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NATHALIE BONNARD",
+      "date_extraction": "2025-12-19T09:45:02Z"
+    },
+    {
+      "numero_commande": "RT002259",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAETITIA LAPLACE",
+      "date_extraction": "2025-12-19T09:45:03Z"
+    },
+    {
+      "numero_commande": "RT002265",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JEAN CHRISTOPHE BEVILACQUA",
+      "date_extraction": "2025-12-19T09:45:04Z"
+    },
+    {
+      "numero_commande": "RT002268",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ERIC MATTAROZZI",
+      "date_extraction": "2025-12-19T09:45:06Z"
+    },
+    {
+      "numero_commande": "RT002226",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ABDEL HAKIM KOURTICHE",
+      "date_extraction": "2025-12-19T09:45:08Z"
+    },
+    {
+      "numero_commande": "RT002241",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "KARIM ZENAZEL",
+      "date_extraction": "2025-12-19T09:45:09Z"
+    },
+    {
+      "numero_commande": "RT002205",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NORA ZEMMAR",
+      "date_extraction": "2025-12-19T09:45:10Z"
+    },
+    {
+      "numero_commande": "RT002246",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FABIENNE HUGUES",
+      "date_extraction": "2025-12-19T09:45:11Z"
+    },
+    {
+      "numero_commande": "RT002234",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SONIA JAMETTE",
+      "date_extraction": "2025-12-19T09:45:13Z"
+    },
+    {
+      "numero_commande": "RT002216",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MIGUEL SAEZ",
+      "date_extraction": "2025-12-19T09:45:15Z"
     }
   ],
-  "lastUpdate": "2025-12-19T08:46:06.525Z",
+  "lastUpdate": "2025-12-19T09:46:03.272Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1642,
+    "totalCommandes": 1655,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
