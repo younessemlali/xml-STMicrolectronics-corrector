@@ -15200,12 +15200,57 @@
       "classification_interimaire": "A2",
       "personne_absente": "CECILIO LOPEZ",
       "date_extraction": "2025-12-19T15:45:20Z"
+    },
+    {
+      "numero_commande": "RT002227",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "WALID BEN MOHAMED",
+      "date_extraction": "2025-12-19T16:45:15Z"
+    },
+    {
+      "numero_commande": "RT002248",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "REGIS CASONI",
+      "date_extraction": "2025-12-19T16:45:16Z"
+    },
+    {
+      "numero_commande": "RT002275",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ENZO RICCI",
+      "date_extraction": "2025-12-19T16:45:16Z"
+    },
+    {
+      "numero_commande": "RT002245",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CATHERINE BOSSU",
+      "date_extraction": "2025-12-19T16:45:17Z"
+    },
+    {
+      "numero_commande": "RT002232",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SOLANGE SERNA",
+      "date_extraction": "2025-12-19T16:45:19Z"
     }
   ],
-  "lastUpdate": "2025-12-19T15:46:14.147Z",
+  "lastUpdate": "2025-12-19T16:46:12.070Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1689,
+    "totalCommandes": 1694,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
