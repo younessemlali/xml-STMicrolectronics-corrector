@@ -15299,12 +15299,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "LAURA MALAVASI",
       "date_extraction": "2025-12-19T23:45:05Z"
+    },
+    {
+      "numero_commande": "RT002239",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ANNIE VIDAL",
+      "date_extraction": "2025-12-20T01:45:10Z"
     }
   ],
-  "lastUpdate": "2025-12-19T23:46:00.982Z",
+  "lastUpdate": "2025-12-20T01:46:04.948Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1700,
+    "totalCommandes": 1701,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
