@@ -15371,12 +15371,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "SABRINA GHALEM",
       "date_extraction": "2025-12-23T08:44:57Z"
+    },
+    {
+      "numero_commande": "RT002289",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ELIES CHABOU",
+      "date_extraction": "2025-12-23T10:45:10Z"
+    },
+    {
+      "numero_commande": "RT002288",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAURENT BREYSSE",
+      "date_extraction": "2025-12-23T10:45:11Z"
     }
   ],
-  "lastUpdate": "2025-12-23T08:46:00.925Z",
+  "lastUpdate": "2025-12-23T10:46:08.184Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1708,
+    "totalCommandes": 1710,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
