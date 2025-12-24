@@ -15524,12 +15524,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "NATHALIE COVELLO",
       "date_extraction": "2025-12-24T10:45:02Z"
+    },
+    {
+      "numero_commande": "CR002858",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CLAUDE VOLPATO",
+      "date_extraction": "2025-12-24T11:44:49Z"
+    },
+    {
+      "numero_commande": "RT002312",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NICOLAS BOYER",
+      "date_extraction": "2025-12-24T11:44:50Z"
     }
   ],
-  "lastUpdate": "2025-12-24T10:45:49.980Z",
+  "lastUpdate": "2025-12-24T11:45:39.003Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1725,
+    "totalCommandes": 1727,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
