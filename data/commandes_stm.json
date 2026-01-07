@@ -16532,12 +16532,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "ANNIE VIDAL",
       "date_extraction": "2026-01-06T16:45:14Z"
+    },
+    {
+      "numero_commande": "CR002926",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "PHILIPPE BOIZOT",
+      "date_extraction": "2026-01-07T03:45:20Z"
     }
   ],
-  "lastUpdate": "2026-01-06T16:46:16.539Z",
+  "lastUpdate": "2026-01-07T03:46:15.766Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1837,
+    "totalCommandes": 1838,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
