@@ -16550,12 +16550,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "BRIAN HACKETT",
       "date_extraction": "2026-01-07T04:45:17Z"
+    },
+    {
+      "numero_commande": "CR002919",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JEREMY BUFFET",
+      "date_extraction": "2026-01-07T13:45:03Z"
+    },
+    {
+      "numero_commande": "CR003002",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JOHANN KARRIERE",
+      "date_extraction": "2026-01-07T13:45:04Z"
     }
   ],
-  "lastUpdate": "2026-01-07T04:46:15.142Z",
+  "lastUpdate": "2026-01-07T13:46:01.589Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1839,
+    "totalCommandes": 1841,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
