@@ -17072,12 +17072,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "ADAM ESCALES",
       "date_extraction": "2026-01-09T14:44:59Z"
+    },
+    {
+      "numero_commande": "RT002519",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SOPHIE MORIN",
+      "date_extraction": "2026-01-09T15:46:55Z"
+    },
+    {
+      "numero_commande": "RT002498",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FABRICE SERRA",
+      "date_extraction": "2026-01-09T15:46:57Z"
     }
   ],
-  "lastUpdate": "2026-01-09T14:45:50.985Z",
+  "lastUpdate": "2026-01-09T15:48:13.118Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1897,
+    "totalCommandes": 1899,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
