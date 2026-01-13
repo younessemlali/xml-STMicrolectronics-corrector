@@ -17414,12 +17414,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "SARA MARTINEZ HIGUERA",
       "date_extraction": "2026-01-13T13:45:29Z"
+    },
+    {
+      "numero_commande": "CR003067",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Olivier MAZZILLI",
+      "date_extraction": "2026-01-13T16:45:01Z"
     }
   ],
-  "lastUpdate": "2026-01-13T13:46:36.468Z",
+  "lastUpdate": "2026-01-13T16:45:55.512Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1935,
+    "totalCommandes": 1936,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
