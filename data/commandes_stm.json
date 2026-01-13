@@ -17405,12 +17405,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "SENGTHANONG SENG",
       "date_extraction": "2026-01-13T08:45:46Z"
+    },
+    {
+      "numero_commande": "RT002549",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SARA MARTINEZ HIGUERA",
+      "date_extraction": "2026-01-13T13:45:29Z"
     }
   ],
-  "lastUpdate": "2026-01-13T08:46:58.725Z",
+  "lastUpdate": "2026-01-13T13:46:36.468Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1934,
+    "totalCommandes": 1935,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
