@@ -17441,12 +17441,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "MERIEM FARES",
       "date_extraction": "2026-01-15T03:44:57Z"
+    },
+    {
+      "numero_commande": "CD000473",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JEREMIE MATHON",
+      "date_extraction": "2026-01-15T13:45:38Z"
     }
   ],
-  "lastUpdate": "2026-01-15T03:45:57.542Z",
+  "lastUpdate": "2026-01-15T13:46:41.931Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1938,
+    "totalCommandes": 1939,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
