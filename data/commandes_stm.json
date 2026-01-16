@@ -17702,12 +17702,84 @@
       "classification_interimaire": "A2",
       "personne_absente": "FABRICE RIVEIRO",
       "date_extraction": "2026-01-16T14:45:02Z"
+    },
+    {
+      "numero_commande": "RT002627",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "YANNICK TOSELLI",
+      "date_extraction": "2026-01-16T15:45:11Z"
+    },
+    {
+      "numero_commande": "RT002595",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ANNIE VIDAL",
+      "date_extraction": "2026-01-16T15:45:12Z"
+    },
+    {
+      "numero_commande": "RT002617",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MARIE PIERRE SABATIER",
+      "date_extraction": "2026-01-16T15:45:13Z"
+    },
+    {
+      "numero_commande": "RT002611",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "THEO GUIL",
+      "date_extraction": "2026-01-16T15:45:14Z"
+    },
+    {
+      "numero_commande": "RT002632",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "PATRICK CIBRARI",
+      "date_extraction": "2026-01-16T15:45:15Z"
+    },
+    {
+      "numero_commande": "RT002616",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAETITIA LAPLACE",
+      "date_extraction": "2026-01-16T15:45:16Z"
+    },
+    {
+      "numero_commande": "RT002603",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SABRINA LE GUILLOU",
+      "date_extraction": "2026-01-16T15:45:17Z"
+    },
+    {
+      "numero_commande": "RT002609",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "STEPHANIE RAVEL",
+      "date_extraction": "2026-01-16T15:45:18Z"
     }
   ],
-  "lastUpdate": "2026-01-16T14:45:52.142Z",
+  "lastUpdate": "2026-01-16T15:46:12.586Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1967,
+    "totalCommandes": 1975,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
