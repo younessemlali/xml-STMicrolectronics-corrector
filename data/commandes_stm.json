@@ -17774,12 +17774,111 @@
       "classification_interimaire": "A2",
       "personne_absente": "STEPHANIE RAVEL",
       "date_extraction": "2026-01-16T15:45:18Z"
+    },
+    {
+      "numero_commande": "RT002598",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CHRISTELLE THIRIAT",
+      "date_extraction": "2026-01-16T16:45:17Z"
+    },
+    {
+      "numero_commande": "RT002622",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "THOMAS BARUCCI",
+      "date_extraction": "2026-01-16T16:45:18Z"
+    },
+    {
+      "numero_commande": "RT002586",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "GREGORY COOPMAN",
+      "date_extraction": "2026-01-16T16:45:19Z"
+    },
+    {
+      "numero_commande": "RT002583",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "WALID BEN MOHAMED",
+      "date_extraction": "2026-01-16T16:45:20Z"
+    },
+    {
+      "numero_commande": "RT002630",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NATHALIE BONNARD",
+      "date_extraction": "2026-01-16T16:45:21Z"
+    },
+    {
+      "numero_commande": "RT002600",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "VALERIE BRUGNIES",
+      "date_extraction": "2026-01-16T16:45:22Z"
+    },
+    {
+      "numero_commande": "RT002581",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CAROLE PERO",
+      "date_extraction": "2026-01-16T16:45:23Z"
+    },
+    {
+      "numero_commande": "RT002591",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "DYLAN CASILE",
+      "date_extraction": "2026-01-16T16:45:24Z"
+    },
+    {
+      "numero_commande": "RT002592",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAETITIA COBALTO",
+      "date_extraction": "2026-01-16T16:45:25Z"
+    },
+    {
+      "numero_commande": "RT002563",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NORA ZEMMAR",
+      "date_extraction": "2026-01-16T16:45:26Z"
+    },
+    {
+      "numero_commande": "RT002607",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CHRYSTELE BOUDIER",
+      "date_extraction": "2026-01-16T16:45:27Z"
     }
   ],
-  "lastUpdate": "2026-01-16T15:46:12.586Z",
+  "lastUpdate": "2026-01-16T16:46:17.550Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1975,
+    "totalCommandes": 1986,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
