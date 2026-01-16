@@ -17873,12 +17873,48 @@
       "classification_interimaire": "A2",
       "personne_absente": "CHRYSTELE BOUDIER",
       "date_extraction": "2026-01-16T16:45:27Z"
+    },
+    {
+      "numero_commande": "RT002589",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SYLVIE MARTIN",
+      "date_extraction": "2026-01-16T17:45:12Z"
+    },
+    {
+      "numero_commande": "RT002590",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SONIA JAMETTE",
+      "date_extraction": "2026-01-16T17:45:13Z"
+    },
+    {
+      "numero_commande": "RT002625",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "RABAH SOLTANI",
+      "date_extraction": "2026-01-16T17:45:14Z"
+    },
+    {
+      "numero_commande": "RT002615",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ELODIE KEYICHIAN",
+      "date_extraction": "2026-01-16T17:45:15Z"
     }
   ],
-  "lastUpdate": "2026-01-16T16:46:17.550Z",
+  "lastUpdate": "2026-01-16T17:46:13.984Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1986,
+    "totalCommandes": 1990,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
