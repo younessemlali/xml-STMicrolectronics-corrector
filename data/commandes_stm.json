@@ -17468,12 +17468,201 @@
       "classification_interimaire": "A2",
       "personne_absente": "CLAUDE VOLPATO",
       "date_extraction": "2026-01-16T02:46:57Z"
+    },
+    {
+      "numero_commande": "RT002605",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ISABELLE ROBINEAU",
+      "date_extraction": "2026-01-16T13:45:21Z"
+    },
+    {
+      "numero_commande": "RT002582",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ABDEL HAKIM KOURTICHE",
+      "date_extraction": "2026-01-16T13:45:23Z"
+    },
+    {
+      "numero_commande": "CR003097",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JEREMY BUFFET",
+      "date_extraction": "2026-01-16T13:45:24Z"
+    },
+    {
+      "numero_commande": "RT002571",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MIGUEL SAEZ",
+      "date_extraction": "2026-01-16T13:45:25Z"
+    },
+    {
+      "numero_commande": "RT002578",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "OCEANE DARRAS",
+      "date_extraction": "2026-01-16T13:45:26Z"
+    },
+    {
+      "numero_commande": "RT002567",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "DAVID KEN",
+      "date_extraction": "2026-01-16T13:45:27Z"
+    },
+    {
+      "numero_commande": "RT002579",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "DELPHINE OSTENCH",
+      "date_extraction": "2026-01-16T13:45:28Z"
+    },
+    {
+      "numero_commande": "RT002552",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "DIMITRI RAFIK",
+      "date_extraction": "2026-01-16T13:45:29Z"
+    },
+    {
+      "numero_commande": "RT002577",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ERIC GUADOURI",
+      "date_extraction": "2026-01-16T13:45:30Z"
+    },
+    {
+      "numero_commande": "RT002569",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CLAIRE PELLENQ",
+      "date_extraction": "2026-01-16T13:45:31Z"
+    },
+    {
+      "numero_commande": "RT002573",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CECILIO LOPEZ",
+      "date_extraction": "2026-01-16T13:45:32Z"
+    },
+    {
+      "numero_commande": "RT002564",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SABRINA GHALEM",
+      "date_extraction": "2026-01-16T13:45:34Z"
+    },
+    {
+      "numero_commande": "RT002572",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "EDDY TENZA",
+      "date_extraction": "2026-01-16T13:45:35Z"
+    },
+    {
+      "numero_commande": "RT002570",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "KARINE ROURE",
+      "date_extraction": "2026-01-16T13:45:36Z"
+    },
+    {
+      "numero_commande": "RT002559",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "OLIVIER CLOITRE PAGE",
+      "date_extraction": "2026-01-16T13:45:37Z"
+    },
+    {
+      "numero_commande": "RT002576",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FREDERIC HARET",
+      "date_extraction": "2026-01-16T13:45:38Z"
+    },
+    {
+      "numero_commande": "RT002574",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FLORENCE CALARNOU",
+      "date_extraction": "2026-01-16T13:45:39Z"
+    },
+    {
+      "numero_commande": "RT002565",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CHANTAL MAYANS",
+      "date_extraction": "2026-01-16T13:45:40Z"
+    },
+    {
+      "numero_commande": "RT002560",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CATHY HARRAULT",
+      "date_extraction": "2026-01-16T13:45:41Z"
+    },
+    {
+      "numero_commande": "RT002575",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CHRISTOPHE LAMBERT",
+      "date_extraction": "2026-01-16T13:45:42Z"
+    },
+    {
+      "numero_commande": "RT002580",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "ATAM - Technicien et agent de ma?trise",
+      "classification_interimaire": "C5",
+      "personne_absente": "FRECH FRECH",
+      "date_extraction": "2026-01-16T13:45:43Z"
     }
   ],
-  "lastUpdate": "2026-01-16T02:48:10.848Z",
+  "lastUpdate": "2026-01-16T13:46:22.235Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 1941,
+    "totalCommandes": 1962,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
