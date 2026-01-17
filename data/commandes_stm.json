@@ -18062,12 +18062,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "BEATRICE LEDUC",
       "date_extraction": "2026-01-16T23:45:08Z"
+    },
+    {
+      "numero_commande": "RT002588",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SOLANGE SERNA",
+      "date_extraction": "2026-01-17T01:45:24Z"
     }
   ],
-  "lastUpdate": "2026-01-16T23:45:58.126Z",
+  "lastUpdate": "2026-01-17T01:46:12.230Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2007,
+    "totalCommandes": 2008,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
