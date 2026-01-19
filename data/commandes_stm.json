@@ -18107,12 +18107,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "Souad SAADI",
       "date_extraction": "2026-01-19T00:47:50Z"
+    },
+    {
+      "numero_commande": "CR003165",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Estelle JOURDAN",
+      "date_extraction": "2026-01-19T20:44:57Z"
     }
   ],
-  "lastUpdate": "2026-01-19T00:48:53.186Z",
+  "lastUpdate": "2026-01-19T20:45:50.658Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2012,
+    "totalCommandes": 2013,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
