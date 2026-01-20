@@ -18134,12 +18134,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "Olivier MAZZILLI",
       "date_extraction": "2026-01-20T03:44:54Z"
+    },
+    {
+      "numero_commande": "RT002640",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "IC - Ing?nieurs et cadres",
+      "classification_interimaire": null,
+      "personne_absente": null,
+      "date_extraction": "2026-01-20T13:48:07Z"
     }
   ],
-  "lastUpdate": "2026-01-20T03:45:41.729Z",
+  "lastUpdate": "2026-01-20T13:49:07.003Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2015,
+    "totalCommandes": 2016,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
