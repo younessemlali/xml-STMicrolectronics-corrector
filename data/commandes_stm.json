@@ -18143,12 +18143,21 @@
       "classification_interimaire": null,
       "personne_absente": null,
       "date_extraction": "2026-01-20T13:48:07Z"
+    },
+    {
+      "numero_commande": "CR003195",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Celine DA COSTA",
+      "date_extraction": "2026-01-22T13:45:50Z"
     }
   ],
-  "lastUpdate": "2026-01-20T13:49:07.003Z",
+  "lastUpdate": "2026-01-22T13:46:54.382Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2016,
+    "totalCommandes": 2017,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
