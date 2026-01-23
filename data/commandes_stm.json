@@ -18692,12 +18692,66 @@
       "classification_interimaire": "D7",
       "personne_absente": "DANIEL TARAN",
       "date_extraction": "2026-01-23T15:45:02Z"
+    },
+    {
+      "numero_commande": "CR003216",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JEREMY BUFFET",
+      "date_extraction": "2026-01-23T16:44:44Z"
+    },
+    {
+      "numero_commande": "RT002682",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "ATAM - Technicien et agent de ma?trise",
+      "classification_interimaire": "C5",
+      "personne_absente": "FRECH FRECH",
+      "date_extraction": "2026-01-23T16:44:46Z"
+    },
+    {
+      "numero_commande": "RT002676",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CATHY HARRAULT",
+      "date_extraction": "2026-01-23T16:44:46Z"
+    },
+    {
+      "numero_commande": "RT002690",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "KARINE ROURE",
+      "date_extraction": "2026-01-23T16:44:48Z"
+    },
+    {
+      "numero_commande": "RT002723",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CAROLE PERO",
+      "date_extraction": "2026-01-23T16:44:49Z"
+    },
+    {
+      "numero_commande": "RT002695",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SABRINA GHALEM",
+      "date_extraction": "2026-01-23T16:44:50Z"
     }
   ],
-  "lastUpdate": "2026-01-23T15:46:08.845Z",
+  "lastUpdate": "2026-01-23T16:45:49.427Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2077,
+    "totalCommandes": 2083,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
