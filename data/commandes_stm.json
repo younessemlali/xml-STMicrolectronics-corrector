@@ -19205,12 +19205,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "Lisa PESENTI",
       "date_extraction": "2026-01-28T13:44:57Z"
+    },
+    {
+      "numero_commande": "CR003299",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Olivier MAZZILLI",
+      "date_extraction": "2026-01-28T17:44:57Z"
     }
   ],
-  "lastUpdate": "2026-01-28T13:46:15.083Z",
+  "lastUpdate": "2026-01-28T17:46:08.058Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2134,
+    "totalCommandes": 2135,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
