@@ -19511,12 +19511,129 @@
       "classification_interimaire": "A2",
       "personne_absente": "DIDIER NICOLAS",
       "date_extraction": "2026-01-29T21:45:17Z"
+    },
+    {
+      "numero_commande": "RT002812",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Fabrice RIVEIRO",
+      "date_extraction": "2026-01-29T22:45:25Z"
+    },
+    {
+      "numero_commande": "RT002781",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Lakhdar MEZIANE",
+      "date_extraction": "2026-01-29T22:45:26Z"
+    },
+    {
+      "numero_commande": "RT002807",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "HELENE MARCHINI",
+      "date_extraction": "2026-01-29T22:45:28Z"
+    },
+    {
+      "numero_commande": "RT002798",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "RABAH SOLTANI",
+      "date_extraction": "2026-01-29T22:45:29Z"
+    },
+    {
+      "numero_commande": "RT002812",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Fabrice RIVEIRO",
+      "date_extraction": "2026-01-29T22:45:31Z"
+    },
+    {
+      "numero_commande": "RT002781",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Lakhdar MEZIANE",
+      "date_extraction": "2026-01-29T22:45:33Z"
+    },
+    {
+      "numero_commande": "RT002807",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "HELENE MARCHINI",
+      "date_extraction": "2026-01-29T22:45:34Z"
+    },
+    {
+      "numero_commande": "RT002798",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "RABAH SOLTANI",
+      "date_extraction": "2026-01-29T22:45:35Z"
+    },
+    {
+      "numero_commande": "RT002788",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAETITIA LAPLACE",
+      "date_extraction": "2026-01-29T22:45:37Z"
+    },
+    {
+      "numero_commande": "RT002757",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "KARINE ROURE",
+      "date_extraction": "2026-01-29T22:45:38Z"
+    },
+    {
+      "numero_commande": "RT002803",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAURENCE CAMLAY",
+      "date_extraction": "2026-01-29T22:45:40Z"
+    },
+    {
+      "numero_commande": "RT002791",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "OLIVIER PELLEGRINO",
+      "date_extraction": "2026-01-29T22:45:42Z"
+    },
+    {
+      "numero_commande": "RT002789",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MARIE PIERRE SABATIER",
+      "date_extraction": "2026-01-29T22:45:44Z"
     }
   ],
-  "lastUpdate": "2026-01-29T21:46:37.084Z",
+  "lastUpdate": "2026-01-29T22:46:55.176Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2168,
+    "totalCommandes": 2181,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
