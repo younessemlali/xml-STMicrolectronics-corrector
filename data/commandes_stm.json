@@ -19259,12 +19259,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "PHILIPPE GIGANTE",
       "date_extraction": "2026-01-29T05:44:49Z"
+    },
+    {
+      "numero_commande": "CD000500",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "WARREN HAMADA",
+      "date_extraction": "2026-01-29T14:45:06Z"
     }
   ],
-  "lastUpdate": "2026-01-29T05:45:56.945Z",
+  "lastUpdate": "2026-01-29T14:46:30.933Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2140,
+    "totalCommandes": 2141,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
