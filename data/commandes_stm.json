@@ -19268,12 +19268,66 @@
       "classification_interimaire": "A2",
       "personne_absente": "WARREN HAMADA",
       "date_extraction": "2026-01-29T14:45:06Z"
+    },
+    {
+      "numero_commande": "RT002778",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Muriel DEJEAN",
+      "date_extraction": "2026-01-29T16:45:38Z"
+    },
+    {
+      "numero_commande": "RT002756",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "DAVID KEN",
+      "date_extraction": "2026-01-29T16:45:40Z"
+    },
+    {
+      "numero_commande": "RT002768",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MIGUEL SAEZ",
+      "date_extraction": "2026-01-29T16:45:41Z"
+    },
+    {
+      "numero_commande": "RT002751",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FABRICE SERRA",
+      "date_extraction": "2026-01-29T16:45:43Z"
+    },
+    {
+      "numero_commande": "RT002768",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MIGUEL SAEZ",
+      "date_extraction": "2026-01-29T16:45:45Z"
+    },
+    {
+      "numero_commande": "RT002751",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FABRICE SERRA",
+      "date_extraction": "2026-01-29T16:45:46Z"
     }
   ],
-  "lastUpdate": "2026-01-29T14:46:30.933Z",
+  "lastUpdate": "2026-01-29T16:47:53.487Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2141,
+    "totalCommandes": 2147,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
