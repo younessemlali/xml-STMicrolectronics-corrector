@@ -19664,12 +19664,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "NORA ZEMMAR",
       "date_extraction": "2026-01-30T00:45:02Z"
+    },
+    {
+      "numero_commande": "RT002800",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NICOLAS CHAISSAC",
+      "date_extraction": "2026-01-30T01:45:00Z"
+    },
+    {
+      "numero_commande": "RT002795",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "THOMAS BARUCCI",
+      "date_extraction": "2026-01-30T01:45:02Z"
     }
   ],
-  "lastUpdate": "2026-01-30T00:46:05.806Z",
+  "lastUpdate": "2026-01-30T01:46:07.135Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2185,
+    "totalCommandes": 2187,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
