@@ -19862,12 +19862,30 @@
       "classification_interimaire": "C5",
       "personne_absente": "FRECH FRECH",
       "date_extraction": "2026-01-30T16:44:53Z"
+    },
+    {
+      "numero_commande": "CR003373",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Souad SAADI",
+      "date_extraction": "2026-02-02T01:44:53Z"
+    },
+    {
+      "numero_commande": "CR003372",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Abdelaziz KADI",
+      "date_extraction": "2026-02-02T01:44:54Z"
     }
   ],
-  "lastUpdate": "2026-01-30T16:46:05.315Z",
+  "lastUpdate": "2026-02-02T01:45:52.638Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2207,
+    "totalCommandes": 2209,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
