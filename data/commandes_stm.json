@@ -20321,12 +20321,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "YANNICK TOSELLI",
       "date_extraction": "2026-02-05T18:45:00Z"
+    },
+    {
+      "numero_commande": "RT002882",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "PIERRE DOBRINA",
+      "date_extraction": "2026-02-05T21:44:59Z"
+    },
+    {
+      "numero_commande": "CD000520",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "PHILIPPE GIGANTE",
+      "date_extraction": "2026-02-05T21:45:00Z"
     }
   ],
-  "lastUpdate": "2026-02-05T18:46:12.978Z",
+  "lastUpdate": "2026-02-05T21:46:13.727Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2258,
+    "totalCommandes": 2260,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
