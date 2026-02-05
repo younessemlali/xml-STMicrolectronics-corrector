@@ -20114,12 +20114,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "ADELINE DUPONT",
       "date_extraction": "2026-02-05T04:44:44Z"
+    },
+    {
+      "numero_commande": "CR003444",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "STEVE REMY",
+      "date_extraction": "2026-02-05T05:45:38Z"
     }
   ],
-  "lastUpdate": "2026-02-05T04:45:34.971Z",
+  "lastUpdate": "2026-02-05T05:47:10.171Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2235,
+    "totalCommandes": 2236,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
