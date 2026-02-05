@@ -20096,12 +20096,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "Celine TRAMAGLIA",
       "date_extraction": "2026-02-04T13:45:52Z"
+    },
+    {
+      "numero_commande": "CR003433",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JEREMY BUFFET",
+      "date_extraction": "2026-02-05T04:44:44Z"
+    },
+    {
+      "numero_commande": "CR003439",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ADELINE DUPONT",
+      "date_extraction": "2026-02-05T04:44:44Z"
     }
   ],
-  "lastUpdate": "2026-02-04T13:46:54.071Z",
+  "lastUpdate": "2026-02-05T04:45:34.971Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2233,
+    "totalCommandes": 2235,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
