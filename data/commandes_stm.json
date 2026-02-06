@@ -20474,12 +20474,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "OCEANE DARRAS",
       "date_extraction": "2026-02-06T15:44:44Z"
+    },
+    {
+      "numero_commande": "RT002913",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "KARINE ROURE",
+      "date_extraction": "2026-02-06T17:46:21Z"
     }
   ],
-  "lastUpdate": "2026-02-06T15:45:48.249Z",
+  "lastUpdate": "2026-02-06T17:48:34.953Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2275,
+    "totalCommandes": 2276,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
