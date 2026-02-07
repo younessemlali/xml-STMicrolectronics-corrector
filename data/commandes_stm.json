@@ -20519,12 +20519,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "NORA ZEMMAR",
       "date_extraction": "2026-02-06T21:45:41Z"
+    },
+    {
+      "numero_commande": "RT002921",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MAXIME RIEU",
+      "date_extraction": "2026-02-07T13:45:07Z"
     }
   ],
-  "lastUpdate": "2026-02-06T21:47:29.915Z",
+  "lastUpdate": "2026-02-07T13:46:23.689Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2280,
+    "totalCommandes": 2281,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
