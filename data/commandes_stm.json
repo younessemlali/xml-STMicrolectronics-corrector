@@ -20771,12 +20771,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "MATHIEU LE VIET",
       "date_extraction": "2026-02-09T08:45:08Z"
+    },
+    {
+      "numero_commande": "CR003510",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Jonathan FAUSER",
+      "date_extraction": "2026-02-10T18:45:14Z"
     }
   ],
-  "lastUpdate": "2026-02-09T08:45:57.537Z",
+  "lastUpdate": "2026-02-10T18:46:30.220Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2308,
+    "totalCommandes": 2309,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
