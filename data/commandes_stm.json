@@ -20825,12 +20825,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "OLIVIER CLOITRE",
       "date_extraction": "2026-02-11T13:45:51Z"
+    },
+    {
+      "numero_commande": "CR003575",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CLAUDE VOLPATO",
+      "date_extraction": "2026-02-11T23:44:44Z"
+    },
+    {
+      "numero_commande": "CR003564",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "David LEITAO",
+      "date_extraction": "2026-02-11T23:44:45Z"
     }
   ],
-  "lastUpdate": "2026-02-11T13:47:29.814Z",
+  "lastUpdate": "2026-02-11T23:45:32.319Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2314,
+    "totalCommandes": 2316,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
