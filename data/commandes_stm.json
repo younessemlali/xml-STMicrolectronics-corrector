@@ -21518,12 +21518,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "TEOFILOVIC Slobodan",
       "date_extraction": "2026-02-13T18:44:43Z"
+    },
+    {
+      "numero_commande": "RT003022",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ELODIE KEYICHIAN",
+      "date_extraction": "2026-02-13T19:44:47Z"
+    },
+    {
+      "numero_commande": "RT003026",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LISIANE BEGOUIN",
+      "date_extraction": "2026-02-13T19:44:47Z"
     }
   ],
-  "lastUpdate": "2026-02-13T18:45:28.324Z",
+  "lastUpdate": "2026-02-13T19:45:37.493Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2391,
+    "totalCommandes": 2393,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
