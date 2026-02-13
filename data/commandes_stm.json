@@ -21437,12 +21437,66 @@
       "classification_interimaire": "D7",
       "personne_absente": "WISSEM KALAI",
       "date_extraction": "2026-02-13T14:45:41Z"
+    },
+    {
+      "numero_commande": "RT003017",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "ATAM - Technicien et agent de ma?trise",
+      "classification_interimaire": "D7",
+      "personne_absente": "Wissem KALAI",
+      "date_extraction": "2026-02-13T15:45:02Z"
+    },
+    {
+      "numero_commande": "RT002990",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "RADMILA DUCANOVIC",
+      "date_extraction": "2026-02-13T15:45:03Z"
+    },
+    {
+      "numero_commande": "RT003044",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "PASCALE BOUSSANGE",
+      "date_extraction": "2026-02-13T15:45:04Z"
+    },
+    {
+      "numero_commande": "RT002984",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "REGIS PELLEGRINI",
+      "date_extraction": "2026-02-13T15:45:05Z"
+    },
+    {
+      "numero_commande": "RT003035",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "YANNICK TOSELLI",
+      "date_extraction": "2026-02-13T15:45:06Z"
+    },
+    {
+      "numero_commande": "RT003019",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MYLENE BONILLA",
+      "date_extraction": "2026-02-13T15:45:07Z"
     }
   ],
-  "lastUpdate": "2026-02-13T14:46:01.399Z",
+  "lastUpdate": "2026-02-13T15:46:05.545Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2382,
+    "totalCommandes": 2388,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
