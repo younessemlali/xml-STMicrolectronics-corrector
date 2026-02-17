@@ -21626,12 +21626,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "Souad SAADI",
       "date_extraction": "2026-02-15T21:44:43Z"
+    },
+    {
+      "numero_commande": "CR003624",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JEREMY BUFFET",
+      "date_extraction": "2026-02-17T04:44:52Z"
+    },
+    {
+      "numero_commande": "CR003631",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Nathan JalifierTalmat",
+      "date_extraction": "2026-02-17T04:44:53Z"
     }
   ],
-  "lastUpdate": "2026-02-15T21:45:22.747Z",
+  "lastUpdate": "2026-02-17T04:45:40.815Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2403,
+    "totalCommandes": 2405,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
