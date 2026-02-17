@@ -21644,12 +21644,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "Nathan JalifierTalmat",
       "date_extraction": "2026-02-17T04:44:53Z"
+    },
+    {
+      "numero_commande": "CR003633",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Laura Bontempi",
+      "date_extraction": "2026-02-17T05:44:48Z"
     }
   ],
-  "lastUpdate": "2026-02-17T04:45:40.815Z",
+  "lastUpdate": "2026-02-17T05:45:38.212Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2405,
+    "totalCommandes": 2406,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
