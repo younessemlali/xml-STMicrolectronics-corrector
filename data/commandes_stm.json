@@ -21707,12 +21707,102 @@
       "classification_interimaire": "A2",
       "personne_absente": "MARIE PIERRE SABATIER",
       "date_extraction": "2026-02-19T15:44:45Z"
+    },
+    {
+      "numero_commande": "RT003082",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JIMMY BACLE",
+      "date_extraction": "2026-02-19T16:44:44Z"
+    },
+    {
+      "numero_commande": "RT003069",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NICOLAS CHAISSAC",
+      "date_extraction": "2026-02-19T16:44:44Z"
+    },
+    {
+      "numero_commande": "RT003079",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "EMMANUEL BRUGUERA",
+      "date_extraction": "2026-02-19T16:44:45Z"
+    },
+    {
+      "numero_commande": "RT003078",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "PASCALE BOUSSANGE",
+      "date_extraction": "2026-02-19T16:44:46Z"
+    },
+    {
+      "numero_commande": "RT003083",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Clement PALUSSIERE",
+      "date_extraction": "2026-02-19T16:44:47Z"
+    },
+    {
+      "numero_commande": "RT003056",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Geoffrey DJEBORI",
+      "date_extraction": "2026-02-19T16:44:48Z"
+    },
+    {
+      "numero_commande": "RT003077",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NICOLAS DIDIER",
+      "date_extraction": "2026-02-19T16:44:48Z"
+    },
+    {
+      "numero_commande": "RT003085",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Laure SCHAUMANN",
+      "date_extraction": "2026-02-19T16:44:49Z"
+    },
+    {
+      "numero_commande": "RT003072",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "VANESSA PROYE",
+      "date_extraction": "2026-02-19T16:44:50Z"
+    },
+    {
+      "numero_commande": "RT003053",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ELODIE KEYICHIAN",
+      "date_extraction": "2026-02-19T16:44:51Z"
     }
   ],
-  "lastUpdate": "2026-02-19T15:45:37.159Z",
+  "lastUpdate": "2026-02-19T16:45:27.193Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2412,
+    "totalCommandes": 2422,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
