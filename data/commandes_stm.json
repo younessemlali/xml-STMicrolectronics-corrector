@@ -21887,12 +21887,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "PIERRE MARIE LAUTH",
       "date_extraction": "2026-02-19T19:45:14Z"
+    },
+    {
+      "numero_commande": "RT003081",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "PATRICK CIBRARI",
+      "date_extraction": "2026-02-19T22:44:51Z"
+    },
+    {
+      "numero_commande": "CD000552",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "PANIER CYRIL",
+      "date_extraction": "2026-02-19T22:44:52Z"
     }
   ],
-  "lastUpdate": "2026-02-19T19:46:11.644Z",
+  "lastUpdate": "2026-02-19T22:45:40.094Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2432,
+    "totalCommandes": 2434,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
