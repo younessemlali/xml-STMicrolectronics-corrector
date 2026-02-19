@@ -21905,12 +21905,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "PANIER CYRIL",
       "date_extraction": "2026-02-19T22:44:52Z"
+    },
+    {
+      "numero_commande": "RT003070",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "YANNICK TOSELLI",
+      "date_extraction": "2026-02-19T23:44:45Z"
+    },
+    {
+      "numero_commande": "RT003084",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Vanessa PROYE",
+      "date_extraction": "2026-02-19T23:44:46Z"
     }
   ],
-  "lastUpdate": "2026-02-19T22:45:40.094Z",
+  "lastUpdate": "2026-02-19T23:45:29.855Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2434,
+    "totalCommandes": 2436,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
