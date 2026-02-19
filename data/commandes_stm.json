@@ -21797,12 +21797,57 @@
       "classification_interimaire": "A2",
       "personne_absente": "ELODIE KEYICHIAN",
       "date_extraction": "2026-02-19T16:44:51Z"
+    },
+    {
+      "numero_commande": "RT003063",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JEAN CHRISTOPHE BEVILACQUA",
+      "date_extraction": "2026-02-19T17:44:45Z"
+    },
+    {
+      "numero_commande": "RT003073",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAURENCE CAMLAY",
+      "date_extraction": "2026-02-19T17:44:46Z"
+    },
+    {
+      "numero_commande": "RT003059",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "OLIVIER PELLEGRINO",
+      "date_extraction": "2026-02-19T17:44:47Z"
+    },
+    {
+      "numero_commande": "RT003068",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "EVA GANDRA MORENO",
+      "date_extraction": "2026-02-19T17:44:47Z"
+    },
+    {
+      "numero_commande": "RT003086",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Nicolas GALLI",
+      "date_extraction": "2026-02-19T17:44:48Z"
     }
   ],
-  "lastUpdate": "2026-02-19T16:45:27.193Z",
+  "lastUpdate": "2026-02-19T17:45:34.550Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2422,
+    "totalCommandes": 2427,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
