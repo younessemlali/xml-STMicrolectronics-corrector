@@ -21923,12 +21923,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "Vanessa PROYE",
       "date_extraction": "2026-02-19T23:44:46Z"
+    },
+    {
+      "numero_commande": "RT003074",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NATHALIE BONNARD",
+      "date_extraction": "2026-02-20T01:44:47Z"
+    },
+    {
+      "numero_commande": "RT003064",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "THOMAS BARUCCI",
+      "date_extraction": "2026-02-20T01:44:48Z"
     }
   ],
-  "lastUpdate": "2026-02-19T23:45:29.855Z",
+  "lastUpdate": "2026-02-20T01:45:31.600Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2436,
+    "totalCommandes": 2438,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
