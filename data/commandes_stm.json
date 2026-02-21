@@ -21995,12 +21995,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "Christophe AGUERO",
       "date_extraction": "2026-02-21T00:44:55Z"
+    },
+    {
+      "numero_commande": "RT003091",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "FABIENNE DOZOL",
+      "date_extraction": "2026-02-21T17:44:54Z"
+    },
+    {
+      "numero_commande": "RT003095",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "AUDREY SORIA ARELLANO",
+      "date_extraction": "2026-02-21T17:44:55Z"
     }
   ],
-  "lastUpdate": "2026-02-21T00:45:49.115Z",
+  "lastUpdate": "2026-02-21T17:45:51.553Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2444,
+    "totalCommandes": 2446,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
