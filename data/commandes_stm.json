@@ -22364,12 +22364,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "Alexis AVON",
       "date_extraction": "2026-02-23T19:44:48Z"
+    },
+    {
+      "numero_commande": "CD000557",
+      "code_agence": "STC",
+      "code_unite": "STC",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": null,
+      "date_extraction": "2026-02-24T05:44:56Z"
     }
   ],
-  "lastUpdate": "2026-02-23T19:45:38.221Z",
+  "lastUpdate": "2026-02-24T05:45:47.855Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2485,
+    "totalCommandes": 2486,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
