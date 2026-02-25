@@ -22490,12 +22490,39 @@
       "classification_interimaire": "D7",
       "personne_absente": "DANIEL TARAN",
       "date_extraction": "2026-02-25T01:44:46Z"
+    },
+    {
+      "numero_commande": "CR003787",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "lucas touchard",
+      "date_extraction": "2026-02-25T05:44:48Z"
+    },
+    {
+      "numero_commande": "CR003784",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CHRISTIAN FADI",
+      "date_extraction": "2026-02-25T05:44:49Z"
+    },
+    {
+      "numero_commande": "CR003784",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CHRISTIAN FADI",
+      "date_extraction": "2026-02-25T05:44:50Z"
     }
   ],
-  "lastUpdate": "2026-02-25T01:45:34.522Z",
+  "lastUpdate": "2026-02-25T05:45:39.388Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2499,
+    "totalCommandes": 2502,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
