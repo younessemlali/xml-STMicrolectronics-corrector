@@ -22463,12 +22463,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "FLORENT DUPRE",
       "date_extraction": "2026-02-24T23:44:45Z"
+    },
+    {
+      "numero_commande": "RT003140",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "DAVID PELLOUX",
+      "date_extraction": "2026-02-25T00:45:10Z"
     }
   ],
-  "lastUpdate": "2026-02-24T23:45:30.208Z",
+  "lastUpdate": "2026-02-25T00:46:09.064Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2496,
+    "totalCommandes": 2497,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
