@@ -23129,12 +23129,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "SEBASTIEN PENO",
       "date_extraction": "2026-02-25T15:46:21Z"
+    },
+    {
+      "numero_commande": "RT003192",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NATHALIE COVELLO",
+      "date_extraction": "2026-02-25T16:44:52Z"
+    },
+    {
+      "numero_commande": "RT003213",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "IC - Ing?nieurs et cadres",
+      "classification_interimaire": null,
+      "personne_absente": null,
+      "date_extraction": "2026-02-25T16:44:53Z"
     }
   ],
-  "lastUpdate": "2026-02-25T15:47:28.434Z",
+  "lastUpdate": "2026-02-25T16:45:46.115Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2570,
+    "totalCommandes": 2572,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
