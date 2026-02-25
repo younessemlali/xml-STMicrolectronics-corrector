@@ -23066,12 +23066,75 @@
       "classification_interimaire": "D7",
       "personne_absente": "ELODIE ROBERRINI",
       "date_extraction": "2026-02-25T14:44:58Z"
+    },
+    {
+      "numero_commande": "RT003197",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MARIE JOUBERT",
+      "date_extraction": "2026-02-25T15:46:12Z"
+    },
+    {
+      "numero_commande": "RT003158",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAURENT BREYSSE",
+      "date_extraction": "2026-02-25T15:46:14Z"
+    },
+    {
+      "numero_commande": "RT003144",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "INGRID DUMAS",
+      "date_extraction": "2026-02-25T15:46:16Z"
+    },
+    {
+      "numero_commande": "RT003196",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SEBASTIEN PENO",
+      "date_extraction": "2026-02-25T15:46:17Z"
+    },
+    {
+      "numero_commande": "RT003158",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAURENT BREYSSE",
+      "date_extraction": "2026-02-25T15:46:18Z"
+    },
+    {
+      "numero_commande": "RT003144",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "INGRID DUMAS",
+      "date_extraction": "2026-02-25T15:46:20Z"
+    },
+    {
+      "numero_commande": "RT003196",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "SEBASTIEN PENO",
+      "date_extraction": "2026-02-25T15:46:21Z"
     }
   ],
-  "lastUpdate": "2026-02-25T14:45:41.337Z",
+  "lastUpdate": "2026-02-25T15:47:28.434Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2563,
+    "totalCommandes": 2570,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
