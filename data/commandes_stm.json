@@ -22526,12 +22526,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "FREDERIC CANDYLAKI",
       "date_extraction": "2026-02-25T06:44:43Z"
+    },
+    {
+      "numero_commande": "RT003194",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "BASTIEN IDANEZ MANAZ",
+      "date_extraction": "2026-02-25T08:44:48Z"
     }
   ],
-  "lastUpdate": "2026-02-25T06:45:28.291Z",
+  "lastUpdate": "2026-02-25T08:45:42.267Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2503,
+    "totalCommandes": 2504,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
