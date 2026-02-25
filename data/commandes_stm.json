@@ -22985,12 +22985,93 @@
       "classification_interimaire": "A2",
       "personne_absente": "DAVID KEN",
       "date_extraction": "2026-02-25T13:45:21Z"
+    },
+    {
+      "numero_commande": "RT003198",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "MARIE PIERRE TIVERON",
+      "date_extraction": "2026-02-25T14:44:51Z"
+    },
+    {
+      "numero_commande": "RT003175",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "NORA ZEMMAR",
+      "date_extraction": "2026-02-25T14:44:52Z"
+    },
+    {
+      "numero_commande": "RT003167",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ERIC GUADOURI",
+      "date_extraction": "2026-02-25T14:44:53Z"
+    },
+    {
+      "numero_commande": "RT003153",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CARLA CAMILLERI",
+      "date_extraction": "2026-02-25T14:44:54Z"
+    },
+    {
+      "numero_commande": "RT003180",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "ATAM - Technicien et agent de ma?trise",
+      "classification_interimaire": "D8",
+      "personne_absente": "MARC TIPA",
+      "date_extraction": "2026-02-25T14:44:55Z"
+    },
+    {
+      "numero_commande": "RT003204",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ERIC ROMAGNOLO",
+      "date_extraction": "2026-02-25T14:44:56Z"
+    },
+    {
+      "numero_commande": "RT003166",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "ATAM - Technicien et agent de ma?trise",
+      "classification_interimaire": "C5",
+      "personne_absente": "MARIE-JEANNE FRECH",
+      "date_extraction": "2026-02-25T14:44:57Z"
+    },
+    {
+      "numero_commande": "RT003151",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "ATAM - Technicien et agent de ma?trise",
+      "classification_interimaire": "D7",
+      "personne_absente": "LAKHDAR MEZIANE",
+      "date_extraction": "2026-02-25T14:44:58Z"
+    },
+    {
+      "numero_commande": "RT003150",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "ATAM - Technicien et agent de ma?trise",
+      "classification_interimaire": "D7",
+      "personne_absente": "ELODIE ROBERRINI",
+      "date_extraction": "2026-02-25T14:44:58Z"
     }
   ],
-  "lastUpdate": "2026-02-25T13:45:25.007Z",
+  "lastUpdate": "2026-02-25T14:45:41.337Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2554,
+    "totalCommandes": 2563,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
