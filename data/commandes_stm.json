@@ -23183,12 +23183,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "JULIEN TORRE",
       "date_extraction": "2026-02-26T13:45:04Z"
+    },
+    {
+      "numero_commande": "RT003215",
+      "code_agence": "O41",
+      "code_unite": "7",
+      "statut": "ICJEUNES - Ing?nieurs/cadres/jeunes diplom?s recrut?s par ST",
+      "classification_interimaire": null,
+      "personne_absente": "Laura Coisson",
+      "date_extraction": "2026-02-26T17:44:51Z"
     }
   ],
-  "lastUpdate": "2026-02-26T13:46:14.864Z",
+  "lastUpdate": "2026-02-26T17:45:42.730Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2576,
+    "totalCommandes": 2577,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
