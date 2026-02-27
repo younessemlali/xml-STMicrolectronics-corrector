@@ -23534,12 +23534,84 @@
       "classification_interimaire": "A2",
       "personne_absente": "WALID BEN MOHAMED",
       "date_extraction": "2026-02-27T15:45:18Z"
+    },
+    {
+      "numero_commande": "RT003280",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "REGIS PELLEGRINI",
+      "date_extraction": "2026-02-27T16:46:24Z"
+    },
+    {
+      "numero_commande": "RT003284",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "EVA LEMENANT",
+      "date_extraction": "2026-02-27T16:46:25Z"
+    },
+    {
+      "numero_commande": "RT003255",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ANNIE CLARIMON",
+      "date_extraction": "2026-02-27T16:46:26Z"
+    },
+    {
+      "numero_commande": "RT003220",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "OLIVIER PELLEGRINO",
+      "date_extraction": "2026-02-27T16:46:27Z"
+    },
+    {
+      "numero_commande": "RT003257",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "GREGORY COOPMAN",
+      "date_extraction": "2026-02-27T16:46:29Z"
+    },
+    {
+      "numero_commande": "RT003275",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "ADBEL HAKIM KOURTICHE",
+      "date_extraction": "2026-02-27T16:46:30Z"
+    },
+    {
+      "numero_commande": "RT003256",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "RADMILA DUCANOVIC",
+      "date_extraction": "2026-02-27T16:46:31Z"
+    },
+    {
+      "numero_commande": "RT003269",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "JEAN GUILLAUME MILLET",
+      "date_extraction": "2026-02-27T16:46:33Z"
     }
   ],
-  "lastUpdate": "2026-02-27T15:46:20.458Z",
+  "lastUpdate": "2026-02-27T16:47:42.575Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2615,
+    "totalCommandes": 2623,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
