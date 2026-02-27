@@ -23642,12 +23642,21 @@
       "classification_interimaire": "A2",
       "personne_absente": "SONIA JAMETTE",
       "date_extraction": "2026-02-27T18:46:04Z"
+    },
+    {
+      "numero_commande": "RT003251",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "CHRISTELLE THIRIAT",
+      "date_extraction": "2026-02-27T23:44:54Z"
     }
   ],
-  "lastUpdate": "2026-02-27T18:47:12.209Z",
+  "lastUpdate": "2026-02-27T23:45:45.851Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2627,
+    "totalCommandes": 2628,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
