@@ -23651,12 +23651,30 @@
       "classification_interimaire": "A2",
       "personne_absente": "CHRISTELLE THIRIAT",
       "date_extraction": "2026-02-27T23:44:54Z"
+    },
+    {
+      "numero_commande": "RT003232",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "LAURENCE CAMLAY",
+      "date_extraction": "2026-02-28T01:45:01Z"
+    },
+    {
+      "numero_commande": "RT003229",
+      "code_agence": "696",
+      "code_unite": "696",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "PATRICK TOSELLI",
+      "date_extraction": "2026-02-28T01:45:01Z"
     }
   ],
-  "lastUpdate": "2026-02-27T23:45:45.851Z",
+  "lastUpdate": "2026-02-28T01:45:45.923Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2628,
+    "totalCommandes": 2630,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
