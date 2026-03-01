@@ -23669,12 +23669,48 @@
       "classification_interimaire": "A2",
       "personne_absente": "PATRICK TOSELLI",
       "date_extraction": "2026-02-28T01:45:01Z"
+    },
+    {
+      "numero_commande": "CR003838",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Jean-Marc CLEMENT",
+      "date_extraction": "2026-03-01T16:44:44Z"
+    },
+    {
+      "numero_commande": "CR003841",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Magali DABIR",
+      "date_extraction": "2026-03-01T16:44:45Z"
+    },
+    {
+      "numero_commande": "CR003840",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Cl?ment DELDON",
+      "date_extraction": "2026-03-01T16:44:46Z"
+    },
+    {
+      "numero_commande": "CR003839",
+      "code_agence": "663",
+      "code_unite": "663",
+      "statut": "OP - Op?rateur",
+      "classification_interimaire": "A2",
+      "personne_absente": "Sabri ACHAICHIA",
+      "date_extraction": "2026-03-01T16:44:46Z"
     }
   ],
-  "lastUpdate": "2026-02-28T01:45:45.923Z",
+  "lastUpdate": "2026-03-01T16:45:30.721Z",
   "source": "Google Apps Script - Traitement imm?diat",
   "metadata": {
-    "totalCommandes": 2630,
+    "totalCommandes": 2634,
     "source": "Google Apps Script - PIXID STMicroelectronics",
     "sheet_id": "1eVoS4Pd6RiL-4PLaZWC5s8Yzax6VbT5D9Tz5K2deMs4",
     "folder_id": "1YevTmiEAycLE2X0g01juOO-cWm-O6V2F",
